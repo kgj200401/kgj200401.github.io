@@ -286,6 +286,126 @@
             border-color: var(--line) !important;
         }
 
+        .skill-panel {
+            text-align: center;
+        }
+
+        .skill-eyebrow {
+            color: #047857 !important;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-title {
+            color: var(--text) !important;
+            font-size: clamp(1.9rem, 4vw, 2.6rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tabs {
+            display: inline-flex;
+            gap: 0.25rem;
+            padding: 0.35rem;
+            margin-bottom: 3rem;
+            background: #f3f4f6;
+            border-radius: 999px;
+        }
+
+        .skill-tab {
+            min-width: 5.75rem;
+            padding: 0.75rem 1rem;
+            border: 0;
+            border-radius: 999px;
+            color: var(--subtle) !important;
+            font-size: 0.9rem;
+            font-weight: 800;
+            transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill-tab:hover,
+        .skill-tab.active {
+            background: #ffffff !important;
+            color: var(--text) !important;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 1.25rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            gap: 0.45rem;
+            padding: 1rem;
+            background: #ffffff !important;
+            border: 1px solid #f1f5f9;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06) !important;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px) !important;
+            border-color: var(--line-strong);
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1) !important;
+        }
+
+        .skill-card img {
+            width: 2.75rem;
+            height: 2.75rem;
+            object-fit: contain;
+        }
+
+        .skill-card-name {
+            color: var(--muted) !important;
+            font-size: 0.75rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .skill-fallback {
+            width: 2.75rem;
+            height: 2.75rem;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: #111827;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 900;
+        }
+
+        .skill-card.is-hidden {
+            display: none;
+        }
+
+        .skill-modal-icon {
+            width: 3.25rem;
+            height: 3.25rem;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 1rem;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid var(--line);
+        }
+
+        .skill-modal-icon img {
+            width: 2.1rem;
+            height: 2.1rem;
+            object-fit: contain;
+        }
+
         @media (max-width: 768px) {
             main {
                 padding-top: 2.5rem !important;
@@ -299,6 +419,27 @@
                 position: static !important;
                 margin-top: 1rem;
                 opacity: 1 !important;
+            }
+
+            .skill-tabs {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+                border-radius: 18px;
+            }
+
+            .skill-tab {
+                min-width: 0;
+            }
+
+            .skill-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.85rem;
+            }
+
+            .skill-card {
+                border-radius: 14px;
+                padding: 0.75rem;
             }
         }
     </style>
@@ -407,90 +548,80 @@
                     </div>
                 </div>
 
-                <!-- 3. Tech Skills Table -->
-                <div class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">🛠️ 보유 기술 및 능력</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-400">
-                            <thead class="text-xs text-gray-300 uppercase bg-[#252525] border-b border-gray-700">
-                                <tr>
-                                    <th scope="col" class="px-4 py-3 rounded-tl-lg w-1/4">기술</th>
-                                    <th scope="col" class="px-4 py-3 w-20 text-center whitespace-nowrap">수준</th>
-                                    <th scope="col" class="px-4 py-3 rounded-tr-lg">상세 내용</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-800">
-                                <tr class="hover:bg-[#252525] transition">
-                                    <td class="px-4 py-3 font-semibold text-blue-400 whitespace-nowrap">Python</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-blue-900/40 border border-blue-800 text-blue-300 text-xs px-2 py-1 rounded">상</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>데이터 분석 및 다양한 라이브러리(Pandas 등)를 활용한 업무 자동화 스크립트 작성 가능</li>
-                                            <li>DFS/BFS, DP 등 알고리즘 기반의 논리적 문제 해결 역량 보유</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#252525] transition">
-                                    <td class="px-4 py-3 font-semibold text-blue-400 whitespace-nowrap">AI/LLM</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-blue-900/40 border border-blue-800 text-blue-300 text-xs px-2 py-1 rounded">상</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>대규모 언어 모델(LLM) 파이프라인 구축 및 온디바이스 최적화 역량 보유</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#252525] transition">
-                                    <td class="px-4 py-3 font-semibold text-green-400 whitespace-nowrap">Data 분석/ RAG</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-green-900/40 border border-green-800 text-green-300 text-xs px-2 py-1 rounded">중상</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>현업 연구 데이터를 활용한 데이터 전처리 및 분석 역량 보유</li>
-                                            <li>검색 증강 생성(RAG) 기술 매커니즘 이해 및 실무 과제 연계 기능 구현 가능</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#252525] transition">
-                                    <td class="px-4 py-3 font-semibold text-green-400 whitespace-nowrap">JavaScript</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-green-900/40 border border-green-800 text-green-300 text-xs px-2 py-1 rounded">중상</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>비동기 통신 및 웹 애플리케이션의 동적 기능 구현 및 데이터 맵핑 가능</li>
-                                            <li>프론트엔드 프레임워크와의 데이터 인터페이스 연동 최적화 가능</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#252525] transition">
-                                    <td class="px-4 py-3 font-semibold text-yellow-400 whitespace-nowrap">Django</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/40 border border-yellow-800 text-yellow-300 text-xs px-2 py-1 rounded">중</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>MVC 아키텍처 기반의 백엔드 서버 구축 및 REST API 설계 가능</li>
-                                            <li>데이터베이스 ERD 설계 및 시스템 비즈니스 로직 구현 역량 보유</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#252525] transition">
-                                    <td class="px-4 py-3 font-semibold text-yellow-400 whitespace-nowrap">Vue</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/40 border border-yellow-800 text-yellow-300 text-xs px-2 py-1 rounded">중</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>컴포넌트 기반 아키텍처 이해 및 사용자 중심의 UI/UX 단독 구현 가능</li>
-                                            <li>상태 관리 라이브러리를 활용한 프론트엔드 데이터 흐름 제어 가능</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#252525] transition border-b border-gray-800">
-                                    <td class="px-4 py-3 font-semibold text-yellow-400 whitespace-nowrap">HTML/CSS</td>
-                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/40 border border-yellow-800 text-yellow-300 text-xs px-2 py-1 rounded">중</span></td>
-                                    <td class="px-4 py-3">
-                                        <ul class="list-disc list-inside space-y-1">
-                                            <li>시맨틱 마크업을 준수한 웹 표준 레이아웃 구성 및 스타일링 가능</li>
-                                            <li>웹 반응형 화면 설계 및 프론트엔드 프레임워크 연동</li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <!-- 3. Tech Skills -->
+                <div class="reveal skill-panel">
+                    <p class="skill-eyebrow">기술 스택 및 도구</p>
+                    <h3 class="skill-title">프로젝트에 사용한 기술입니다.</h3>
+
+                    <div class="skill-tabs" role="tablist" aria-label="기술 스택 필터">
+                        <button type="button" class="skill-tab active" data-filter="all">전체</button>
+                        <button type="button" class="skill-tab" data-filter="languages">Languages</button>
+                        <button type="button" class="skill-tab" data-filter="frontend">Frontend</button>
+                        <button type="button" class="skill-tab" data-filter="backend">Backend / AI</button>
+                        <button type="button" class="skill-tab" data-filter="tools">Tools</button>
+                    </div>
+
+                    <div class="skill-grid" aria-label="보유 기술 및 도구">
+                        <button type="button" class="skill-card" data-category="languages" data-title="Python" data-comment="데이터 분석, 자동화 스크립트, AI 모델 실험 파이프라인 구현에 주로 사용합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                            <span class="skill-card-name">Python</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="backend" data-title="AI/LLM" data-comment="멀티모달 모델, LLM 프롬프팅, 경량화 및 추론 최적화 흐름을 이해하고 구현합니다." data-fallback="AI" onclick="openSkillModal(this)">
+                            <span class="skill-fallback">AI</span>
+                            <span class="skill-card-name">AI/LLM</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="backend" data-title="Data 분석 / RAG" data-comment="데이터 전처리와 탐색적 분석을 기반으로 RAG 구조를 설계하고 업무형 리포트 생성에 연결합니다." data-fallback="RAG" onclick="openSkillModal(this)">
+                            <span class="skill-fallback">RAG</span>
+                            <span class="skill-card-name">Data/RAG</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="languages" data-title="JavaScript" data-comment="동적 UI, 비동기 통신, 프론트엔드 데이터 흐름 구현에 사용합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                            <span class="skill-card-name">JavaScript</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="backend" data-title="Django" data-comment="MVC 기반 백엔드 구성, REST API 설계, 데이터베이스 연동 경험이 있습니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django">
+                            <span class="skill-card-name">Django</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="frontend" data-title="Vue" data-comment="컴포넌트 기반 화면 구성과 상태 흐름을 이해하고 사용자 중심 UI를 구현합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue">
+                            <span class="skill-card-name">Vue</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="frontend" data-title="HTML" data-comment="시맨틱 마크업을 바탕으로 구조가 분명한 웹 페이지를 작성합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+                            <span class="skill-card-name">HTML</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="frontend" data-title="CSS" data-comment="반응형 레이아웃과 일관된 스타일링으로 화면 완성도를 다듬습니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+                            <span class="skill-card-name">CSS</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="frontend" data-title="React" data-comment="컴포넌트 단위 UI 구성과 API 연동 기반의 동적 화면 구현 경험이 있습니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                            <span class="skill-card-name">React</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="tools" data-title="Git" data-comment="브랜치 기반 협업, 커밋 관리, 변경 이력 추적에 활용합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                            <span class="skill-card-name">Git</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="tools" data-title="GitHub" data-comment="저장소 관리, 코드 공유, 프로젝트 결과물 정리에 사용합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+                            <span class="skill-card-name">GitHub</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="tools" data-title="Notion" data-comment="프로젝트 문서화, 회의 기록, 작업 정리와 지식 관리에 활용합니다." data-fallback="N" onclick="openSkillModal(this)">
+                            <span class="skill-fallback">N</span>
+                            <span class="skill-card-name">Notion</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="tools" data-title="Figma" data-comment="UI 구조를 빠르게 시각화하고 팀원과 화면 설계를 공유하는 데 사용합니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                            <span class="skill-card-name">Figma</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="tools" data-title="GitLab" data-comment="팀 프로젝트 저장소와 이슈 기반 개발 흐름을 관리한 경험이 있습니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab">
+                            <span class="skill-card-name">GitLab</span>
+                        </button>
+                        <button type="button" class="skill-card" data-category="tools" data-title="Jira" data-comment="애자일 스프린트, 백로그 우선순위 관리, 일정 추적에 활용했습니다." data-icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" onclick="openSkillModal(this)">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira">
+                            <span class="skill-card-name">Jira</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -736,6 +867,16 @@
             </div>
         </dialog>
 
+        <!-- 팝업 모달 영역: 기술 스택 -->
+        <dialog id="modal-skill" class="bg-[#1e1e1e] text-gray-300 rounded-2xl border border-gray-700 w-11/12 max-w-sm p-0 shadow-2xl m-auto backdrop:bg-black/70 backdrop:backdrop-blur-sm">
+            <div class="p-6 text-center">
+                <div id="skill-modal-icon" class="skill-modal-icon"></div>
+                <h3 id="skill-modal-title" class="text-xl font-bold text-white mb-3">Skill</h3>
+                <p id="skill-modal-comment" class="text-sm text-gray-400 leading-relaxed mb-6"></p>
+                <button onclick="document.getElementById('modal-skill').close()" class="px-4 py-2 text-sm font-semibold rounded-lg">닫기</button>
+            </div>
+        </dialog>
+
         <!-- 팝업 모달 영역: 연락처 -->
         <dialog id="modal-contact" class="bg-[#1e1e1e] text-gray-300 rounded-2xl border border-gray-700 w-11/12 max-w-sm p-0 shadow-2xl m-auto backdrop:bg-black/70 backdrop:backdrop-blur-sm">
             <div class="p-6">
@@ -764,6 +905,22 @@
 
     <!-- 스크롤 애니메이션 JS -->
     <script>
+        function openSkillModal(button) {
+            const modal = document.getElementById('modal-skill');
+            const iconBox = document.getElementById('skill-modal-icon');
+            const title = document.getElementById('skill-modal-title');
+            const comment = document.getElementById('skill-modal-comment');
+            const icon = button.dataset.icon;
+            const fallback = button.dataset.fallback || button.dataset.title.slice(0, 2);
+
+            title.textContent = button.dataset.title;
+            comment.textContent = button.dataset.comment;
+            iconBox.innerHTML = icon
+                ? `<img src="${icon}" alt="${button.dataset.title}">`
+                : `<span class="skill-fallback">${fallback}</span>`;
+            modal.showModal();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const reveals = document.querySelectorAll('.reveal');
             const revealOnScroll = new IntersectionObserver((entries, observer) => {
@@ -776,6 +933,23 @@
             }, { threshold: 0.1 }); // 요소가 10% 화면에 보일 때 실행
 
             reveals.forEach(reveal => revealOnScroll.observe(reveal));
+
+            const skillTabs = document.querySelectorAll('.skill-tab');
+            const skillCards = document.querySelectorAll('.skill-card');
+
+            skillTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const filter = tab.dataset.filter;
+
+                    skillTabs.forEach(item => item.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    skillCards.forEach(card => {
+                        const shouldShow = filter === 'all' || card.dataset.category === filter;
+                        card.classList.toggle('is-hidden', !shouldShow);
+                    });
+                });
+            });
         });
     </script>
 </body>
