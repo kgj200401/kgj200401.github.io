@@ -426,64 +426,63 @@
             margin-bottom: 1rem;
         }
 
-        .profile-summary {
+        .profile-list {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
         }
 
-        .summary-card,
-        .competency-card {
+        .profile-card {
+            display: grid;
+            grid-template-columns: 9.5rem minmax(0, 1fr);
+            gap: 2rem;
+            align-items: start;
             background: #ffffff !important;
             border: 1px solid var(--line) !important;
-            border-radius: 18px !important;
-            padding: 1.5rem !important;
+            border-radius: 10px !important;
+            padding: 2rem !important;
             box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04) !important;
             transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .summary-card:hover,
-        .competency-card:hover {
+        .profile-card:hover {
             transform: translateY(-3px) !important;
             border-color: var(--line-strong) !important;
             background: #ffffff !important;
             box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08) !important;
         }
 
-        .summary-label,
-        .competency-label {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.35rem 0.75rem;
-            margin-bottom: 1rem;
-            border-radius: 999px;
-            background: #ecfdf5;
+        .profile-meta {
             color: #047857 !important;
-            font-size: 0.78rem;
+            font-size: 1rem;
             font-weight: 900;
+            line-height: 1.45;
+            word-break: keep-all;
         }
 
-        .summary-title,
-        .competency-title {
+        .profile-card-title {
             color: var(--text) !important;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 900;
             line-height: 1.3;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.85rem;
         }
 
-        .summary-copy,
-        .competency-copy {
+        .profile-card-kicker {
+            color: #047857 !important;
+            font-size: 0.92rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .profile-card-copy,
+        .profile-card li {
             color: var(--muted) !important;
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             line-height: 1.75;
         }
 
-        .competency-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
+        .profile-card ul {
+            margin-top: 0.25rem;
         }
 
         .projects-heading {
@@ -649,9 +648,10 @@
                 padding: 0.75rem;
             }
 
-            .profile-summary,
-            .competency-grid {
+            .profile-card {
                 grid-template-columns: 1fr;
+                gap: 0.85rem;
+                padding: 1.35rem !important;
             }
 
             .projects-heading {
@@ -696,7 +696,7 @@
         <!-- Hero Section -->
         <section class="mb-16 flex flex-col md:flex-row items-center md:items-start gap-8">
             <!-- 프로필 사진 영역 -->
-            <div class="reveal w-48 h-48 md:w-56 md:h-56 flex-shrink-0">
+            <div class="reveal w-48 h-60 md:w-56 md:h-68 flex-shrink-0">
                 <!-- 사진 파일 이름이 다르다면 아래 src="사진이름.확장자" 부분을 수정해주세요 -->
                 <img src="./profile.jpg" alt="프로필 사진" class="w-full h-full object-cover rounded-3xl border-4 border-[#2d2d2d] shadow-2xl transition-transform hover:scale-105 duration-300 animate-float">
             </div>
@@ -705,7 +705,7 @@
                 <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight break-words">
                     데이터의 맥락을 읽어내어<br />
                     사용자의 경험을 혁신하는<br />
-                    멀티모달 AI 전문가 <span class="text-blue-500">강건재</span>입니다.
+                    AI 엔지니어 <span class="text-blue-500">강건재</span>입니다.
                 </h1>
                 <p class="text-gray-400 text-lg mb-8 leading-relaxed break-words">
                     <span class="block max-w-2xl">기술적 통찰력과 데이터 분석 역량을 바탕으로, 고객의 요구를 최적의 비즈니스 가치로 변환합니다.</span>
@@ -733,40 +733,62 @@
                 <p class="text-gray-400">AI 모델 최적화, 데이터 기반 문제 해결, 협업 커뮤니케이션 중심의 성장 경험.</p>
             </div>
 
-            <div class="flex flex-col gap-6">
-                <div class="profile-summary">
-                    <div class="summary-card reveal">
-                        <span class="summary-label">Education</span>
-                        <h3 class="summary-title">SSAFY 14기</h3>
-                        <p class="summary-copy">비전공 Python 반. 1학기: Python 기초, 알고리즘, 웹 개발(Django, HTML/CSS, JavaScript, Vue) 중심 기본 교육. 2학기: 팀 프로젝트 기반 심화 과정 및 포트폴리오 고도화.</p>
-                    </div>
-                    <div class="summary-card reveal">
-                        <span class="summary-label">Major</span>
-                        <h3 class="summary-title">한국항공대학교 졸업</h3>
-                        <p class="summary-copy">항공전자정보공학부 전공. H/W-S/W 통합 구조 이해. 시스템 관점의 문제 분석 경험.</p>
-                    </div>
-                    <div class="summary-card reveal">
-                        <span class="summary-label">Certificate</span>
-                        <h3 class="summary-title">자격 및 어학</h3>
-                        <p class="summary-copy">ADsP 취득. OPIc IH 등급. 전기기사 필기 합격.</p>
+            <div class="profile-list">
+                <div class="profile-card reveal">
+                    <div class="profile-meta">2025.07 - 2026.06</div>
+                    <div>
+                        <h3 class="profile-card-title">삼성청년 SW.AI 아카데미 14기</h3>
+                        <p class="profile-card-kicker">Education · Python 반</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>1학기: Python 기초, 알고리즘, Django, HTML/CSS, JavaScript, Vue 중심 기본 교육</li>
+                            <li>2학기: 팀 프로젝트 기반 심화 과정 및 포트폴리오 고도화</li>
+                            <li>Git, GitLab, Jira 기반 협업 및 프로젝트 관리 경험</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="competency-grid">
-                    <div class="competency-card reveal">
-                        <span class="competency-label">Optimization</span>
-                        <h3 class="competency-title">Data Analysis & Optimization</h3>
-                        <p class="competency-copy">Pandas/NumPy 기반 데이터 분석. 4-bit Quantization, LoRA, TensorRT 기반 추론 최적화. 제한된 자원 환경에서의 성능 개선 경험.</p>
+                <div class="profile-card reveal">
+                    <div class="profile-meta">Major</div>
+                    <div>
+                        <h3 class="profile-card-title">한국항공대학교 졸업</h3>
+                        <p class="profile-card-kicker">항공전자정보공학부</p>
+                        <p class="profile-card-copy">H/W-S/W 통합 구조 이해. 시스템 관점의 문제 분석 경험.</p>
                     </div>
-                    <div class="competency-card reveal">
-                        <span class="competency-label">Communication</span>
-                        <h3 class="competency-title">Global Communication</h3>
-                        <p class="competency-copy">영어학원 강사 3년. 학습자 눈높이에 맞춘 설명 역량. 복잡한 AI 모델의 실패 사례와 성능 지표를 비기술 직군도 이해할 수 있는 실행 계획으로 변환.</p>
+                </div>
+
+                <div class="profile-card reveal">
+                    <div class="profile-meta">Communication</div>
+                    <div>
+                        <h3 class="profile-card-title">눈높이에 맞춘 설명 역량</h3>
+                        <p class="profile-card-kicker">영어학원 강사 3년</p>
+                        <p class="profile-card-copy">학습자 이해도에 맞춘 설명 경험. 복잡한 AI 모델의 실패 사례와 성능 지표를 비기술 직군도 이해할 수 있는 실행 계획으로 변환.</p>
                     </div>
-                    <div class="competency-card reveal">
-                        <span class="competency-label">Infrastructure</span>
-                        <h3 class="competency-title">Software & Infrastructure</h3>
-                        <p class="competency-copy">Python 자동화. RAG 기반 업무 흐름 설계. AWS 환경 관리. 모델과 서비스의 실제 운영 환경 연결 경험.</p>
+                </div>
+
+                <div class="profile-card reveal">
+                    <div class="profile-meta">Optimization</div>
+                    <div>
+                        <h3 class="profile-card-title">Data Analysis & Optimization</h3>
+                        <p class="profile-card-kicker">데이터 분석 및 추론 최적화</p>
+                        <p class="profile-card-copy">Pandas/NumPy 기반 데이터 분석. 4-bit Quantization, LoRA, TensorRT 기반 추론 최적화. 제한된 자원 환경에서의 성능 개선 경험.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card reveal">
+                    <div class="profile-meta">Infrastructure</div>
+                    <div>
+                        <h3 class="profile-card-title">Software & Infrastructure</h3>
+                        <p class="profile-card-kicker">자동화 및 운영 환경 연결</p>
+                        <p class="profile-card-copy">Python 자동화. RAG 기반 업무 흐름 설계. AWS 환경 관리. 모델과 서비스의 실제 운영 환경 연결 경험.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card reveal">
+                    <div class="profile-meta">Certificate</div>
+                    <div>
+                        <h3 class="profile-card-title">자격 및 어학</h3>
+                        <p class="profile-card-kicker">기술 이해도 및 커뮤니케이션 기반</p>
+                        <p class="profile-card-copy">ADsP 취득. OPIc IH 등급. 전기기사 필기 합격.</p>
                     </div>
                 </div>
 
