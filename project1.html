@@ -6,61 +6,183 @@
     <title>이미지 기반 VQA 멀티모달 AI 모델 - 프로젝트 상세</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        :root {
+            --page-bg: #ffffff;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --line: #e5e7eb;
+            --line-strong: #d1d5db;
+            --text: #111827;
+            --muted: #4b5563;
+            --subtle: #6b7280;
+            --accent: #2563eb;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            min-height: 100vh;
+            background: var(--page-bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        nav {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        .back-link {
+            color: var(--subtle);
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 4rem 0 2.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .eyebrow {
+            color: #047857;
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        h2 {
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        p, li {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .problem-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .problem-title {
+            color: var(--accent);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: #f3f4f6;
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+        }
     </style>
 </head>
-<body class="bg-[#121212] text-gray-300 antialiased min-h-screen flex flex-col">
-    <nav class="max-w-3xl mx-auto w-full px-6 py-6 mt-4">
-        <a href="index.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition font-medium border border-gray-700 bg-gray-800 px-4 py-2 rounded-lg">
-            &larr; 포트폴리오로 돌아가기
-        </a>
+<body class="antialiased flex flex-col">
+    <nav>
+        <div class="max-w-4xl mx-auto w-full px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-wide">GEONJAE</a>
+            <a href="index.html#projects" class="back-link inline-flex items-center gap-2">&larr; 프로젝트 목록</a>
+        </div>
     </nav>
 
-    <main class="max-w-3xl mx-auto w-full px-6 py-8 flex-grow">
-        <div class="mb-10 pb-6 border-b border-gray-800">
-            <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">이미지 기반 VQA 멀티모달 AI 모델</h1>
-            <p class="text-blue-400 font-mono text-lg">2025.10 ~ 2025.10</p>
-        </div>
-        
-        <div class="space-y-10 text-base">
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">📌 프로젝트 개요</h2>
-                <p class="text-gray-400 leading-relaxed">제한된 인프라 자원을 극복하여 대규모 모델의 비즈니스 활용 가능성을 검토하고, 최적화 기법을 통해 운영 효율성을 확보하는 것을 목표로 하였습니다.</p>
+    <main class="max-w-4xl mx-auto w-full px-6 flex-grow">
+        <header class="hero">
+            <p class="eyebrow">Project 01</p>
+            <h1>이미지 기반 VQA 멀티모달 AI 모델</h1>
+            <p class="mt-5 text-lg text-gray-500">자원 제약 환경에서 대규모 모델을 경량화하고, 추론 효율과 정확도를 함께 개선한 프로젝트입니다.</p>
+            <div class="flex flex-wrap gap-2 mt-6">
+                <span class="tag">2025.10</span>
+                <span class="tag">Qwen3-VL</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">Unsloth</span>
+                <span class="tag">LoRA</span>
             </div>
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">🏆 주요 성과</h2>
-                <ul class="list-disc list-inside text-gray-400 space-y-2">
-                    <li><strong>최종 리더보드 순위 11위</strong> (최고 점수: 0.9645)</li>
-                    <li><strong>VRAM 사용량 70% 절감</strong> (24GB → 7GB) 및 정확도 향상 (+4.8%)</li>
+        </header>
+
+        <div class="py-12 space-y-8">
+            <section class="card">
+                <h2>프로젝트 개요</h2>
+                <p>제한된 인프라 자원을 극복하여 대규모 멀티모달 모델의 실전 활용 가능성을 검토하고, 양자화와 파인튜닝 전략을 통해 운영 효율성을 확보하는 것을 목표로 했습니다.</p>
+            </section>
+
+            <section class="card">
+                <h2>주요 성과</h2>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>최종 리더보드 11위</strong> 달성, 최고 점수 0.9645 기록</li>
+                    <li><strong>VRAM 사용량 70% 절감</strong>으로 24GB 환경 부담을 7GB 수준까지 완화</li>
+                    <li>선지 셔플 전략을 통해 기준 대비 정확도 4.8% 향상</li>
                 </ul>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">🛠️ 주요 문제 해결 사례</h2>
+            </section>
+
+            <section class="card">
+                <h2>주요 문제 해결 사례</h2>
                 <div class="space-y-4">
-                    <div class="bg-[#1e1e1e] p-6 rounded-xl border border-gray-800 shadow-sm">
-                        <p class="text-blue-400 font-bold mb-2">문제 1. 한정된 예산과 자원 내 대형 모델 구동</p>
-                        <p class="text-gray-400 mb-2"><span class="text-gray-300 font-semibold">해결:</span> Unsloth 기반 4bit 양자화 도입, 비전 레이어 고정(freeze) 및 언어 모델 레이어에만 LoRA 어댑터 적용.</p>
-                        <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> VRAM 사용량을 70% 절감하면서도 32B 모델의 고성능 추론 능력 유지.</p>
+                    <div class="problem-card">
+                        <p class="problem-title">문제 1. 한정된 예산과 자원 내 대형 모델 구동</p>
+                        <p><strong>해결:</strong> Unsloth 기반 4-bit 양자화를 도입하고, 비전 레이어는 고정한 뒤 언어 모델 레이어에만 LoRA 어댑터를 적용했습니다.</p>
+                        <p><strong>결과:</strong> VRAM 사용량을 크게 줄이면서도 32B 모델의 고성능 추론 능력을 유지했습니다.</p>
                     </div>
-                    <div class="bg-[#1e1e1e] p-6 rounded-xl border border-gray-800 shadow-sm">
-                        <p class="text-blue-400 font-bold mb-2">문제 2. 단순 통계적 오류로 인한 분석 신뢰성 저하 (Position Bias)</p>
-                        <p class="text-gray-400 mb-2"><span class="text-gray-300 font-semibold">해결:</span> EDA를 통해 편향 발견, 데이터 로더에서 정답과 오답을 무작위로 섞는 '선지 셔플(Choice Shuffle)' 구현.</p>
-                        <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> 모델이 위치가 아닌 의미적 상관관계에 집중하도록 유도, 정확도 4.8% 향상 (0.92 → 0.9645).</p>
+                    <div class="problem-card">
+                        <p class="problem-title">문제 2. Position Bias로 인한 분석 신뢰성 저하</p>
+                        <p><strong>해결:</strong> EDA로 편향을 발견하고 데이터 로더에서 정답과 오답을 무작위로 섞는 Choice Shuffle을 구현했습니다.</p>
+                        <p><strong>결과:</strong> 모델이 보기 위치가 아니라 의미적 상관관계에 집중하도록 유도해 정확도를 개선했습니다.</p>
                     </div>
                 </div>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">💻 담당 업무 및 사용 기술</h2>
-                <ul class="list-disc list-inside text-gray-400 space-y-2 mb-6">
+            </section>
+
+            <section class="card">
+                <h2>담당 업무 및 사용 기술</h2>
+                <ul class="list-disc list-inside space-y-2 mb-5">
                     <li>모델 성능 비교 분석 및 벤치마킹</li>
                     <li>정확도 방어를 위한 하이퍼파라미터 최적값 탐색</li>
                     <li>Few-shot 프롬프팅 및 정규표현식 기반 출력 정형화 제어</li>
                 </ul>
-            </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tag">Qwen3-VL (32B)</span>
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">Unsloth</span>
+                    <span class="tag">LoRA/QLoRA</span>
+                </div>
+            </section>
         </div>
     </main>
-    <footer class="max-w-3xl mx-auto w-full px-6 py-8 border-t border-gray-800 mt-auto text-center">
-        <p class="text-xs text-gray-600">© 2026 강건재 Personal Portfolio</p>
+
+    <footer class="max-w-4xl mx-auto w-full px-6 py-8 text-center">
+        <p class="text-xs text-gray-500">© 2026 강건재 Personal Portfolio</p>
     </footer>
 </body>
 </html>
