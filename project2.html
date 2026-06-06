@@ -6,60 +6,180 @@
     <title>지능형 스마트팜 통합 관리 솔루션 - 프로젝트 상세</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        :root {
+            --page-bg: #ffffff;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --line: #e5e7eb;
+            --text: #111827;
+            --muted: #4b5563;
+            --subtle: #6b7280;
+            --accent: #2563eb;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            min-height: 100vh;
+            background: var(--page-bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        nav {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        .back-link {
+            color: var(--subtle);
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .hero {
+            padding: 4rem 0 2.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .eyebrow {
+            color: #047857;
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        h2 {
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        p, li {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .problem-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .problem-title {
+            color: var(--accent);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: #f3f4f6;
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        footer { border-top: 1px solid var(--line); }
     </style>
 </head>
-<body class="bg-[#121212] text-gray-300 antialiased min-h-screen flex flex-col">
-    <nav class="max-w-3xl mx-auto w-full px-6 py-6 mt-4">
-        <a href="index.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition font-medium border border-gray-700 bg-gray-800 px-4 py-2 rounded-lg">
-            &larr; 포트폴리오로 돌아가기
-        </a>
+<body class="antialiased flex flex-col">
+    <nav>
+        <div class="max-w-4xl mx-auto w-full px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-wide">GEONJAE</a>
+            <a href="index.html#projects" class="back-link inline-flex items-center gap-2">&larr; 프로젝트 목록</a>
+        </div>
     </nav>
 
-    <main class="max-w-3xl mx-auto w-full px-6 py-8 flex-grow">
-        <div class="mb-10 pb-6 border-b border-gray-800">
-            <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">지능형 스마트팜 통합 관리 솔루션 (MEERUSFARM)</h1>
-            <p class="text-blue-400 font-mono text-lg">2026.01 ~ 2026.02 (6주)</p>
-        </div>
-        
-        <div class="space-y-10 text-base">
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">📌 프로젝트 개요</h2>
-                <p class="text-gray-400 leading-relaxed">숙련공 부족 문제를 해결하기 위해 AI와 IoT 기술을 융합하여, 비전문가도 현장을 즉시 관리할 수 있는 지능형 의사결정 보조 시스템(Edge-Cloud 하이브리드)을 구축했습니다.</p>
+    <main class="max-w-4xl mx-auto w-full px-6 flex-grow">
+        <header class="hero">
+            <p class="eyebrow">Project 02</p>
+            <h1>지능형 스마트팜 통합 관리 솔루션</h1>
+            <p class="mt-5 text-lg text-gray-500">Edge-Cloud 하이브리드 구조로 병해 탐지와 RAG 기반 리포트 생성을 연결한 스마트팜 관리 시스템입니다.</p>
+            <div class="flex flex-wrap gap-2 mt-6">
+                <span class="tag">2026.01 ~ 02</span>
+                <span class="tag">MEERUSFARM</span>
+                <span class="tag">YOLOv8 Nano</span>
+                <span class="tag">TensorRT</span>
+                <span class="tag">RAG</span>
             </div>
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">🏆 주요 성과</h2>
-                <ul class="list-disc list-inside text-gray-400 space-y-2">
-                    <li><strong>실시간 탐지 정확도 (mAP50): 0.9</strong> (YOLOv8 + TensorRT 최적화)</li>
-                    <li><strong>Polygon 라벨링 기반 파인튜닝으로 손실값 18% 감소</strong></li>
-                    <li><strong>프로젝트 마감 시간 100% 준수 및 서비스 안정성 달성</strong></li>
+        </header>
+
+        <div class="py-12 space-y-8">
+            <section class="card">
+                <h2>프로젝트 개요</h2>
+                <p>숙련공 부족 문제를 해결하기 위해 AI와 IoT 기술을 융합했습니다. 비전문가도 현장을 빠르게 파악하고 의사결정할 수 있도록 실시간 탐지, 센서 데이터, 지식 기반 리포트를 하나의 흐름으로 구성했습니다.</p>
+            </section>
+
+            <section class="card">
+                <h2>주요 성과</h2>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>실시간 탐지 정확도 mAP50 0.9</strong> 달성</li>
+                    <li>Polygon 라벨링 기반 파인튜닝으로 손실값 18% 감소</li>
+                    <li>프로젝트 마감 시간 준수와 안정적인 MVP 완성</li>
                 </ul>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">🛠️ 주요 문제 해결 사례</h2>
+            </section>
+
+            <section class="card">
+                <h2>주요 문제 해결 사례</h2>
                 <div class="space-y-4">
-                    <div class="bg-[#1e1e1e] p-6 rounded-xl border border-gray-800 shadow-sm">
-                        <p class="text-blue-400 font-bold mb-2">문제 1. 최신 기술(vLLM) 도입 리스크와 데드라인 상충</p>
-                        <p class="text-gray-400 mb-2"><span class="text-gray-300 font-semibold">해결:</span> 시뮬레이션 환경 통합의 어려움 파악 후 신속한 의사결정. 안정적 모델 파이프 유지 및 프롬프트 엔지니어링(사전 로드 지식베이스)으로 우회.</p>
-                        <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> 동일한 수준의 사용자 경험을 제공하며 일정 준수 및 안전한 배포(서비스 런칭) 달성.</p>
+                    <div class="problem-card">
+                        <p class="problem-title">문제 1. 최신 기술 도입 리스크와 데드라인 상충</p>
+                        <p><strong>해결:</strong> vLLM 통합 리스크를 빠르게 판단하고, 안정적인 모델 파이프라인과 프롬프트 엔지니어링 기반 지식베이스로 우회했습니다.</p>
+                        <p><strong>결과:</strong> 사용자 경험 수준을 유지하면서 일정 내 서비스 런칭을 달성했습니다.</p>
                     </div>
-                    <div class="bg-[#1e1e1e] p-6 rounded-xl border border-gray-800 shadow-sm">
-                        <p class="text-blue-400 font-bold mb-2">문제 2. 팀 내 방법론(완벽함 vs 속도) 차이로 인한 갈등</p>
-                        <p class="text-gray-400 mb-2"><span class="text-gray-300 font-semibold">해결:</span> 핵심 기능 선정 후 고도화하는 '단계별 개발 로직'을 제시하여 목표와 방향성을 재정립.</p>
-                        <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> 팀 내 합의 도출 및 일관된 개발 방향 수립으로 MVP의 성공적 완성.</p>
+                    <div class="problem-card">
+                        <p class="problem-title">문제 2. 팀 내 개발 방향 차이</p>
+                        <p><strong>해결:</strong> 핵심 기능을 먼저 선정하고 단계별로 고도화하는 개발 로직을 제안했습니다.</p>
+                        <p><strong>결과:</strong> 팀 내 합의를 이끌어내고 일관된 개발 방향으로 MVP를 완성했습니다.</p>
                     </div>
                 </div>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">💻 담당 업무 및 사용 기술</h2>
-                <ul class="list-disc list-inside text-gray-400 space-y-2 mb-6">
-                    <li>AI 모델 파이프라인 총괄 (Detection/Segmentation) 설계 및 최적화</li>
-                    <li>1,248개 Polygon 라벨링 데이터 직접 제작 및 파인튜닝</li>
+            </section>
+
+            <section class="card">
+                <h2>담당 업무 및 사용 기술</h2>
+                <ul class="list-disc list-inside space-y-2 mb-5">
+                    <li>AI 모델 파이프라인 총괄 및 Detection/Segmentation 최적화</li>
+                    <li>1,248개 Polygon 라벨링 데이터 제작 및 파인튜닝</li>
                     <li>센서 데이터와 농업 지식 베이스를 결합한 RAG 시스템 설계</li>
-                    <li>Jira 기반 Agile Sprint 운영 및 백로그 우선순위 관리 (리딩)</li>
+                    <li>Jira 기반 Agile Sprint 운영 및 백로그 우선순위 관리</li>
                 </ul>
-            </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tag">YOLOv8 Nano</span>
+                    <span class="tag">TensorRT (FP16)</span>
+                    <span class="tag">Jetson Orin Nano</span>
+                    <span class="tag">LLM (RAG)</span>
+                    <span class="tag">MQTT</span>
+                </div>
+            </section>
         </div>
     </main>
+
+    <footer class="max-w-4xl mx-auto w-full px-6 py-8 text-center">
+        <p class="text-xs text-gray-500">© 2026 강건재 Personal Portfolio</p>
+    </footer>
 </body>
 </html>
