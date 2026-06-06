@@ -11,6 +11,24 @@
         /* 모달 팝업 애니메이션 */
         dialog[open] { animation: modalFadeIn 0.3s ease-out forwards; }
         @keyframes modalFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* 스크롤 등장 애니메이션 (Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 프로필 사진 떠오르는 효과 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
     </style>
 </head>
 <body class="bg-[#121212] text-gray-300 antialiased min-h-screen flex flex-col">
@@ -34,12 +52,12 @@
         <!-- Hero Section -->
         <section class="mb-16 flex flex-col md:flex-row items-center md:items-start gap-8">
             <!-- 프로필 사진 영역 -->
-            <div class="w-48 h-48 md:w-56 md:h-56 flex-shrink-0">
+            <div class="reveal w-48 h-48 md:w-56 md:h-56 flex-shrink-0">
                 <!-- 사진 파일 이름이 다르다면 아래 src="사진이름.확장자" 부분을 수정해주세요 -->
-                <img src="./profile.jpg" alt="프로필 사진" class="w-full h-full object-cover rounded-3xl border-4 border-[#2d2d2d] shadow-2xl transition-transform hover:scale-105 duration-300">
+                <img src="./profile.jpg" alt="프로필 사진" class="w-full h-full object-cover rounded-3xl border-4 border-[#2d2d2d] shadow-2xl transition-transform hover:scale-105 duration-300 animate-float">
             </div>
             <!-- 소개 텍스트 영역 -->
-            <div class="flex-1 text-center md:text-left">
+            <div class="reveal flex-1 text-center md:text-left">
                 <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight break-words">
                     데이터의 맥락을 읽어내어<br />
                     사용자의 경험을 혁신하는<br />
@@ -70,7 +88,7 @@
             </h2>
             <div class="flex flex-col gap-6">
                 <!-- 1. Education -->
-                <div class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition flex flex-col md:flex-row gap-8">
+                <div class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col md:flex-row gap-8">
                     <div class="flex-1">
                         <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">📂 교육 및 학력</h3>
                         <p class="text-sm text-gray-400 leading-relaxed">
@@ -87,7 +105,7 @@
                 <!-- 2. Core Competencies Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <!-- Data Analysis & Optimization -->
-                    <div class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 transition group">
+                    <div class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] group">
                         <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2 group-hover:text-blue-400 transition">⚡ Data Analysis & Optimization</h3>
                         <ul class="text-sm text-gray-400 space-y-3 leading-relaxed">
                             <li><strong class="text-gray-300">데이터 기반 분석:</strong> Pandas, NumPy를 활용한 대규모 실적 데이터 전처리 및 탐색적 데이터 분석(EDA) 역량 보유 (시장 동향 및 수요 예측 활용 가능)</li>
@@ -98,7 +116,7 @@
                     </div>
                     
                     <!-- Global Communication & Technical Interpretation -->
-                    <div class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-green-500 transition group">
+                    <div class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-green-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(34,197,94,0.15)] group">
                         <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2 group-hover:text-green-400 transition">🌍 Global Communication</h3>
                         <ul class="text-sm text-gray-400 space-y-3 leading-relaxed">
                             <li><strong class="text-gray-300">기술 가교:</strong> 복잡한 AI 모델의 Failure Case 분석 및 성능 지표를 비기술직군(Sales/경영진)이 이해할 수 있는 Action Plan으로 변환하여 전달.</li>
@@ -107,7 +125,7 @@
                     </div>
                     
                     <!-- Software & Infrastructure -->
-                    <div class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-purple-500 transition group">
+                    <div class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-purple-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(168,85,247,0.15)] group">
                         <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2 group-hover:text-purple-400 transition">💻 Software & Infrastructure</h3>
                         <ul class="text-sm text-gray-400 space-y-3 leading-relaxed">
                             <li><strong class="text-gray-300">업무 자동화:</strong> Python 및 LLM 프롬프트 엔지니어링(RAG)을 활용하여 반복적인 기술 보고서 작성 및 견적 검토 프로세스 자동화</li>
@@ -118,7 +136,7 @@
                 </div>
 
                 <!-- 3. Tech Skills Table -->
-                <div class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition">
+                <div class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                     <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">🛠️ 보유 기술 및 능력</h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-400">
@@ -213,7 +231,7 @@
             </h2>
             <div class="flex flex-col gap-4">
                 <!-- Project 1 -->
-                <div onclick="document.getElementById('modal-proj-1').showModal()" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
+                <div onclick="document.getElementById('modal-proj-1').showModal()" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
                 <div onclick="location.href='project1.html'" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">1. 이미지 기반 VQA 멀티모달 AI 모델</h3>
@@ -233,7 +251,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div onclick="document.getElementById('modal-proj-2').showModal()" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
+                <div onclick="document.getElementById('modal-proj-2').showModal()" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
                 <div onclick="location.href='project2.html'" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">2. 지능형 스마트팜 통합 관리 솔루션</h3>
@@ -253,7 +271,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div onclick="document.getElementById('modal-proj-3').showModal()" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
+                <div onclick="document.getElementById('modal-proj-3').showModal()" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
                 <div onclick="location.href='project3.html'" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">3. NightWatch 야간 자율순찰 시스템</h3>
@@ -474,5 +492,22 @@
         <p class="text-xs text-gray-500 mb-2">"기술적 이상향을 넘어, 제한된 현장 인프라에서도 최적의 성능을 발휘하는 실전형 AI 솔루션을 구축하겠습니다."</p>
         <p class="text-xs text-gray-600">© 2026 강건재 Personal Portfolio | 010-4120-2283 | kgj200401@gmail.com</p>
     </footer>
+
+    <!-- 스크롤 애니메이션 JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // 한 번 등장하면 애니메이션 유지
+                    }
+                });
+            }, { threshold: 0.1 }); // 요소가 10% 화면에 보일 때 실행
+
+            reveals.forEach(reveal => revealOnScroll.observe(reveal));
+        });
+    </script>
 </body>
 </html>
