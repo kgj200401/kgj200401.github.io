@@ -29,9 +29,281 @@
             50% { transform: translateY(-10px); }
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
+
+        :root {
+            --page-bg: #ffffff;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --line: #e5e7eb;
+            --line-strong: #d1d5db;
+            --text: #111827;
+            --muted: #4b5563;
+            --subtle: #6b7280;
+            --accent: #2563eb;
+        }
+
+        body {
+            background: var(--page-bg) !important;
+            color: var(--text) !important;
+        }
+
+        nav {
+            border-bottom: 1px solid var(--line);
+            margin-top: 0 !important;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        main {
+            padding-top: 4rem !important;
+        }
+
+        section {
+            scroll-margin-top: 5rem;
+        }
+
+        h1, h2, h3,
+        .text-white,
+        .text-gray-200,
+        .text-gray-300 {
+            color: var(--text) !important;
+        }
+
+        p,
+        li,
+        td,
+        .text-gray-400,
+        .text-gray-500,
+        .text-gray-600 {
+            color: var(--muted) !important;
+        }
+
+        .text-blue-300,
+        .text-blue-400,
+        .text-blue-500,
+        .group:hover .group-hover\:text-blue-400 {
+            color: var(--accent) !important;
+        }
+
+        .text-green-300,
+        .text-green-400,
+        .group:hover .group-hover\:text-green-400 {
+            color: #047857 !important;
+        }
+
+        .text-purple-400,
+        .group:hover .group-hover\:text-purple-400 {
+            color: #7c3aed !important;
+        }
+
+        .text-yellow-300,
+        .text-yellow-400 {
+            color: #a16207 !important;
+        }
+
+        a,
+        button {
+            color: inherit;
+        }
+
+        a:hover,
+        button:hover {
+            color: var(--accent) !important;
+        }
+
+        nav a,
+        nav button {
+            color: var(--subtle) !important;
+        }
+
+        nav a:first-child {
+            color: var(--text) !important;
+        }
+
+        [class*="bg-[#121212]"],
+        [class*="bg-[#1e1e1e]"],
+        [class*="bg-[#252525]"],
+        [class*="bg-[#2d2d2d]"],
+        [class*="bg-[#3d3d3d]"],
+        .bg-gray-800,
+        .bg-gray-800\/40 {
+            background-color: var(--surface) !important;
+        }
+
+        .bg-blue-600,
+        .hover\:bg-blue-700:hover {
+            background-color: var(--text) !important;
+            color: #ffffff !important;
+            border-color: var(--text) !important;
+        }
+
+        main a[class*="px-5"] {
+            background: var(--surface) !important;
+            color: var(--text) !important;
+            border: 1px solid var(--line) !important;
+        }
+
+        main a[href$=".pdf"] {
+            background: var(--text) !important;
+            color: #ffffff !important;
+            border-color: var(--text) !important;
+        }
+
+        main a[class*="px-5"]:hover {
+            background: var(--surface-soft) !important;
+            border-color: var(--line-strong) !important;
+        }
+
+        main a[href$=".pdf"]:hover {
+            background: #374151 !important;
+            color: #ffffff !important;
+        }
+
+        .border,
+        .border-4,
+        .border-gray-700,
+        .border-gray-700\/50,
+        .border-gray-800,
+        .border-blue-800,
+        .border-green-800,
+        .border-yellow-800 {
+            border-color: var(--line) !important;
+        }
+
+        .shadow-2xl,
+        .shadow-lg,
+        [class*="shadow-["] {
+            box-shadow: none !important;
+        }
+
+        .rounded-2xl,
+        .rounded-3xl,
+        .rounded-xl {
+            border-radius: 12px !important;
+        }
+
+        .animate-float {
+            animation: none !important;
+        }
+
+        img {
+            border-color: var(--line) !important;
+            box-shadow: none !important;
+        }
+
+        .reveal {
+            transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+        }
+
+        .hover\:-translate-y-1:hover,
+        .hover\:-translate-y-2:hover,
+        .hover\:scale-105:hover {
+            transform: none !important;
+        }
+
+        [class*="hover:border-"]:hover {
+            border-color: var(--line-strong) !important;
+        }
+
+        [class*="hover:bg-"]:hover,
+        tr:hover {
+            background-color: var(--surface-soft) !important;
+        }
+
+        .reveal[class*="border"] {
+            background: var(--surface) !important;
+            border: 1px solid var(--line) !important;
+        }
+
+        #portfolio .reveal,
+        #projects .reveal {
+            padding: 1.5rem !important;
+        }
+
+        #projects .reveal {
+            border-radius: 10px !important;
+            padding-right: 6.5rem !important;
+        }
+
+        #projects .reveal:hover,
+        #portfolio .reveal:hover {
+            border-color: var(--line-strong) !important;
+            background: var(--surface-soft) !important;
+        }
+
+        .font-mono {
+            color: var(--subtle) !important;
+        }
+
+        span[class*="bg-gray-800"],
+        span[class*="bg-blue-900"],
+        span[class*="bg-green-900"],
+        span[class*="bg-yellow-900"] {
+            background: #f3f4f6 !important;
+            border: 1px solid var(--line) !important;
+            color: var(--muted) !important;
+            border-radius: 6px !important;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        thead {
+            background: var(--surface-soft) !important;
+            border-color: var(--line) !important;
+        }
+
+        tbody {
+            border-color: var(--line) !important;
+        }
+
+        dialog {
+            background: var(--surface) !important;
+            color: var(--text) !important;
+            border-color: var(--line) !important;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.14) !important;
+        }
+
+        dialog::backdrop {
+            background: rgba(15, 23, 42, 0.24) !important;
+            backdrop-filter: blur(2px);
+        }
+
+        dialog .sticky {
+            background: var(--surface) !important;
+            border-color: var(--line) !important;
+        }
+
+        dialog button {
+            background: var(--surface-soft) !important;
+            color: var(--muted) !important;
+            border: 1px solid var(--line);
+        }
+
+        footer {
+            border-color: var(--line) !important;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding-top: 2.5rem !important;
+            }
+
+            #projects .reveal {
+                padding-right: 1.5rem !important;
+            }
+
+            #projects .absolute {
+                position: static !important;
+                margin-top: 1rem;
+                opacity: 1 !important;
+            }
+        }
     </style>
 </head>
-<body class="bg-[#121212] text-gray-300 antialiased min-h-screen flex flex-col">
+<body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col">
     <!-- 네비게이션 바 -->
     <nav class="max-w-4xl mx-auto w-full px-6 py-4 flex justify-between items-center mt-4">
         <div class="flex items-center space-x-6">
@@ -231,8 +503,7 @@
             </h2>
             <div class="flex flex-col gap-4">
                 <!-- Project 1 -->
-                <div onclick="document.getElementById('modal-proj-1').showModal()" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
-                <div onclick="location.href='project1.html'" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
+                <div onclick="location.href='project1.html'" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">1. 이미지 기반 VQA 멀티모달 AI 모델</h3>
                         <span class="text-xs text-gray-500 font-mono mt-1 md:mt-0">2025.10</span>
@@ -251,8 +522,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div onclick="document.getElementById('modal-proj-2').showModal()" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
-                <div onclick="location.href='project2.html'" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
+                <div onclick="location.href='project2.html'" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">2. 지능형 스마트팜 통합 관리 솔루션</h3>
                         <span class="text-xs text-gray-500 font-mono mt-1 md:mt-0">2026.01 ~ 02</span>
@@ -271,8 +541,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div onclick="document.getElementById('modal-proj-3').showModal()" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
-                <div onclick="location.href='project3.html'" class="bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition cursor-pointer group relative">
+                <div onclick="location.href='project3.html'" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">3. NightWatch 야간 자율순찰 시스템</h3>
                         <span class="text-xs text-gray-500 font-mono mt-1 md:mt-0">2026.03 ~ 04</span>
