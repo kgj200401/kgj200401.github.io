@@ -12,7 +12,7 @@
         dialog[open] { animation: modalFadeIn 0.3s ease-out forwards; }
         @keyframes modalFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 스크롤 등장 애니메이션. (Reveal) */
+        /* 스크롤 등장 애니메이션 (Reveal) */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -406,6 +406,133 @@
             object-fit: contain;
         }
 
+        .projects-heading {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .projects-eyebrow {
+            color: #047857 !important;
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+
+        .projects-title {
+            color: var(--text) !important;
+            font-size: clamp(2rem, 4vw, 2.6rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .featured-projects {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .featured-project {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+            gap: 3rem;
+            align-items: center;
+            padding: 2.5rem !important;
+            background: #ffffff !important;
+            border: 1px solid var(--line) !important;
+            border-radius: 24px !important;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .featured-project:hover {
+            transform: translateY(-4px) !important;
+            border-color: var(--line-strong) !important;
+            background: #ffffff !important;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08) !important;
+        }
+
+        .featured-project:nth-child(even) .project-image-wrap {
+            order: 2;
+        }
+
+        .project-image-wrap {
+            overflow: hidden;
+            border-radius: 14px;
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+        }
+
+        .project-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .featured-project:hover .project-image {
+            transform: scale(1.03);
+        }
+
+        .project-category {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.85rem;
+            margin-bottom: 1.25rem;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #047857 !important;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .project-title {
+            color: var(--text) !important;
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-subtitle {
+            color: var(--subtle) !important;
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 1.75rem;
+        }
+
+        .project-description {
+            color: var(--muted) !important;
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-link-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.4rem;
+            border-radius: 10px;
+            background: var(--text) !important;
+            color: #ffffff !important;
+            font-size: 0.95rem;
+            font-weight: 900;
+            border: 1px solid var(--text) !important;
+        }
+
+        .project-link-button:hover {
+            background: #374151 !important;
+            color: #ffffff !important;
+        }
+
         @media (max-width: 768px) {
             main {
                 padding-top: 2.5rem !important;
@@ -440,6 +567,25 @@
             .skill-card {
                 border-radius: 14px;
                 padding: 0.75rem;
+            }
+
+            .projects-heading {
+                margin-bottom: 2rem;
+            }
+
+            .featured-project {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.25rem !important;
+                border-radius: 18px !important;
+            }
+
+            .featured-project:nth-child(even) .project-image-wrap {
+                order: 0;
+            }
+
+            .project-link-button {
+                width: 100%;
             }
         }
     </style>
@@ -629,67 +775,69 @@
 
         <!-- Projects Section -->
         <section id="projects" class="mb-16">
-            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                <span>🚀</span> 진행 프로젝트
-            </h2>
-            <div class="flex flex-col gap-4">
+            <div class="projects-heading reveal">
+                <p class="projects-eyebrow">FEATURED PROJECTS</p>
+                <h2 class="projects-title">주요 프로젝트</h2>
+                <p class="text-gray-400">각 프로젝트에서 마주한 문제, 해결 방식, 담당 역할을 중심으로 정리했습니다.</p>
+            </div>
+            <div class="featured-projects">
                 <!-- Project 1 -->
-                <div onclick="location.href='project1.html'" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                        <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">1. 이미지 기반 VQA 멀티모달 AI 모델</h3>
-                        <span class="text-xs text-gray-500 font-mono mt-1 md:mt-0">2025.10</span>
+                <article onclick="location.href='project1.html'" class="featured-project reveal group" tabindex="0" role="link" aria-label="이미지 기반 VQA 멀티모달 AI 모델 자세히 보기" onkeydown="if(event.key === 'Enter') location.href='project1.html'">
+                    <div class="project-image-wrap">
+                        <img class="project-image" src="pjt1_pic/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-06%20170200.png" alt="이미지 기반 VQA 멀티모달 AI 모델 대표 이미지">
                     </div>
-                    <p class="text-sm text-gray-400 mb-4">자원 제약 환경에서의 대규모 모델 경량화 및 추론 가속 시스템 구축</p>
-                    <ul class="text-sm text-gray-400 list-disc list-inside mb-4 space-y-1">
-                        <li>Qwen3-VL(32B) 기반 4-bit 양자화 및 LoRA 파인튜닝 (VRAM 70% 절감)</li>
-                        <li>선지 셔플 알고리즘으로 리더보드 정확도 4.8% 향상 (최종 11위)</li>
-                    </ul>
-                    <div class="flex gap-2 text-xs font-mono mt-4">
-                        <span class="bg-gray-800 px-2 py-1 rounded">PyTorch</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">Unsloth</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">LoRA</span>
+                    <div>
+                        <span class="project-category">Multimodal AI</span>
+                        <h3 class="project-title">이미지 기반 VQA 멀티모달 AI 모델</h3>
+                        <p class="project-subtitle">2025.10</p>
+                        <p class="project-description">자원 제약 환경에서 Qwen3-VL 기반 대규모 모델을 4-bit 양자화하고, LoRA 파인튜닝과 선지 셔플 전략으로 추론 효율과 정확도를 함께 개선했습니다.</p>
+                        <div class="project-tags">
+                            <span class="bg-gray-800 px-2 py-1 rounded">PyTorch</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">Unsloth</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">LoRA</span>
+                        </div>
+                        <span class="project-link-button">프로젝트 자세히 보기 &rarr;</span>
                     </div>
-                    <div class="absolute bottom-6 right-6 text-xs text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">자세히 보기 &rarr;</div>
-                </div>
+                </article>
 
                 <!-- Project 2 -->
-                <div onclick="location.href='project2.html'" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                        <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">2. 지능형 스마트팜 통합 관리 솔루션</h3>
-                        <span class="text-xs text-gray-500 font-mono mt-1 md:mt-0">2026.01 ~ 02</span>
+                <article onclick="location.href='project2.html'" class="featured-project reveal group" tabindex="0" role="link" aria-label="지능형 스마트팜 통합 관리 솔루션 자세히 보기" onkeydown="if(event.key === 'Enter') location.href='project2.html'">
+                    <div class="project-image-wrap">
+                        <img class="project-image" src="pjt2_pic/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-06%20165027.png" alt="지능형 스마트팜 통합 관리 솔루션 대표 이미지">
                     </div>
-                    <p class="text-sm text-gray-400 mb-4">Edge-Cloud 하이브리드 아키텍처 기반 실시간 병해 탐지 및 RAG 리포트 생성</p>
-                    <ul class="text-sm text-gray-400 list-disc list-inside mb-4 space-y-1">
-                        <li>YOLOv8 Nano + TensorRT(FP16)로 Jetson 환경 실시간 추론 (mAP50 0.9)</li>
-                        <li>vLLM 및 RAG 기반 농작물 상태 분석 리포트 자동 생성</li>
-                    </ul>
-                    <div class="flex gap-2 text-xs font-mono mt-4">
-                        <span class="bg-gray-800 px-2 py-1 rounded">YOLOv8 Nano</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">TensorRT</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">RAG</span>
+                    <div>
+                        <span class="project-category">Edge AI / RAG</span>
+                        <h3 class="project-title">지능형 스마트팜 통합 관리 솔루션</h3>
+                        <p class="project-subtitle">2026.01 ~ 02</p>
+                        <p class="project-description">Edge-Cloud 하이브리드 아키텍처를 기반으로 병해를 실시간 탐지하고, 센서 데이터와 농업 지식 베이스를 결합해 RAG 리포트를 자동 생성했습니다.</p>
+                        <div class="project-tags">
+                            <span class="bg-gray-800 px-2 py-1 rounded">YOLOv8 Nano</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">TensorRT</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">RAG</span>
+                        </div>
+                        <span class="project-link-button">프로젝트 자세히 보기 &rarr;</span>
                     </div>
-                    <div class="absolute bottom-6 right-6 text-xs text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">자세히 보기 &rarr;</div>
-                </div>
+                </article>
 
                 <!-- Project 3 -->
-                <div onclick="location.href='project3.html'" class="reveal bg-[#1e1e1e] border border-gray-800 p-6 rounded-xl hover:border-blue-500 hover:bg-[#252525] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] cursor-pointer group relative">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                        <h3 class="text-lg font-bold text-white flex items-center gap-2 group-hover:text-blue-400 transition">3. NightWatch 야간 자율순찰 시스템</h3>
-                        <span class="text-xs text-gray-500 font-mono mt-1 md:mt-0">2026.03 ~ 04</span>
+                <article onclick="location.href='project3.html'" class="featured-project reveal group" tabindex="0" role="link" aria-label="NightWatch 야간 자율순찰 시스템 자세히 보기" onkeydown="if(event.key === 'Enter') location.href='project3.html'">
+                    <div class="project-image-wrap">
+                        <img class="project-image" src="pjt3_pic/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-06%20170124.png" alt="NightWatch 야간 자율순찰 시스템 대표 이미지">
                     </div>
-                    <p class="text-sm text-gray-400 mb-4">자율주행 로봇 기반 이상상황 탐지 및 GPT-4o 자동 관제 리포트 시스템</p>
-                    <ul class="text-sm text-gray-400 list-disc list-inside mb-4 space-y-1">
-                        <li>ROS2 + Nav2 자율주행 및 YOLO11n + EfficientNet-B0 비전 파이프라인 구축</li>
-                        <li>프로세스 분리를 통해 CPU 사용률 85% → 62% 감소 및 응답 속도 최적화</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 text-xs font-mono mt-4">
-                        <span class="bg-gray-800 px-2 py-1 rounded">ROS2</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">YOLO11n</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">GPT-4o</span>
-                        <span class="bg-gray-800 px-2 py-1 rounded">FastAPI</span>
+                    <div>
+                        <span class="project-category">Robotics / Vision AI</span>
+                        <h3 class="project-title">NightWatch 야간 자율순찰 시스템</h3>
+                        <p class="project-subtitle">2026.03 ~ 04</p>
+                        <p class="project-description">ROS2 기반 자율주행 로봇이 야간 순찰을 수행하며 이상상황을 탐지하고, GPT-4o 기반 관제 리포트와 알림을 자동화했습니다.</p>
+                        <div class="project-tags">
+                            <span class="bg-gray-800 px-2 py-1 rounded">ROS2</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">YOLO11n</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">GPT-4o</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">FastAPI</span>
+                        </div>
+                        <span class="project-link-button">프로젝트 자세히 보기 &rarr;</span>
                     </div>
-                    <div class="absolute bottom-6 right-6 text-xs text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">자세히 보기 &rarr;</div>
-                </div>
+                </article>
             </div>
         </section>
 
