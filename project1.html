@@ -233,13 +233,123 @@
             line-height: 1.5;
         }
 
+        .figure-card {
+            margin-top: 1.25rem;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .project-figure {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            padding: 0.9rem 1rem;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        .tuning-visual {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .tuning-visual h4 {
+            margin-bottom: 0.85rem;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 900;
+        }
+
+        .tuning-chart {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-box {
+            padding: 0.9rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--surface-soft);
+        }
+
+        .metric-title {
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-size: 0.82rem;
+            font-weight: 900;
+        }
+
+        .bar-area {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.55rem;
+            height: 9rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--line-strong);
+        }
+
+        .bar-wrap {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
+        }
+
+        .bar {
+            width: 100%;
+            min-height: 0.6rem;
+            border-radius: 8px 8px 3px 3px;
+            background: #111827;
+        }
+
+        .bar.loss { background: #2563eb; }
+        .bar.bad { background: #ef4444; }
+        .bar.good { background: #047857; }
+
+        .bar-label {
+            display: block;
+            margin-top: 0.45rem;
+            color: var(--subtle);
+            font-size: 0.68rem;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .bar-value {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--muted);
+            font-size: 0.68rem;
+            font-weight: 900;
+        }
+
+        .tuning-note {
+            margin-top: 0.9rem;
+            color: var(--muted);
+            font-size: 0.84rem;
+            font-weight: 800;
+            line-height: 1.7;
+        }
+
         footer { border-top: 1px solid var(--line); }
 
         @media (max-width: 768px) {
             .meta-grid,
             .role-grid,
             .tech-grid,
-            .impact-grid {
+            .impact-grid,
+            .tuning-chart {
                 grid-template-columns: 1fr;
             }
         }
@@ -333,7 +443,7 @@
                     <div class="sub-card">
                         <div class="role-head">
                             <h3>EDA 및 데이터 편향 진단</h3>
-                            <span class="contribution">기여도 25%</span>
+                            <span class="contribution">기여도 20%</span>
                         </div>
                         <p>
                             학습 이미지의 카테고리 분포를 분석해 동물/음식 데이터가 과도하게 많은 구조를 확인했습니다.
@@ -343,7 +453,7 @@
                     <div class="sub-card">
                         <div class="role-head">
                             <h3>이미지 수집 및 전처리 자동화</h3>
-                            <span class="contribution">기여도 25%</span>
+                            <span class="contribution">기여도 20%</span>
                         </div>
                         <p>
                             Pixabay API를 활용해 부족한 이미지 카테고리를 키워드 기반으로 자동 수집했습니다.
@@ -363,23 +473,32 @@
                     <div class="sub-card">
                         <div class="role-head">
                             <h3>학습 튜닝 및 과적합 디버깅</h3>
-                            <span class="contribution">기여도 20%</span>
+                            <span class="contribution">기여도 50%</span>
                         </div>
                         <p>
-                            epoch과 데이터 수를 늘릴 때 Loss가 진동하거나 Validation Loss가 급격히 떨어지는 과적합 신호를 확인했습니다.
-                            Learning rate, Weight decay, LoRA dropout(0.05~0.1)을 조정하며 적정 학습량과 안정적인 수렴 구간을 탐색했습니다.
+                            학습 데이터 수를 200, 500, 1000개 단위로 늘리며 Loss와 Accuracy 변화를 비교했습니다.
+                            데이터 수 증가만으로는 성능이 완만하게 개선됐지만, 1000개 데이터에서 epoch을 2로 늘렸을 때 Loss가 급증하고 Accuracy가 크게 하락하는 과적합 신호를 확인했습니다.
+                            이후 Learning rate, Weight decay, LoRA dropout(0.05~0.1)을 조정하며 적정 학습량과 안정적인 수렴 구간을 탐색했습니다.
                         </p>
                     </div>
                     <div class="sub-card">
                         <div class="role-head">
                             <h3>최종 성능 발표</h3>
-                            <span class="contribution">기여도 10%</span>
+                            <span class="contribution">기여도 100%</span>
                         </div>
                         <p>
                             리더보드 결과, 데이터 증강 전략, 균등 샘플링 로더, 하이퍼파라미터 튜닝 과정을 발표 자료로 정리했습니다.
                             단순 점수 발표가 아니라 성능 개선에 영향을 준 실험 흐름을 중심으로 설명했습니다.
                         </p>
                     </div>
+                </div>
+
+                <div class="figure-card">
+                    <img src="./pjt1_pic/111.png" alt="Qwen3-VL-8B 모델 선정 비교 자료" class="project-figure">
+                    <p class="figure-caption">
+                        모델 선정 근거: Qwen2.5-VL, Qwen3-VL-8B, Gemma, LLaVA 계열을 비교했고,
+                        최종적으로 Qwen3-VL-8B-Instruct-unsloth-bnb-4bit 모델이 가장 높은 성능 흐름을 보여 주요 모델로 채택했습니다.
+                    </p>
                 </div>
             </section>
 
@@ -441,13 +560,74 @@
                     <div class="problem-card">
                         <p class="problem-title">문제 3. 데이터 증강 후 학습량 증가에 따른 과적합 신호 발생</p>
                         <p>
-                            <strong>상황:</strong> epoch과 데이터 수를 늘리는 과정에서 Loss가 진동하거나 Validation Loss가 급격히 떨어지는 현상이 발생했습니다.
-                            이는 모델이 증강 데이터의 패턴을 과하게 학습할 가능성을 보여주는 신호였습니다.
+                            <strong>상황:</strong> 데이터 수를 200개에서 500개, 1000개로 늘렸을 때는 Loss가 낮아지고 Accuracy가 소폭 상승하는 흐름을 확인했습니다.
+                            하지만 1000개 데이터에서 epoch을 2로 늘리자 Loss가 약 0.84 수준까지 급증하고 Accuracy가 약 0.27 수준으로 하락했습니다.
+                            이는 모델이 증강 데이터의 패턴을 과하게 학습했을 가능성을 보여주는 신호였습니다.
                         </p>
                         <p>
-                            <strong>해결:</strong> Learning rate, Weight decay, LoRA dropout(0.05~0.1)을 조정하며 학습 안정성을 비교했습니다.
-                            단순히 학습량을 늘리는 방식이 아니라, Loss 흐름을 역추적해 적정 학습량을 조절했습니다.
+                            <strong>해결:</strong> 실험 로그에서 Loss와 Accuracy가 함께 무너지는 지점을 기준으로 학습량을 다시 조정했습니다.
+                            Learning rate와 Weight decay를 낮춰 업데이트 폭을 안정화하고, LoRA dropout(0.05~0.1)을 적용해 특정 패턴 암기를 줄이는 방향으로 비교했습니다.
+                            단순히 데이터와 epoch을 늘리는 방식이 아니라, 지표 흐름을 역추적해 적정 학습량을 조절했습니다.
                         </p>
+                        <div class="tuning-visual" aria-label="하이퍼파라미터 튜닝 실험 그래프">
+                            <h4>학습 데이터 수와 epoch 변화에 따른 지표 흐름</h4>
+                            <div class="tuning-chart">
+                                <div class="metric-box">
+                                    <p class="metric-title">Loss</p>
+                                    <div class="bar-area">
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.35</span>
+                                            <div class="bar loss" style="height: 38%;"></div>
+                                            <span class="bar-label">200</span>
+                                        </div>
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.32</span>
+                                            <div class="bar loss" style="height: 34%;"></div>
+                                            <span class="bar-label">500</span>
+                                        </div>
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.28</span>
+                                            <div class="bar loss" style="height: 30%;"></div>
+                                            <span class="bar-label">1000</span>
+                                        </div>
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.84</span>
+                                            <div class="bar bad" style="height: 88%;"></div>
+                                            <span class="bar-label">1000<br>epoch 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="metric-box">
+                                    <p class="metric-title">Accuracy</p>
+                                    <div class="bar-area">
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.94</span>
+                                            <div class="bar good" style="height: 88%;"></div>
+                                            <span class="bar-label">200</span>
+                                        </div>
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.94</span>
+                                            <div class="bar good" style="height: 88%;"></div>
+                                            <span class="bar-label">500</span>
+                                        </div>
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.95</span>
+                                            <div class="bar good" style="height: 90%;"></div>
+                                            <span class="bar-label">1000</span>
+                                        </div>
+                                        <div class="bar-wrap">
+                                            <span class="bar-value">0.27</span>
+                                            <div class="bar bad" style="height: 28%;"></div>
+                                            <span class="bar-label">1000<br>epoch 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="tuning-note">
+                                결론: 데이터 수를 늘리는 것은 일정 구간까지 도움이 됐지만, epoch 증가가 함께 들어가면 과적합이 발생했습니다.
+                                이 실험을 통해 “학습량이 많을수록 좋다”가 아니라 “Loss 흐름을 보며 학습 강도를 조절해야 한다”는 기준을 세웠습니다.
+                            </p>
+                        </div>
                         <div class="key-point">
                             <p>핵심 판단: 성능 개선은 더 많은 학습이 아니라, 과적합 신호를 읽고 학습 강도를 조절하는 과정에서 만들어짐.</p>
                         </div>
@@ -491,6 +671,12 @@
                 </div>
                 <div class="key-point">
                     <p>핵심 성과: 데이터 편향을 직접 분석하고, 이미지 수집/QA 생성/균등 샘플링/양자화 학습까지 연결해 최종 리더보드 11위 달성.</p>
+                </div>
+                <div class="figure-card">
+                    <img src="./pjt1_pic/333.png" alt="최종 리더보드 11위 달성 화면" class="project-figure">
+                    <p class="figure-caption">
+                        최종 리더보드 결과: C026_OBYG 팀으로 11위, 팀 최종 베스트 점수 0.96296을 기록했습니다.
+                    </p>
                 </div>
             </section>
 
