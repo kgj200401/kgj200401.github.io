@@ -612,6 +612,38 @@
             margin-bottom: 2rem;
         }
 
+        .project-tech {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.65rem;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: #ffffff !important;
+            color: var(--muted) !important;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .project-tech img {
+            width: 1.1rem;
+            height: 1.1rem;
+            object-fit: contain;
+        }
+
+        .project-tech-mark {
+            min-width: 1.1rem;
+            height: 1.1rem;
+            padding: 0 0.18rem;
+            display: grid;
+            place-items: center;
+            border-radius: 5px;
+            background: var(--text);
+            color: #ffffff;
+            font-size: 0.55rem;
+            font-weight: 900;
+        }
+
         .project-link-button {
             display: inline-flex;
             align-items: center;
@@ -770,7 +802,12 @@
                     <div>
                         <h3 class="profile-card-title">영어학원 강사</h3>
                         <p class="profile-card-kicker">Communication</p>
-                        <p class="profile-card-copy">조교로 시작해 중학교 1학년부터 고등학교 2학년까지 직접 수업. 학습자 이해도에 맞춘 설명 경험. 복잡한 내용을 상대방의 눈높이에 맞춰 전달하는 커뮤니케이션 역량.</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>조교로 시작해 강사 역할까지 확장</li>
+                            <li>중학교 1학년부터 고등학교 2학년까지 직접 수업</li>
+                            <li>학습자 이해도에 맞춘 설명 및 피드백 경험</li>
+                            <li>복잡한 내용을 상대방의 눈높이에 맞춰 전달하는 커뮤니케이션 역량</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -905,12 +942,12 @@
                     <div>
                         <span class="project-category">Multimodal AI</span>
                         <h3 class="project-title">이미지 기반 VQA 멀티모달 AI 모델</h3>
-                        <p class="project-subtitle">2025.10</p>
+                        <p class="project-subtitle">2025.10(1주)</p>
                         <p class="project-description">자원 제약 환경에서 Qwen3-VL 기반 대규모 모델을 4-bit 양자화하고, LoRA 파인튜닝과 선지 셔플 전략으로 추론 효율과 정확도를 함께 개선했습니다.</p>
                         <div class="project-tags">
-                            <span class="bg-gray-800 px-2 py-1 rounded">PyTorch</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">Unsloth</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">LoRA</span>
+                            <span class="project-tech"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="">PyTorch</span>
+                            <span class="project-tech"><span class="project-tech-mark">U</span>Unsloth</span>
+                            <span class="project-tech"><span class="project-tech-mark">L</span>LoRA</span>
                         </div>
                         <span class="project-link-button">프로젝트 자세히 보기 &rarr;</span>
                     </div>
@@ -924,12 +961,12 @@
                     <div>
                         <span class="project-category">Edge AI / RAG</span>
                         <h3 class="project-title">지능형 스마트팜 통합 관리 솔루션</h3>
-                        <p class="project-subtitle">2026.01 ~ 02</p>
+                        <p class="project-subtitle">2026.01 ~ 02(6주)</p>
                         <p class="project-description">Edge-Cloud 하이브리드 아키텍처를 기반으로 병해를 실시간 탐지하고, 센서 데이터와 농업 지식 베이스를 결합해 RAG 리포트를 자동 생성했습니다.</p>
                         <div class="project-tags">
-                            <span class="bg-gray-800 px-2 py-1 rounded">YOLOv8 Nano</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">TensorRT</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">RAG</span>
+                            <span class="project-tech"><span class="project-tech-mark">Y</span>YOLOv8 Nano</span>
+                            <span class="project-tech"><span class="project-tech-mark">TRT</span>TensorRT</span>
+                            <span class="project-tech"><span class="project-tech-mark">R</span>RAG</span>
                         </div>
                         <span class="project-link-button">프로젝트 자세히 보기 &rarr;</span>
                     </div>
@@ -943,13 +980,13 @@
                     <div>
                         <span class="project-category">Robotics / Vision AI</span>
                         <h3 class="project-title">NightWatch 야간 자율순찰 시스템</h3>
-                        <p class="project-subtitle">2026.03 ~ 04</p>
+                        <p class="project-subtitle">2026.03 ~ 04(7주)</p>
                         <p class="project-description">ROS2 기반 자율주행 로봇이 야간 순찰을 수행하며 이상상황을 탐지하고, GPT-4o 기반 관제 리포트와 알림을 자동화했습니다.</p>
                         <div class="project-tags">
-                            <span class="bg-gray-800 px-2 py-1 rounded">ROS2</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">YOLO11n</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">GPT-4o</span>
-                            <span class="bg-gray-800 px-2 py-1 rounded">FastAPI</span>
+                            <span class="project-tech"><span class="project-tech-mark">R2</span>ROS2</span>
+                            <span class="project-tech"><span class="project-tech-mark">Y</span>YOLO11n</span>
+                            <span class="project-tech"><span class="project-tech-mark">GPT</span>GPT-4o</span>
+                            <span class="project-tech"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="">FastAPI</span>
                         </div>
                         <span class="project-link-button">프로젝트 자세히 보기 &rarr;</span>
                     </div>
