@@ -97,6 +97,21 @@
             padding: 1.5rem;
         }
 
+        .card h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .card h2::before {
+            content: "";
+            width: 0.45rem;
+            height: 1.35rem;
+            border-radius: 999px;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
         .meta-label {
             color: var(--green);
             font-size: 0.82rem;
@@ -129,6 +144,26 @@
             margin-bottom: 0.65rem;
         }
 
+        .highlight {
+            color: var(--text);
+            font-weight: 900;
+            background: linear-gradient(transparent 60%, #dbeafe 60%);
+        }
+
+        .key-point {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            background: #ecfdf5;
+        }
+
+        .key-point p {
+            color: #065f46;
+            font-weight: 800;
+            line-height: 1.7;
+        }
+
         .tag {
             display: inline-flex;
             align-items: center;
@@ -148,12 +183,68 @@
             gap: 1rem;
         }
 
+        .role-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-head h3 {
+            margin-bottom: 0;
+        }
+
+        .contribution {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0.25rem 0.55rem;
+            border-radius: 999px;
+            background: #111827;
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 900;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .impact-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+            background: var(--surface-soft);
+        }
+
+        .impact-value {
+            display: block;
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .impact-label {
+            display: block;
+            margin-top: 0.35rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            line-height: 1.5;
+        }
+
         footer { border-top: 1px solid var(--line); }
 
         @media (max-width: 768px) {
             .meta-grid,
             .role-grid,
-            .tech-grid {
+            .tech-grid,
+            .impact-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -198,9 +289,12 @@
             <section class="card">
                 <h2>프로젝트 목표</h2>
                 <p>
-                    고성능 멀티모달 모델을 단순히 실행하는 것에 그치지 않고, <strong>제한된 VRAM 환경에서 안정적으로 추론 가능한 구조</strong>를 만드는 것이 핵심 목표였습니다.
+                    고성능 멀티모달 모델을 단순히 실행하는 것에 그치지 않고, <span class="highlight">제한된 VRAM 환경에서 안정적으로 추론 가능한 구조</span>를 만드는 것이 핵심 목표였습니다.
                     또한 이미지 기반 질의응답(VQA) 태스크에서 모델이 정답의 위치나 보기 순서 같은 표면적 패턴에 의존하지 않고, 이미지와 질문의 의미 관계를 기준으로 답을 선택하도록 개선하는 것을 목표로 했습니다.
                 </p>
+                <div class="key-point">
+                    <p>목표 요약: 대형 VLM을 경량화하고, 보기 순서 편향을 줄여 실전형 VQA 추론 파이프라인 구축.</p>
+                </div>
             </section>
 
             <section class="card">
@@ -237,31 +331,53 @@
                 <h2>역할 및 기여도</h2>
                 <div class="role-grid">
                     <div class="sub-card">
-                        <h3>모델 성능 비교 및 벤치마킹</h3>
+                        <div class="role-head">
+                            <h3>모델 성능 비교 및 벤치마킹</h3>
+                            <span class="contribution">기여도 30%</span>
+                        </div>
                         <p>
                             후보 모델별로 동일한 평가 데이터와 동일한 프롬프트 조건을 적용해 추론 결과를 비교했습니다.
                             모델별 정답률, 오답 유형, 출력 형식 안정성을 함께 확인해 단순 점수뿐 아니라 운영 가능성을 기준으로 비교했습니다.
                         </p>
                     </div>
                     <div class="sub-card">
-                        <h3>하이퍼파라미터 탐색</h3>
+                        <div class="role-head">
+                            <h3>하이퍼파라미터 탐색</h3>
+                            <span class="contribution">기여도 25%</span>
+                        </div>
                         <p>
                             양자화 적용 여부, LoRA 적용 범위, max token, temperature, few-shot 예시 구성 등을 바꿔가며 정확도와 출력 안정성을 비교했습니다.
                             특히 정확도 상승과 VRAM 사용량 사이의 균형을 기준으로 최종 설정을 선택했습니다.
                         </p>
                     </div>
                     <div class="sub-card">
-                        <h3>프롬프트 및 출력 제어</h3>
+                        <div class="role-head">
+                            <h3>프롬프트 및 출력 제어</h3>
+                            <span class="contribution">기여도 20%</span>
+                        </div>
                         <p>
                             모델이 불필요한 설명을 길게 생성하거나 선택지 외 답변을 생성하는 문제를 줄이기 위해 답변 형식을 명확히 제한했습니다.
                             정규표현식 기반 후처리로 모델 출력에서 최종 선택지를 안정적으로 추출했습니다.
                         </p>
                     </div>
                     <div class="sub-card">
-                        <h3>편향 분석 및 데이터 로더 개선</h3>
+                        <div class="role-head">
+                            <h3>편향 분석 및 데이터 로더 개선</h3>
+                            <span class="contribution">기여도 15%</span>
+                        </div>
                         <p>
                             오답 케이스를 확인하며 특정 보기 위치에 정답이 몰릴 때 모델이 위치 패턴을 학습할 가능성을 점검했습니다.
                             이를 줄이기 위해 데이터 로딩 단계에서 선택지를 섞고 정답 인덱스를 재매핑하는 로직을 구현했습니다.
+                        </p>
+                    </div>
+                    <div class="sub-card">
+                        <div class="role-head">
+                            <h3>최종 성능 발표</h3>
+                            <span class="contribution">기여도 10%</span>
+                        </div>
+                        <p>
+                            최종 리더보드 결과, 모델 최적화 과정, Choice Shuffle 적용 전후의 성능 차이를 정리해 발표했습니다.
+                            단순 결과 공유가 아니라 어떤 실험이 성능 개선에 영향을 주었는지 흐름 중심으로 설명했습니다.
                         </p>
                     </div>
                 </div>
@@ -304,6 +420,9 @@
                         <p>
                             <strong>결과:</strong> VRAM 사용량을 약 70% 절감하면서도 32B 모델의 추론 성능을 유지할 수 있었습니다.
                         </p>
+                        <div class="key-point">
+                            <p>핵심 판단: 전체 모델을 무리하게 조정하지 않고, 비전 레이어 고정 + 언어 레이어 LoRA 적용으로 자원 효율을 확보.</p>
+                        </div>
                     </div>
                     <div class="problem-card">
                         <p class="problem-title">문제 2. 보기 위치에 의존하는 Position Bias 발생</p>
@@ -318,6 +437,9 @@
                         <p>
                             <strong>결과:</strong> 위치 편향을 줄이고, 기준 대비 정확도를 4.8% 향상시켰습니다.
                         </p>
+                        <div class="key-point">
+                            <p>핵심 판단: 모델 튜닝만이 아니라 데이터 로딩 단계의 편향 제어가 성능 개선에 직접적으로 기여.</p>
+                        </div>
                     </div>
                     <div class="problem-card">
                         <p class="problem-title">문제 3. 모델 출력 형식이 일정하지 않아 자동 채점 안정성이 낮음</p>
@@ -338,12 +460,27 @@
 
             <section class="card">
                 <h2>성과</h2>
-                <ul class="list-disc list-inside space-y-2">
-                    <li><strong>최종 리더보드 전국 11위</strong> 달성</li>
-                    <li><strong>최고 점수 0.9645</strong> 기록</li>
-                    <li><strong>VRAM 사용량 약 70% 절감</strong> (24GB 수준 부담을 약 7GB 수준으로 완화)</li>
-                    <li><strong>Choice Shuffle 적용 후 정확도 4.8% 향상</strong></li>
-                </ul>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <span class="impact-value">11위</span>
+                        <span class="impact-label">최종 리더보드 순위</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">0.9645</span>
+                        <span class="impact-label">최고 점수</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">70%</span>
+                        <span class="impact-label">VRAM 사용량 절감</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">+4.8%</span>
+                        <span class="impact-label">Choice Shuffle 적용 후 정확도 향상</span>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <p>핵심 성과: 32B급 멀티모달 모델을 제한된 자원에서 운용 가능한 형태로 최적화하고, 데이터 편향 완화를 통해 정확도까지 개선.</p>
+                </div>
             </section>
 
             <section class="card">
