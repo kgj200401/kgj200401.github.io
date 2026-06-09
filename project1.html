@@ -271,67 +271,152 @@
             font-weight: 900;
         }
 
-        .tuning-chart {
+        .tuning-layout {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
+            grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.92fr);
+            gap: 1.25rem;
+            align-items: stretch;
         }
 
-        .metric-box {
-            padding: 0.9rem;
+        .chart-card {
+            padding: 1rem;
             border: 1px solid var(--line);
-            border-radius: 10px;
+            border-radius: 12px;
             background: var(--surface-soft);
         }
 
-        .metric-title {
-            margin-bottom: 0.75rem;
-            color: var(--text);
-            font-size: 0.82rem;
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            color: #1d4ed8;
+            font-size: 0.78rem;
             font-weight: 900;
         }
 
-        .bar-area {
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-dot {
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+        }
+
+        .dot-200 { background: #d8e5ec; }
+        .dot-500 { background: #92b3e1; }
+        .dot-1000 { background: #2857c5; }
+        .dot-overfit { background: #f55d62; }
+
+        .axis-chart {
+            display: grid;
+            grid-template-columns: 2.25rem 1fr;
+            gap: 0.65rem;
+        }
+
+        .y-axis {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            height: 13rem;
+            color: #2554c7;
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-align: right;
+        }
+
+        .plot-area {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+            height: 13rem;
+            padding: 0 0.4rem 1.65rem;
+            background-image:
+                linear-gradient(to bottom, #cbd8f0 1px, transparent 1px);
+            background-size: 100% 20%;
+            border-bottom: 1px solid #cbd8f0;
+        }
+
+        .bar-group {
+            position: relative;
             display: flex;
             align-items: flex-end;
-            gap: 0.55rem;
-            height: 9rem;
-            padding-bottom: 0.4rem;
-            border-bottom: 1px solid var(--line-strong);
-        }
-
-        .bar-wrap {
-            flex: 1;
+            gap: 0.24rem;
             min-width: 0;
-            text-align: center;
         }
 
-        .bar {
-            width: 100%;
-            min-height: 0.6rem;
-            border-radius: 8px 8px 3px 3px;
-            background: #111827;
+        .chart-bar {
+            position: relative;
+            flex: 1;
+            min-width: 1.6rem;
+            border-radius: 6px 6px 2px 2px;
         }
 
-        .bar.loss { background: #2563eb; }
-        .bar.bad { background: #ef4444; }
-        .bar.good { background: #047857; }
-
-        .bar-label {
-            display: block;
-            margin-top: 0.45rem;
-            color: var(--subtle);
-            font-size: 0.68rem;
-            font-weight: 800;
-            line-height: 1.25;
-        }
-
-        .bar-value {
-            display: block;
-            margin-bottom: 0.35rem;
-            color: var(--muted);
-            font-size: 0.68rem;
+        .chart-bar::before {
+            content: attr(data-value);
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 0.35rem);
+            transform: translateX(-50%);
+            color: #111827;
+            font-size: 0.65rem;
             font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .group-label {
+            position: absolute;
+            left: 50%;
+            bottom: -1.45rem;
+            transform: translateX(-50%);
+            color: #1d4ed8;
+            font-size: 0.92rem;
+            font-weight: 900;
+        }
+
+        .tuning-quote {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 15rem;
+            padding: 2rem;
+            border-radius: 18px;
+            background: #eaf2ff;
+            color: #1f2937;
+            text-align: center;
+            font-size: 1.05rem;
+            font-weight: 900;
+            line-height: 1.8;
+        }
+
+        .tuning-quote::before,
+        .tuning-quote::after {
+            position: absolute;
+            color: #28457f;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .tuning-quote::before {
+            content: "“";
+            top: -0.35rem;
+            left: 1.5rem;
+        }
+
+        .tuning-quote::after {
+            content: "”";
+            right: 1.5rem;
+            bottom: -2.1rem;
+        }
+
+        .tuning-quote strong {
+            color: #2554c7;
         }
 
         .tuning-note {
@@ -349,8 +434,12 @@
             .role-grid,
             .tech-grid,
             .impact-grid,
-            .tuning-chart {
+            .tuning-layout {
                 grid-template-columns: 1fr;
+            }
+
+            .plot-area {
+                gap: 1rem;
             }
         }
     </style>
@@ -571,56 +660,47 @@
                         </p>
                         <div class="tuning-visual" aria-label="하이퍼파라미터 튜닝 실험 그래프">
                             <h4>학습 데이터 수와 epoch 변화에 따른 지표 흐름</h4>
-                            <div class="tuning-chart">
-                                <div class="metric-box">
-                                    <p class="metric-title">Loss</p>
-                                    <div class="bar-area">
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.35</span>
-                                            <div class="bar loss" style="height: 38%;"></div>
-                                            <span class="bar-label">200</span>
+                            <div class="tuning-layout">
+                                <div class="chart-card">
+                                    <div class="chart-legend" aria-hidden="true">
+                                        <span class="legend-item"><span class="legend-dot dot-200"></span>200</span>
+                                        <span class="legend-item"><span class="legend-dot dot-500"></span>500</span>
+                                        <span class="legend-item"><span class="legend-dot dot-1000"></span>1000</span>
+                                        <span class="legend-item"><span class="legend-dot dot-overfit"></span>1000, epoch=2</span>
+                                    </div>
+                                    <div class="axis-chart">
+                                        <div class="y-axis" aria-hidden="true">
+                                            <span>1.0</span>
+                                            <span>0.8</span>
+                                            <span>0.6</span>
+                                            <span>0.4</span>
+                                            <span>0.2</span>
+                                            <span>0.0</span>
                                         </div>
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.32</span>
-                                            <div class="bar loss" style="height: 34%;"></div>
-                                            <span class="bar-label">500</span>
-                                        </div>
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.28</span>
-                                            <div class="bar loss" style="height: 30%;"></div>
-                                            <span class="bar-label">1000</span>
-                                        </div>
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.84</span>
-                                            <div class="bar bad" style="height: 88%;"></div>
-                                            <span class="bar-label">1000<br>epoch 2</span>
+                                        <div class="plot-area">
+                                            <div class="bar-group">
+                                                <div class="chart-bar dot-200" data-value="0.35" style="height: 35%;"></div>
+                                                <div class="chart-bar dot-500" data-value="0.32" style="height: 32%;"></div>
+                                                <div class="chart-bar dot-1000" data-value="0.28" style="height: 28%;"></div>
+                                                <div class="chart-bar dot-overfit" data-value="0.84" style="height: 84%;"></div>
+                                                <span class="group-label">Loss</span>
+                                            </div>
+                                            <div class="bar-group">
+                                                <div class="chart-bar dot-200" data-value="0.94" style="height: 94%;"></div>
+                                                <div class="chart-bar dot-500" data-value="0.94" style="height: 94%;"></div>
+                                                <div class="chart-bar dot-1000" data-value="0.95" style="height: 95%;"></div>
+                                                <div class="chart-bar dot-overfit" data-value="0.27" style="height: 27%;"></div>
+                                                <span class="group-label">Accuracy</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="metric-box">
-                                    <p class="metric-title">Accuracy</p>
-                                    <div class="bar-area">
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.94</span>
-                                            <div class="bar good" style="height: 88%;"></div>
-                                            <span class="bar-label">200</span>
-                                        </div>
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.94</span>
-                                            <div class="bar good" style="height: 88%;"></div>
-                                            <span class="bar-label">500</span>
-                                        </div>
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.95</span>
-                                            <div class="bar good" style="height: 90%;"></div>
-                                            <span class="bar-label">1000</span>
-                                        </div>
-                                        <div class="bar-wrap">
-                                            <span class="bar-value">0.27</span>
-                                            <div class="bar bad" style="height: 28%;"></div>
-                                            <span class="bar-label">1000<br>epoch 2</span>
-                                        </div>
-                                    </div>
+                                <div class="tuning-quote">
+                                    <p>
+                                        데이터 개수와 epoch을 늘릴수록 정확도는 향상됐지만,
+                                        <strong>일정 수준 이후에는 오히려 과적합이 발생</strong>했습니다.<br>
+                                        <strong>효율적인 학습량 조절</strong>의 중요성을 확인했습니다.
+                                    </p>
                                 </div>
                             </div>
                             <p class="tuning-note">
