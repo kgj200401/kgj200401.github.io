@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>지능형 스마트팜 통합 관리 솔루션 - 프로젝트 상세</title>
+    <title>MEERUSFARM - 프로젝트 상세</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -11,10 +11,12 @@
             --surface: #ffffff;
             --surface-soft: #f8fafc;
             --line: #e5e7eb;
+            --line-strong: #d1d5db;
             --text: #111827;
             --muted: #4b5563;
             --subtle: #6b7280;
             --accent: #2563eb;
+            --green: #047857;
         }
 
         html { scroll-behavior: smooth; }
@@ -45,7 +47,7 @@
         }
 
         .eyebrow {
-            color: #047857;
+            color: var(--green);
             font-size: 0.9rem;
             font-weight: 900;
             margin-bottom: 0.75rem;
@@ -60,10 +62,29 @@
         }
 
         h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
             color: var(--text);
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 900;
             margin-bottom: 1rem;
+        }
+
+        h2::before {
+            content: "";
+            width: 0.45rem;
+            height: 1.35rem;
+            border-radius: 999px;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
         }
 
         p, li {
@@ -71,6 +92,16 @@
             line-height: 1.8;
         }
 
+        strong { color: var(--text); }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .meta-card,
         .card {
             background: var(--surface);
             border: 1px solid var(--line);
@@ -78,6 +109,25 @@
             padding: 1.5rem;
         }
 
+        .meta-label {
+            color: var(--green);
+            font-size: 0.82rem;
+            font-weight: 900;
+            margin-bottom: 0.45rem;
+        }
+
+        .meta-value {
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .section-stack {
+            padding: 3rem 0;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .sub-card,
         .problem-card {
             background: var(--surface-soft);
             border: 1px solid var(--line);
@@ -88,22 +138,114 @@
         .problem-title {
             color: var(--accent);
             font-weight: 900;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .highlight {
+            color: var(--text);
+            font-weight: 900;
+            background: linear-gradient(transparent 60%, #dbeafe 60%);
+        }
+
+        .key-point {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            background: #ecfdf5;
+        }
+
+        .key-point p {
+            color: #065f46;
+            font-weight: 800;
+            line-height: 1.7;
         }
 
         .tag {
             display: inline-flex;
             align-items: center;
-            padding: 0.35rem 0.65rem;
+            padding: 0.38rem 0.68rem;
             border-radius: 6px;
             border: 1px solid var(--line);
             background: #f3f4f6;
             color: var(--muted);
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 800;
         }
 
+        .grid-2,
+        .grid-3 {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .impact-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+            background: var(--surface-soft);
+        }
+
+        .impact-value {
+            display: block;
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .impact-label {
+            display: block;
+            margin-top: 0.35rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            line-height: 1.5;
+        }
+
+        .figure-card {
+            margin-top: 1.25rem;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .project-figure {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            padding: 0.9rem 1rem;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
         footer { border-top: 1px solid var(--line); }
+
+        @media (max-width: 768px) {
+            .meta-grid,
+            .grid-2,
+            .grid-3,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body class="antialiased flex flex-col">
@@ -117,67 +259,219 @@
     <main class="max-w-4xl mx-auto w-full px-6 flex-grow">
         <header class="hero">
             <p class="eyebrow">Project 02</p>
-            <h1>지능형 스마트팜 통합 관리 솔루션</h1>
-            <p class="mt-5 text-lg text-gray-500">Edge-Cloud 하이브리드 구조로 병해 탐지와 RAG 기반 리포트 생성을 연결한 스마트팜 관리 시스템입니다.</p>
-            <div class="flex flex-wrap gap-2 mt-6">
-                <span class="tag">2026.01 ~ 02</span>
-                <span class="tag">MEERUSFARM</span>
-                <span class="tag">YOLOv8 Nano</span>
-                <span class="tag">TensorRT</span>
-                <span class="tag">LLM</span>
-                <span class="tag">RAG</span>
+            <h1>MEERUSFARM 지능형 스마트팜 통합 관리 솔루션</h1>
+            <p class="mt-5 text-lg text-gray-500">
+                자율주행 로봇, 센서 데이터, 비전 AI, RAG 기반 LLM 리포트를 연결해
+                <strong>사람의 눈을 대신하는 데이터 기반 의사결정 솔루션</strong>을 구현한 프로젝트입니다.
+            </p>
+
+            <div class="meta-grid">
+                <div class="meta-card">
+                    <p class="meta-label">프로젝트 기간</p>
+                    <p class="meta-value">2026.01 ~ 2026.02</p>
+                </div>
+                <div class="meta-card">
+                    <p class="meta-label">사용 기술</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag">YOLO26 Nano</span>
+                        <span class="tag">YOLO26 Large Seg</span>
+                        <span class="tag">TensorRT (FP16)</span>
+                        <span class="tag">Jetson Orin Nano</span>
+                        <span class="tag">MQTT</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">GPT-4O-MINI</span>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <div class="py-12 space-y-8">
+        <div class="section-stack">
             <section class="card">
-                <h2>프로젝트 개요</h2>
-                <p>숙련공 부족 문제를 해결하기 위해 AI와 IoT 기술을 융합했습니다. 비전문가도 현장을 빠르게 파악하고 의사결정할 수 있도록 실시간 탐지, 센서 데이터, 지식 기반 리포트를 하나의 흐름으로 구성했습니다.</p>
+                <h2>프로젝트 목표</h2>
+                <p>
+                    스마트팜에서는 사람이 직접 잎, 줄기, 열매의 병반과 곰팡이 여부를 순찰하고 판단해야 합니다.
+                    이 방식은 작업자 경험에 의존해 판단 정확도가 일정하지 않고, 사진 촬영과 위치 기록, 작업 로그 공유도 수작업으로 진행되어 비효율이 발생합니다.
+                </p>
+                <div class="key-point">
+                    <p>
+                        목표 요약: <strong>병해충 예측 고도화</strong> → <strong>방제 효율 극대화</strong> →
+                        <strong>센서·비전·논문 데이터 기반 리포트 자동 생성</strong>.
+                    </p>
+                </div>
             </section>
 
             <section class="card">
-                <h2>주요 성과</h2>
-                <ul class="list-disc list-inside space-y-2">
-                    <li><strong>실시간 탐지 정확도 mAP50 0.9</strong> 달성</li>
-                    <li>Polygon 라벨링 기반 파인튜닝으로 손실값 18% 감소</li>
-                    <li>프로젝트 마감 시간 준수와 안정적인 MVP 완성</li>
-                </ul>
+                <h2>시스템 아키텍처</h2>
+                <p>
+                    Farm 영역의 라즈베리파이는 습도, 토양, 조도, pH 센서와 제어기를 담당하고,
+                    로봇 영역의 Jetson Orin Nano는 카메라 기반 비전 추론을 수행합니다.
+                    중앙 서버는 <strong>EC2, DB, MQTT 브로커, Web Server, S3, GPU 서버</strong>를 연결해 탐지 결과와 리포트를 웹에서 확인할 수 있도록 구성했습니다.
+                </p>
+                <div class="figure-card">
+                    <img src="./pjt2_pic/page21_arch.png" alt="MEERUSFARM 시스템 아키텍처" class="project-figure">
+                    <p class="figure-caption">
+                        아키텍처 근거: 센서 제어 및 통신, 로봇 비전 추론, EC2 기반 웹 관리, S3/GPU 서버 연동 구조로 Edge-Farm-Cloud 흐름을 구성했습니다.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>핵심 기능</h2>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>병해충 이상 판단</h3>
+                        <p><strong>YOLO26 Nano</strong>를 Jetson Orin Nano에서 실시간으로 구동하고, <strong>TensorRT(FP16)</strong>로 Edge 환경 추론 속도를 최적화했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>병해충 심각도 수치화</h3>
+                        <p>잿빛곰팡이 병반 경계를 픽셀 단위로 추출하기 위해 <strong>YOLO26 Large Seg</strong> 모델을 사용하고 직접 라벨링한 데이터로 파인튜닝했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>센서·논문 데이터 기반 RAG 분석</h3>
+                        <p>센서 데이터와 추출된 논문 데이터를 결합해 작물 상태를 분석하는 <strong>RAG 분석 흐름</strong>을 구성했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>GPT-4O-MINI 리포트 생성</h3>
+                        <p>분석 결과를 기반으로 사용자가 이해하기 쉬운 형태의 <strong>농작물 상태 리포트</strong>를 자동 생성하도록 설계했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>역할 및 기여도</h2>
+                <p class="mb-4">
+                    팀 내 공식 역할은 <strong>AI(LLM)</strong>이었고, 비전 탐지 결과와 센서 데이터를 사용자가 이해할 수 있는 의사결정 리포트로 연결하는 흐름에 집중했습니다.
+                </p>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>RAG 분석 흐름 설계</h3>
+                        <p>센서 데이터와 논문 기반 정보를 함께 활용해 작물 상태를 설명할 수 있도록 <strong>RAG 분석 구조</strong>를 정리했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>LLM 리포트 생성</h3>
+                        <p><strong>GPT-4O-MINI</strong>를 활용해 위험도와 조치 방향을 요약하는 리포트 생성 흐름을 구현했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>AI 결과 연결</h3>
+                        <p>비전 AI의 병해충 탐지 결과와 센서 값을 리포트 입력 정보로 연결해 사용자가 상황을 빠르게 파악하도록 구성했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>성과 발표</h3>
+                        <p>리포트 생성 흐름과 AI 판단 결과가 서비스 화면에서 어떻게 의사결정으로 이어지는지 발표 자료로 정리했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>사용 기술 및 선택 이유</h2>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>YOLO26 Nano + TensorRT(FP16)</h3>
+                        <p>Jetson Orin Nano에서 실시간 병해충 판단을 수행해야 했기 때문에 경량 모델과 <strong>TensorRT FP16 최적화</strong>를 선택했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>YOLO26 Large Seg</h3>
+                        <p>병반 영역을 단순 탐지가 아니라 마스크 단위로 수치화하기 위해 높은 연산량이 필요한 Segmentation 모델을 적용했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>MQTT + EC2</h3>
+                        <p>센서와 로봇, 서버가 분리된 구조에서 상태값과 탐지 결과를 안정적으로 전달하기 위해 MQTT 브로커와 EC2 중앙 서버를 사용했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>RAG + GPT-4O-MINI</h3>
+                        <p>센서 수치만 나열하지 않고 논문 기반 정보와 함께 해석해 <strong>사용자 친화적인 리포트</strong>를 생성하기 위해 사용했습니다.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="card">
                 <h2>주요 문제 해결 사례</h2>
                 <div class="space-y-4">
                     <div class="problem-card">
-                        <p class="problem-title">문제 1. 최신 기술 도입 리스크와 데드라인 상충</p>
-                        <p><strong>해결:</strong> vLLM 통합 리스크를 빠르게 판단하고, 안정적인 모델 파이프라인과 프롬프트 엔지니어링 기반 지식베이스로 우회했습니다.</p>
-                        <p><strong>결과:</strong> 사용자 경험 수준을 유지하면서 일정 내 서비스 런칭을 달성했습니다.</p>
+                        <p class="problem-title">문제 1. Edge 환경에서 실시간 병해충 탐지가 필요함</p>
+                        <p>
+                            <strong>상황:</strong> 스마트팜 로봇은 현장에서 이미지를 촬영하고 즉시 이상 여부를 판단해야 했습니다.
+                            서버로 모든 이미지를 보내 처리하면 지연이 발생할 수 있어 Jetson Orin Nano에서 실시간 추론이 가능한 구조가 필요했습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> <strong>YOLO26 Nano</strong> 모델을 사용하고 Detection 모델에 <strong>TensorRT(FP16)</strong>를 적용해 Edge 환경 추론 속도를 최적화했습니다.
+                            판단 결과는 EC2 서버 API로 전송하고 DB에 저장되도록 연결했습니다.
+                        </p>
                     </div>
+
                     <div class="problem-card">
-                        <p class="problem-title">문제 2. 팀 내 개발 방향 차이</p>
-                        <p><strong>해결:</strong> 핵심 기능을 먼저 선정하고 단계별로 고도화하는 개발 로직을 제안했습니다.</p>
-                        <p><strong>결과:</strong> 팀 내 합의를 이끌어내고 일관된 개발 방향으로 MVP를 완성했습니다.</p>
+                        <p class="problem-title">문제 2. 병변의 심각도를 단순 탐지 이상으로 수치화해야 함</p>
+                        <p>
+                            <strong>상황:</strong> 병해충 존재 여부만으로는 방제 우선순위와 조치 수준을 정하기 어렵습니다.
+                            실제 병이 퍼진 면적을 계산하려면 병반 경계를 픽셀 단위로 추출해야 했습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> AI Hub 작물 질병 데이터셋을 기반으로 <strong>Polygon 라벨링</strong>을 직접 수행했습니다.
+                            <strong>520개 데이터셋을 3배 증강해 1,248개</strong> 학습 데이터로 확장하고, YOLO26 Large Seg 모델을 파인튜닝했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>핵심 판단: 탐지 박스만으로 끝내지 않고 병변 마스크를 만들어 심각도 판단에 사용할 수 있는 수치형 근거를 확보.</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 3. 센서 수치와 탐지 결과를 사용자가 이해하기 어려움</p>
+                        <p>
+                            <strong>상황:</strong> 습도, 토양, 조도, pH 같은 센서 값과 병해충 탐지 결과는 각각 의미가 있지만, 사용자가 바로 조치 방향을 판단하기에는 정보가 분산되어 있었습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 센서 데이터와 추출된 논문 데이터를 함께 RAG로 분석하고,
+                            <strong>GPT-4O-MINI</strong>를 통해 위험도와 관리 방향을 요약하는 리포트를 생성했습니다.
+                        </p>
                     </div>
                 </div>
             </section>
 
             <section class="card">
-                <h2>담당 업무 및 사용 기술</h2>
-                <ul class="list-disc list-inside space-y-2 mb-5">
-                    <li>AI 모델 파이프라인 총괄 및 Detection/Segmentation 최적화</li>
-                    <li>1,248개 Polygon 라벨링 데이터 제작 및 파인튜닝</li>
-                    <li>센서 데이터와 농업 지식 베이스를 결합한 RAG 시스템 설계</li>
-                    <li>LLM을 활용한 농작물 상태 분석 리포트 자동 생성 기능 구현</li>
-                    <li>Jira 기반 Agile Sprint 운영 및 백로그 우선순위 관리</li>
-                    <li>영상 포토폴리오 제작 및 성과발표</li>
-
-                </ul>
-                <div class="flex flex-wrap gap-2">
-                    <span class="tag">YOLOv8 Nano</span>
-                    <span class="tag">TensorRT (FP16)</span>
-                    <span class="tag">Jetson Orin Nano</span>
-                    <span class="tag">LLM (RAG)</span>
-                    <span class="tag">MQTT</span>
+                <h2>성과</h2>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <span class="impact-value">0.9</span>
+                        <span class="impact-label">병해충 이상 판단 mAP50(B)</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">0.829</span>
+                        <span class="impact-label">잿빛곰팡이 탐지 성능</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">0.971</span>
+                        <span class="impact-label">딸기 탐지 성능</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">18%</span>
+                        <span class="impact-label">Segmentation val/Loss 감소</span>
+                    </div>
                 </div>
+                <div class="key-point">
+                    <p>
+                        핵심 성과: <strong>YOLO26 + TensorRT</strong>로 Edge 추론 성능을 확보하고,
+                        <strong>Polygon 라벨링 1,248개 데이터</strong>와 RAG 리포트 생성 흐름을 연결했습니다.
+                    </p>
+                </div>
+                <div class="figure-card">
+                    <img src="./pjt2_pic/page45_report.png" alt="GPT-4O-MINI 리포트 생성 화면" class="project-figure">
+                    <p class="figure-caption">
+                        리포트 생성 근거: RAG 분석 결과를 바탕으로 GPT-4O-MINI가 날짜별 위험도와 관리 방향을 요약하는 리포트 화면입니다.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>회고</h2>
+                <p>
+                    이 프로젝트에서 가장 크게 배운 점은 AI 모델의 출력이 서비스 가치가 되려면
+                    탐지 결과를 사용자가 이해하고 행동할 수 있는 정보로 바꿔야 한다는 점입니다.
+                    단순히 병해충을 찾는 것에서 끝나는 것이 아니라, 센서 데이터와 논문 지식을 결합해 조치 가능한 리포트로 만드는 과정이 중요했습니다.
+                </p>
+                <p class="mt-3">
+                    또한 Edge 디바이스, 중앙 서버, 웹 대시보드, LLM 리포트가 함께 동작하는 구조를 보며
+                    AI 기능은 모델 하나가 아니라 데이터 흐름 전체 위에서 안정적으로 설계되어야 한다는 점을 체감했습니다.
+                </p>
             </section>
         </div>
     </main>
