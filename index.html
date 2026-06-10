@@ -943,7 +943,7 @@
                         <span class="project-category">Multimodal AI</span>
                         <h3 class="project-title">이미지 기반 VQA 멀티모달 AI 모델</h3>
                         <p class="project-subtitle">2025.10(1주)</p>
-                        <p class="project-description">자원 제약 환경에서 Qwen3-VL 기반 대규모 모델을 4-bit 양자화하고, LoRA 파인튜닝과 선지 셔플 전략으로 추론 효율과 정확도를 함께 개선했습니다.</p>
+                        <p class="project-description">자원 제약 환경에서 Qwen3-VL-8B 모델을 4-bit 양자화하고, LoRA 파인튜닝과 균등 샘플링 전략으로 반복 실험 안정성과 정확도를 함께 개선했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tech"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="">PyTorch</span>
                             <span class="project-tech"><span class="project-tech-mark">U</span>Unsloth</span>
@@ -964,7 +964,7 @@
                         <p class="project-subtitle">2026.01 ~ 02(6주)</p>
                         <p class="project-description">Edge-Cloud 하이브리드 아키텍처를 기반으로 병해를 실시간 탐지하고, 센서 데이터와 농업 지식 베이스를 결합해 RAG 리포트를 자동 생성했습니다.</p>
                         <div class="project-tags">
-                            <span class="project-tech"><span class="project-tech-mark">Y</span>YOLOv8 Nano</span>
+                            <span class="project-tech"><span class="project-tech-mark">Y</span>YOLO26 Nano</span>
                             <span class="project-tech"><span class="project-tech-mark">TRT</span>TensorRT</span>
                             <span class="project-tech"><span class="project-tech-mark">R</span>RAG</span>
                         </div>
@@ -1012,8 +1012,8 @@
                     <div>
                         <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">🏆 주요 성과</h4>
                         <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li><strong>최종 리더보드 순위 11위</strong> (최고 점수: 0.9645)</li>
-                            <li><strong>VRAM 사용량 70% 절감</strong> (24GB → 7GB) 및 정확도 향상 (+4.8%)</li>
+                            <li><strong>최종 리더보드 순위 11위</strong> (팀 최종 베스트 점수: 0.96296)</li>
+                            <li><strong>Colab 및 GPU 자원 제약 환경</strong>에서 8B 모델 반복 실험 가능 파이프라인 구성</li>
                         </ul>
                     </div>
                     <div>
@@ -1022,12 +1022,12 @@
                             <div class="bg-gray-800/40 p-4 rounded-lg border border-gray-700/50">
                                 <p class="text-blue-400 font-bold mb-1">문제 1. 한정된 예산과 자원 내 대형 모델 구동</p>
                                 <p class="text-gray-400 mb-1"><span class="text-gray-300 font-semibold">해결:</span> Unsloth 기반 4bit 양자화 도입, 비전 레이어 고정(freeze) 및 언어 모델 레이어에만 LoRA 어댑터 적용.</p>
-                                <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> VRAM 사용량을 70% 절감하면서도 32B 모델의 고성능 추론 능력 유지.</p>
+                                <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> OOM 없이 Qwen3-VL-8B 모델을 반복 실험할 수 있는 학습 환경 확보.</p>
                             </div>
                             <div class="bg-gray-800/40 p-4 rounded-lg border border-gray-700/50">
                                 <p class="text-blue-400 font-bold mb-1">문제 2. 단순 통계적 오류로 인한 분석 신뢰성 저하 (Position Bias)</p>
-                                <p class="text-gray-400 mb-1"><span class="text-gray-300 font-semibold">해결:</span> EDA를 통해 편향 발견, 데이터 로더에서 정답과 오답을 무작위로 섞는 '선지 셔플(Choice Shuffle)' 구현.</p>
-                                <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> 모델이 위치가 아닌 의미적 상관관계에 집중하도록 유도, 정확도 4.8% 향상 (0.92 → 0.9645).</p>
+                                <p class="text-gray-400 mb-1"><span class="text-gray-300 font-semibold">해결:</span> EDA를 통해 정답 분포 편향을 발견하고, 모든 보기(a~d)가 동일한 비율로 추출되도록 균등 샘플링 로더 구성.</p>
+                                <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> 보기 분포에 의한 softmax bias 가능성을 낮추고, 최종 점수 0.96296으로 리더보드 11위 달성.</p>
                             </div>
                         </div>
                     </div>
@@ -1039,7 +1039,7 @@
                             <li>Few-shot 프롬프팅 및 정규표현식 기반 출력 정형화 제어</li>
                         </ul>
                         <div class="flex flex-wrap gap-2 text-xs font-mono">
-                            <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">Qwen3-VL (32B)</span>
+                            <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">Qwen3-VL-8B</span>
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">PyTorch</span>
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">Unsloth</span>
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">LoRA/QLoRA</span>
@@ -1067,7 +1067,7 @@
                     <div>
                         <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">🏆 주요 성과</h4>
                         <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li><strong>실시간 탐지 정확도 (mAP50): 0.9</strong> (YOLOv8 + TensorRT 최적화)</li>
+                            <li><strong>실시간 탐지 정확도 (mAP50): 0.9</strong> (YOLO26 + TensorRT 최적화)</li>
                             <li><strong>Polygon 라벨링 기반 파인튜닝으로 손실값 18% 감소</strong></li>
                             <li><strong>프로젝트 마감 시간 100% 준수 및 서비스 안정성 달성</strong></li>
                         </ul>
@@ -1096,7 +1096,7 @@
                             <li>Jira 기반 Agile Sprint 운영 및 백로그 우선순위 관리 (리딩)</li>
                         </ul>
                         <div class="flex flex-wrap gap-2 text-xs font-mono">
-                            <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">YOLOv8 Nano</span>
+                            <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">YOLO26 Nano</span>
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">TensorRT (FP16)</span>
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">Jetson Orin Nano</span>
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">LLM (RAG)</span>
