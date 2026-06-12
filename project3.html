@@ -261,7 +261,7 @@
             <p class="eyebrow">Project 03</p>
             <h1>NightWatch 야간 자율순찰 시스템</h1>
             <p class="mt-5 text-lg text-gray-500">
-                자율주행 로봇, 비전 AI 탐지, GPT-4o 관제 리포트, Web 대시보드를 연결해
+                자율주행 로봇, 비전 AI 탐지, GPT-4o-mini 관제 리포트, Web 대시보드를 연결해
                 <strong>야간 사각지대의 이상 상황을 자동 감지하고 기록하는 보안 관제 시스템</strong>을 구현한 프로젝트입니다.
             </p>
 
@@ -279,7 +279,7 @@
                         <span class="tag">TF2</span>
                         <span class="tag">YOLO11n</span>
                         <span class="tag">EfficientNet-B0</span>
-                        <span class="tag">GPT-4o</span>
+                        <span class="tag">GPT-4o-mini</span>
                         <span class="tag">FastAPI</span>
                         <span class="tag">Flask</span>
                         <span class="tag">React</span>
@@ -289,6 +289,19 @@
         </header>
 
         <div class="section-stack">
+            <section class="card">
+                <h2>대표 화면</h2>
+                <p>
+                    실제 서비스는 로봇 카메라 스트리밍, 이벤트 로그, 순찰 제어, AI 리포트 팝업을 하나의 대시보드에서 확인하는 구조로 구성했습니다.
+                </p>
+                <div class="figure-card">
+                    <img src="./pjt3_pic/page16_dashboard.png" alt="NightWatch 실시간 관제 대시보드 대표 화면" class="project-figure">
+                    <p class="figure-caption">
+                        대표 화면: Flask MJPEG 브릿지로 변환한 로봇 카메라 스트림과 React 기반 이벤트 로그/순찰 제어/리포트 팝업을 한 화면에 배치했습니다.
+                    </p>
+                </div>
+            </section>
+
             <section class="card">
                 <h2>프로젝트 목표</h2>
                 <p>
@@ -308,7 +321,7 @@
                 <p>
                     NightWatch는 로봇이 순찰을 수행하면서 카메라 영상을 ROS2 토픽으로 수신하고,
                     비전 AI가 사람과 자물쇠 상태를 탐지한 뒤, 이벤트 로그를 FastAPI 서버로 집계합니다.
-                    이후 GPT-4o가 Markdown 형식의 보안 리포트를 생성하고, React 대시보드에서 실시간 영상과 이벤트 로그를 확인하도록 구성했습니다.
+                    이후 GPT-4o-mini가 Markdown 형식의 보안 리포트를 생성하고, React 대시보드에서 실시간 영상과 이벤트 로그를 확인하도록 구성했습니다.
                 </p>
                 <div class="figure-card">
                     <img src="./pjt3_pic/page06_solution.png" alt="NightWatch 솔루션 제안" class="project-figure">
@@ -322,16 +335,16 @@
                 <h2>핵심 기능</h2>
                 <div class="grid-2">
                     <div class="sub-card">
-                        <h3>동적 객체 3D 좌표 역산</h3>
-                        <p>카메라 토픽과 TF2 로봇 위치를 결합해 FOV 편차를 계산하고, 삼각함수 역산으로 감지 객체의 절대 X,Y 좌표를 추정했습니다.</p>
+                        <h3>2D 카메라 기반 맵 좌표 추정</h3>
+                        <p>카메라 토픽과 TF2 로봇 위치를 결합해 FOV 편차를 계산하고, 전방 거리 가정과 삼각함수 보정으로 감지 객체의 map 좌표를 추정했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>3m 클러스터링 알림 제어</h3>
                         <p>반경 <strong>3m</strong> 내 동일 좌표를 중복 감지로 판단해 동일 인물 재탐지로 인한 알림 도배를 제거했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>GPT-4o 관제 리포트</h3>
-                        <p>사람 수, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 구조화 JSON으로 변환하고 GPT-4o에 전달해 보안 리포트를 생성했습니다.</p>
+                        <h3>GPT-4o-mini 관제 리포트</h3>
+                        <p>사람 수, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 순찰 데이터로 구조화하고 GPT-4o-mini에 전달해 Markdown 보안 리포트를 생성했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>React + Flask 대시보드</h3>
@@ -343,26 +356,67 @@
             <section class="card">
                 <h2>역할 및 기여도</h2>
                 <p class="mb-4">
-                    프로젝트에서는 <strong>ROS2 기반 자율주행/시뮬레이션, 비전 AI 탐지, 좌표 추정, 웹 연동</strong> 흐름을 함께 다루었습니다.
-                    특히 카메라 좌표를 실제 맵 좌표로 연결하고, 탐지 결과를 웹과 리포트로 전달하는 통합 흐름에 집중했습니다.
+                    제가 담당한 부분은 <strong>LLM 관제 리포트 자동 생성, ROS2-웹 브릿지, 2D 카메라 기반 맵 좌표 추정, 중복 알림 제어</strong>입니다.
+                    탐지 결과가 단순 로그로 끝나지 않고 관제 화면과 보고서로 이어지도록 통합 흐름을 정리했습니다.
                 </p>
                 <div class="grid-2">
-                    <div class="sub-card">
-                        <h3>ROS2 + Nav2 시뮬레이션</h3>
-                        <p>SLAM, Localization, Path Planning과 Gazebo 시뮬레이션을 연결해 순찰 로봇의 이동 흐름을 구성했습니다.</p>
-                    </div>
                     <div class="sub-card">
                         <h3>비전 AI 파이프라인</h3>
                         <p><strong>YOLO11n</strong>으로 사람/자물쇠 위치를 탐지하고, <strong>EfficientNet-B0</strong>로 locked/unlocked 상태를 분류하는 흐름을 구성했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>좌표 추정 알고리즘</h3>
-                        <p>카메라 픽셀 기반 탐지 결과를 TF2와 로봇 방향 정보로 보정해 map 좌표계 위 실제 위치로 변환했습니다.</p>
+                        <p>카메라 픽셀 기반 탐지 결과를 TF2와 로봇 방향 정보로 보정해 map 좌표계 위 추정 위치로 변환했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>ROS-Web 통합</h3>
                         <p>FastAPI/Flask 기반 REST API와 MJPEG 스트리밍 브릿지로 ROS 이벤트와 React 대시보드를 연결했습니다.</p>
                     </div>
+                    <div class="sub-card">
+                        <h3>LLM 리포트 자동 생성</h3>
+                        <p>탐지 인원, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 LLM 입력 데이터로 구조화하고 Markdown 리포트 생성 흐름을 구현했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>LLM 관제 리포트 자동 생성</h2>
+                <p class="mb-4">
+                    순찰 중 발생한 이벤트 로그를 단순 텍스트로 저장하는 데서 끝내지 않고,
+                    보안 관제사가 바로 읽고 판단할 수 있는 <strong>Markdown 관제 리포트</strong>로 변환하는 파이프라인을 설계했습니다.
+                </p>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>순찰 데이터 구조화</h3>
+                        <p>
+                            사람 감지 여부, 자물쇠 locked/unlocked 상태, 발생 시간, 추정 좌표, 캡처 이미지를 하나의 순찰 데이터로 정리했습니다.
+                            로그에 있는 감지 내역이 리포트에서 누락되지 않도록 입력 필드를 명확히 분리했습니다.
+                        </p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>프롬프트 출력 형식 설계</h3>
+                        <p>
+                            단순 요약이 아니라 실제 관제 업무 흐름에 맞춰 <strong>경고 사항, 관리자 조치 제안, 결론</strong>이 포함되도록 출력 형식을 고정했습니다.
+                            리포트는 웹에서 바로 렌더링할 수 있도록 Markdown 형식으로 생성했습니다.
+                        </p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>서버 저장 연동</h3>
+                        <p>
+                            생성된 리포트는 FastAPI 서버의 <strong>/api/report</strong> 엔드포인트로 전송해 DB에 저장되도록 연결했습니다.
+                            이후 리포트 이력은 대시보드에서 조회할 수 있도록 구성했습니다.
+                        </p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>React-Markdown 렌더링</h3>
+                        <p>
+                            생성된 Markdown 리포트를 React 대시보드에서 팝업 형태로 표시했습니다.
+                            이를 통해 AI 탐지 결과가 단순 이벤트 로그를 넘어 후속 조치 판단으로 이어지도록 했습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <p>핵심 기여: 로봇/비전 AI/웹 사이의 마지막 전달 계층을 맡아, 탐지 결과를 관제자가 바로 읽을 수 있는 보고서로 변환.</p>
                 </div>
             </section>
 
@@ -374,16 +428,16 @@
                         <p>자율주행, 위치 추정, 경로 계획, 센서 토픽 처리를 하나의 로봇 시스템으로 묶기 위해 사용했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>TF2 + 삼각함수 역산</h3>
-                        <p>2D 카메라 탐지 결과만으로 맵 위 실제 위치를 추정하기 위해 로봇 위치와 방향, FOV 편차를 함께 활용했습니다.</p>
+                        <h3>TF2 + FOV 기반 위치 추정</h3>
+                        <p>깊이 센서 기반 3D 복원이 아니라, 2D 카메라 탐지 결과에 로봇 위치·방향과 FOV 보정을 더해 맵 위 추정 좌표를 계산했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>YOLO11n + EfficientNet-B0</h3>
                         <p>YOLO11n으로 사람과 자물쇠 영역을 빠르게 탐지하고, Crop된 자물쇠 이미지를 EfficientNet-B0로 분류했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>GPT-4o + React-Markdown</h3>
-                        <p>이벤트 로그와 이미지를 바탕으로 보안관제사 스타일의 Markdown 리포트를 생성하고 대시보드에서 바로 렌더링하기 위해 사용했습니다.</p>
+                        <h3>GPT-4o-mini + React-Markdown</h3>
+                        <p>이벤트 로그와 이미지를 바탕으로 보안관제사 스타일의 Markdown 리포트를 생성하고 대시보드에서 바로 렌더링하기 위해 사용했습니다. 출력 포맷을 고정해 리포트 품질의 일관성을 확보했습니다.</p>
                     </div>
                 </div>
             </section>
@@ -392,13 +446,13 @@
                 <h2>주요 문제 해결 사례</h2>
                 <div class="space-y-4">
                     <div class="problem-card">
-                        <p class="problem-title">문제 1. 2D 카메라 탐지를 실제 맵 좌표로 변환해야 함</p>
+                        <p class="problem-title">문제 1. 2D 카메라 탐지를 맵 좌표로 변환해야 함</p>
                         <p>
                             <strong>상황:</strong> 카메라에서 사람을 감지해도 단순 bounding box만으로는 순찰 맵의 어느 위치에서 이벤트가 발생했는지 알 수 없었습니다.
-                            관제 리포트와 대시보드에 의미 있는 위치 정보를 남기려면 카메라 좌표를 map 좌표계로 변환해야 했습니다.
+                            관제 리포트와 대시보드에 의미 있는 위치 정보를 남기려면 카메라 좌표를 map 좌표계의 추정 좌표로 변환해야 했습니다.
                         </p>
                         <p>
-                            <strong>해결:</strong> ROS2 카메라 토픽, TF2 로봇 위치·방향, FOV 편차를 결합하고 sin/cos 변환을 적용해 절대 X,Y 좌표를 추정했습니다.
+                            <strong>해결:</strong> ROS2 카메라 토픽, TF2 로봇 위치·방향, FOV 편차, 전방 거리 가정을 결합하고 sin/cos 변환을 적용해 X,Y 추정 좌표를 계산했습니다.
                         </p>
                     </div>
 
@@ -425,27 +479,37 @@
                             React 대시보드에서는 순찰 시작/중지 명령을 FastAPI 엔드포인트로 전송하고, AI 리포트는 React-Markdown 팝업으로 렌더링했습니다.
                         </p>
                     </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 4. 탐지 로그를 관제자가 바로 읽을 수 있는 보고서로 바꿔야 함</p>
+                        <p>
+                            <strong>상황:</strong> 사람 감지, 자물쇠 상태, 추정 좌표, 캡처 이미지는 각각 의미 있는 데이터였지만,
+                            단순 로그 형태로는 관제자가 후속 조치를 빠르게 판단하기 어려웠습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 이벤트 로그를 LLM 입력 데이터로 구조화하고,
+                            GPT-4o-mini 프롬프트에 <strong>경고 사항 / 관리자 조치 제안 / 결론</strong> 형식을 명시했습니다.
+                            생성된 Markdown 리포트는 <strong>/api/report</strong>로 저장한 뒤 React-Markdown 팝업으로 렌더링했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>핵심 판단: AI 탐지 결과는 “발견”에서 끝나지 않고, 관제자가 바로 행동할 수 있는 보고서로 변환되어야 함.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section class="card">
                 <h2>핵심 기술 근거</h2>
                 <div class="figure-card">
-                    <img src="./pjt3_pic/page12_mapping.png" alt="동적 객체 3D 좌표 역산 맵핑 알고리즘" class="project-figure">
+                    <img src="./pjt3_pic/page12_mapping.png" alt="2D 카메라 기반 맵 좌표 추정 알고리즘" class="project-figure">
                     <p class="figure-caption">
-                        좌표 역산 근거: 카메라 데이터 수집, TF2 위치 융합, 삼각함수 역산, 3m 클러스터링으로 중복 알림을 제거했습니다.
+                        좌표 추정 근거: 카메라 데이터 수집, TF2 위치 융합, FOV 기반 보정, 3m 클러스터링으로 중복 알림을 제거했습니다.
                     </p>
                 </div>
                 <div class="figure-card">
-                    <img src="./pjt3_pic/page14_report.png" alt="GPT-4o 관제 리포트 생성 흐름" class="project-figure">
+                    <img src="./pjt3_pic/page14_report.png" alt="GPT-4o-mini 관제 리포트 생성 흐름" class="project-figure">
                     <p class="figure-caption">
-                        리포트 생성 근거: 이벤트 로그를 FastAPI에서 구조화 JSON으로 변환하고, GPT-4o가 Markdown 보안 리포트를 생성했습니다.
-                    </p>
-                </div>
-                <div class="figure-card">
-                    <img src="./pjt3_pic/page16_dashboard.png" alt="React Flask 실시간 관제 대시보드" class="project-figure">
-                    <p class="figure-caption">
-                        대시보드 근거: Flask MJPEG 브릿지, React 원격 제어, React-Markdown 리포트 팝업으로 순찰 관제 UI를 구성했습니다.
+                        리포트 생성 근거: 이벤트 로그를 FastAPI에서 구조화 JSON으로 변환하고, GPT-4o-mini가 Markdown 보안 리포트를 생성했습니다.
                     </p>
                 </div>
             </section>
@@ -454,25 +518,25 @@
                 <h2>성과</h2>
                 <div class="impact-grid">
                     <div class="impact-card">
-                        <span class="impact-value">3m</span>
-                        <span class="impact-label">중복 알림 제거 클러스터링 반경</span>
+                        <span class="impact-value">중복 알림 제거</span>
+                        <span class="impact-label">반경 3m 클러스터링으로 동일 이벤트 반복 기록 방지</span>
                     </div>
                     <div class="impact-card">
-                        <span class="impact-value">GPT-4o</span>
-                        <span class="impact-label">멀티모달 관제 리포트 생성</span>
+                        <span class="impact-value">좌표 기록 자동화</span>
+                        <span class="impact-label">탐지 이벤트를 map 좌표 추정값과 함께 저장</span>
                     </div>
                     <div class="impact-card">
-                        <span class="impact-value">MJPEG</span>
-                        <span class="impact-label">ROS 카메라 웹 스트리밍</span>
+                        <span class="impact-value">리포트 자동 생성</span>
+                        <span class="impact-label">GPT-4o-mini 기반 Markdown 보안 리포트 생성</span>
                     </div>
                     <div class="impact-card">
-                        <span class="impact-value">ROS2</span>
-                        <span class="impact-label">자율주행 순찰 통합</span>
+                        <span class="impact-value">실시간 관제 연결</span>
+                        <span class="impact-label">ROS 카메라 스트림을 웹 대시보드에서 확인</span>
                     </div>
                 </div>
                 <div class="key-point">
                     <p>
-                        핵심 성과: 단순 탐지 모델이 아니라 <strong>탐지 → 위치 역산 → 중복 알림 제거 → 리포트 생성 → 웹 관제</strong>까지 이어지는 통합 순찰 파이프라인을 구성했습니다.
+                        핵심 성과: 단순 탐지 모델이 아니라 <strong>탐지 → 맵 좌표 추정 → 중복 알림 제거 → 리포트 생성 → 웹 관제</strong>까지 이어지는 통합 순찰 파이프라인을 구성했습니다.
                     </p>
                 </div>
                 <div class="figure-card">
@@ -491,7 +555,7 @@
                     탐지 결과가 실제 관제 가치로 이어지려면 위치와 상황이 함께 기록되어야 했습니다.
                 </p>
                 <p class="mt-3">
-                    특히 2D 카메라 기반 탐지를 맵 좌표로 역산하고, 3m 클러스터링으로 알림 도배를 줄이는 과정에서
+                    특히 2D 카메라 기반 탐지를 맵 좌표로 추정하고, 3m 클러스터링으로 알림 도배를 줄이는 과정에서
                     모델 출력 이후의 후처리 로직이 사용자 경험을 크게 바꿀 수 있다는 점을 체감했습니다.
                 </p>
             </section>
