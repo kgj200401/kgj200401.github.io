@@ -356,8 +356,8 @@
             <section class="card">
                 <h2>역할 및 기여도</h2>
                 <p class="mb-4">
-                    제가 담당한 부분은 <strong>LLM 관제 리포트 자동 생성, ROS2-웹 브릿지, 2D 카메라 기반 맵 좌표 추정, 중복 알림 제어</strong>입니다.
-                    탐지 결과가 단순 로그로 끝나지 않고 관제 화면과 보고서로 이어지도록 통합 흐름을 정리했습니다.
+                    제가 담당한 부분은 <strong>비전 AI 파이프라인</strong>과 <strong>LLM 관제 리포트 자동 생성</strong>입니다.
+                    탐지 결과가 단순 로그로 끝나지 않고 관제 화면과 보고서로 이어지도록 AI 결과 전달 흐름을 정리했습니다.
                 </p>
                 <div class="grid-2">
                     <div class="sub-card">
@@ -365,16 +365,16 @@
                         <p><strong>YOLO11n</strong>으로 사람/자물쇠 위치를 탐지하고, <strong>EfficientNet-B0</strong>로 locked/unlocked 상태를 분류하는 흐름을 구성했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>좌표 추정 알고리즘</h3>
-                        <p>카메라 픽셀 기반 탐지 결과를 TF2와 로봇 방향 정보로 보정해 map 좌표계 위 추정 위치로 변환했습니다.</p>
+                        <h3>LLM 리포트 자동 생성</h3>
+                        <p>탐지 인원, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 LLM 입력 데이터로 구조화하고 Markdown 리포트 생성 흐름을 구현했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>ROS-Web 통합</h3>
-                        <p>FastAPI/Flask 기반 REST API와 MJPEG 스트리밍 브릿지로 ROS 이벤트와 React 대시보드를 연결했습니다.</p>
+                        <p>FastAPI/Flask 기반 REST API와 MJPEG 스트리밍 브릿지를 활용해 ROS 이벤트와 React 대시보드가 연동되는 구조를 구현했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>LLM 리포트 자동 생성</h3>
-                        <p>탐지 인원, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 LLM 입력 데이터로 구조화하고 Markdown 리포트 생성 흐름을 구현했습니다.</p>
+                        <h3>대시보드 리포트 표시</h3>
+                        <p>생성된 Markdown 리포트를 React-Markdown 팝업으로 표시해 관제자가 탐지 결과와 조치 제안을 바로 확인하도록 연결했습니다.</p>
                     </div>
                 </div>
             </section>
@@ -495,6 +495,26 @@
                             <p>핵심 판단: AI 탐지 결과는 “발견”에서 끝나지 않고, 관제자가 바로 행동할 수 있는 보고서로 변환되어야 함.</p>
                         </div>
                     </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 5. 외부 서버 배포 환경에서 ROS2 실시간 제어/스트리밍 연동이 제한됨</p>
+                        <p>
+                            <strong>상황:</strong> 초기에는 React 대시보드와 FastAPI 서버를 외부 도메인에서 동작시키고,
+                            사용자가 웹에서 순찰 시작/중지, 실시간 영상 확인, 리포트 조회까지 수행하는 구조를 고려했습니다.
+                            하지만 실제 시스템은 <strong>ROS2 노드, Gazebo 시뮬레이션, Flask MJPEG 스트리밍 서버, FastAPI 리포트 서버</strong>가 함께 실행되어야 했습니다.
+                        </p>
+                        <p>
+                            <strong>원인:</strong> 일반적인 웹 서버 배포 환경에서는 ROS2 토픽, Gazebo 프로세스, 로컬 카메라 스트림에 직접 접근하기 어려웠습니다.
+                            특히 실시간 영상과 순찰 제어는 로컬 Flask 브릿지 서버에 의존해 외부 배포 도메인만으로는 전체 기능이 완전하게 동작하기 어려웠습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 완전한 외부 배포 대신 시연 환경에서는 <strong>ROS2/Gazebo/Flask 브릿지/FastAPI</strong>를 같은 로컬 또는 내부 네트워크 환경에서 실행하는 방식으로 전환했습니다.
+                            FastAPI에는 리포트 수신 및 조회 API를 구성하고, React 대시보드에서는 생성된 리포트를 Markdown 형태로 확인할 수 있도록 연결했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>배운 점: 로봇 시스템 배포는 웹 서버뿐 아니라 ROS2 네트워크, 스트리밍 브릿지, 장비 접근 경로까지 함께 설계해야 함.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -551,12 +571,17 @@
                 <h2>회고</h2>
                 <p>
                     이 프로젝트에서 가장 크게 배운 점은 로봇 시스템에서는 AI 모델 성능만큼이나
-                    <strong>좌표계, 시간 동기화, 웹 연동, 중복 이벤트 제어</strong>가 중요하다는 점입니다.
-                    탐지 결과가 실제 관제 가치로 이어지려면 위치와 상황이 함께 기록되어야 했습니다.
+                    <strong>이벤트 데이터 구조화, 웹 연동, 리포트 전달 방식</strong>이 중요하다는 점입니다.
+                    탐지 결과가 실제 관제 가치로 이어지려면 단순 로그가 아니라 관제자가 바로 읽고 판단할 수 있는 보고서 형태로 전달되어야 했습니다.
                 </p>
                 <p class="mt-3">
-                    특히 2D 카메라 기반 탐지를 맵 좌표로 추정하고, 3m 클러스터링으로 알림 도배를 줄이는 과정에서
-                    모델 출력 이후의 후처리 로직이 사용자 경험을 크게 바꿀 수 있다는 점을 체감했습니다.
+                    특히 비전 AI가 만든 사람/자물쇠 탐지 결과를 LLM 입력 데이터로 구조화하고,
+                    Markdown 관제 리포트로 자동 변환하는 과정에서 AI 출력 이후의 전달 계층이 사용자 경험을 크게 바꿀 수 있다는 점을 체감했습니다.
+                </p>
+                <p class="mt-3">
+                    아쉬웠던 점은 완전한 외부 서버 배포까지 연결하지 못하고, ROS2/Gazebo/Flask 브릿지/FastAPI가 함께 실행되는 로컬 시연 환경에 의존했다는 점입니다.
+                    추후에는 <strong>ROSBridge/WebSocket, WebRTC 스트리밍, Docker Compose 통합 실행, Nginx reverse proxy</strong>를 적용해
+                    로봇 시스템도 외부 접속 가능한 구조로 개선해보고 싶습니다.
                 </p>
             </section>
         </div>
