@@ -944,7 +944,7 @@
                         <span class="project-category">Multimodal AI</span>
                         <h3 class="project-title">이미지 기반 VQA 멀티모달 AI 모델</h3>
                         <p class="project-subtitle">2025.10(1주)</p>
-                        <p class="project-description">자원 제약 환경에서 Qwen3-VL-8B 모델을 4-bit 양자화하고, LoRA 파인튜닝과 균등 샘플링 전략으로 반복 실험 안정성과 정확도를 함께 개선했습니다.</p>
+                        <p class="project-description">여러 VLM 후보를 비교한 뒤 Qwen3-VL-8B를 4-bit 양자화와 LoRA/QLoRA로 반복 파인튜닝하며, 제한된 GPU 환경에서도 VQA 성능을 개선했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tech"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="">PyTorch</span>
                             <span class="project-tech"><span class="project-tech-mark">U</span>Unsloth</span>
@@ -1008,36 +1008,43 @@
                 <div class="space-y-8 text-sm">
                     <div>
                         <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">📌 프로젝트 개요</h4>
-                        <p class="text-gray-400 leading-relaxed">제한된 인프라 자원을 극복하여 대규모 모델의 비즈니스 활용 가능성을 검토하고, 최적화 기법을 통해 운영 효율성을 확보하는 것을 목표로 하였습니다.</p>
+                        <p class="text-gray-400 leading-relaxed">Qwen 계열, Gemma, LLaVA 계열 등 여러 Vision-Language Model 후보를 비교하고, Qwen3-VL-8B를 LoRA/QLoRA 방식으로 반복 파인튜닝하여 VQA 성능을 개선하는 것을 목표로 했습니다.</p>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">🏆 주요 성과</h4>
                         <ul class="list-disc list-inside text-gray-400 space-y-2">
                             <li><strong>최종 리더보드 순위 11위</strong> (팀 최종 베스트 점수: 0.96296)</li>
                             <li><strong>Colab 및 GPU 자원 제약 환경</strong>에서 8B 모델 반복 실험 가능 파이프라인 구성</li>
+                            <li><strong>LoRA/QLoRA 파인튜닝 조건</strong>을 반복 조정하며 Loss / Accuracy 흐름 기반 성능 개선</li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">🛠️ 주요 문제 해결 사례</h4>
                         <div class="space-y-4">
                             <div class="bg-gray-800/40 p-4 rounded-lg border border-gray-700/50">
-                                <p class="text-blue-400 font-bold mb-1">문제 1. 한정된 예산과 자원 내 대형 모델 구동</p>
+                                <p class="text-blue-400 font-bold mb-1">문제 1. 기본 VLM만으로는 VQA 데이터셋에 최적화된 성능 확보가 어려움</p>
+                                <p class="text-gray-400 mb-1"><span class="text-gray-300 font-semibold">해결:</span> 여러 VLM 후보를 비교한 뒤 Qwen3-VL-8B를 중심으로 LoRA/QLoRA 파인튜닝을 반복하고, 데이터 수와 epoch, learning rate, weight decay, LoRA dropout을 조정.</p>
+                                <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> Loss / Accuracy 흐름과 리더보드 점수를 함께 보며 최종 점수 0.96296, 전국 11위 달성.</p>
+                            </div>
+                            <div class="bg-gray-800/40 p-4 rounded-lg border border-gray-700/50">
+                                <p class="text-blue-400 font-bold mb-1">문제 2. 한정된 예산과 자원 내 대형 모델 구동</p>
                                 <p class="text-gray-400 mb-1"><span class="text-gray-300 font-semibold">해결:</span> Unsloth 기반 4bit 양자화 도입, 비전 레이어 고정(freeze) 및 언어 모델 레이어에만 LoRA 어댑터 적용.</p>
                                 <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> OOM 없이 Qwen3-VL-8B 모델을 반복 실험할 수 있는 학습 환경 확보.</p>
                             </div>
                             <div class="bg-gray-800/40 p-4 rounded-lg border border-gray-700/50">
-                                <p class="text-blue-400 font-bold mb-1">문제 2. 단순 통계적 오류로 인한 분석 신뢰성 저하 (Position Bias)</p>
+                                <p class="text-blue-400 font-bold mb-1">문제 3. 단순 통계적 오류로 인한 분석 신뢰성 저하 (Position Bias)</p>
                                 <p class="text-gray-400 mb-1"><span class="text-gray-300 font-semibold">해결:</span> EDA를 통해 정답 분포 편향을 발견하고, 모든 보기(a~d)가 동일한 비율로 추출되도록 균등 샘플링 로더 구성.</p>
                                 <p class="text-gray-400"><span class="text-gray-300 font-semibold">결과:</span> 보기 분포에 의한 softmax bias 가능성을 낮추고, 최종 점수 0.96296으로 리더보드 11위 달성.</p>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">� 담당 업무 및 사용 기술</h4>
+                        <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">💻 담당 업무 및 사용 기술</h4>
                         <ul class="list-disc list-inside text-gray-400 space-y-2 mb-4">
-                            <li>모델 성능 비교 분석 및 벤치마킹</li>
-                            <li>정확도 방어를 위한 하이퍼파라미터 최적값 탐색</li>
-                            <li>Few-shot 프롬프팅 및 정규표현식 기반 출력 정형화 제어</li>
+                            <li>Qwen2.5-VL, Qwen3-VL-8B, Gemma, LLaVA 계열 후보 모델 비교</li>
+                            <li>Qwen3-VL-8B LoRA/QLoRA 파인튜닝 실험 및 성능 개선</li>
+                            <li>데이터 수, epoch, learning rate, weight decay, LoRA dropout 조정</li>
+                            <li>Loss / Accuracy 흐름과 리더보드 점수 기반 학습 조건 최적화</li>
                         </ul>
                         <div class="flex flex-wrap gap-2 text-xs font-mono">
                             <span class="bg-gray-800 border border-gray-700 px-2 py-1 rounded">Qwen3-VL-8B</span>
