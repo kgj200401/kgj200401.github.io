@@ -439,8 +439,8 @@
             <p class="eyebrow">Project 01</p>
             <h1>이미지 기반 VQA 멀티모달 AI 모델</h1>
             <p class="mt-5 text-lg text-gray-500">
-                편향된 이미지 데이터와 Google Colab 단일 GPU 환경이라는 제약 속에서, VQA 데이터셋을 확장하고
-                <strong>Qwen3-VL-8B</strong> 모델을 안정적으로 파인튜닝한 멀티모달 AI 프로젝트입니다.
+                Qwen 계열, Gemma, LLaVA 계열 등 여러 Vision-Language Model을 비교하고,
+                <strong>Qwen3-VL-8B</strong>를 LoRA/QLoRA 방식으로 반복 파인튜닝하며 VQA 성능을 개선한 멀티모달 AI 프로젝트입니다.
             </p>
 
             <div class="meta-grid">
@@ -466,11 +466,11 @@
             <section class="card">
                 <h2>프로젝트 목표</h2>
                 <p>
-                    목표는 단순히 VQA 모델을 학습시키는 것이 아니라, <span class="highlight">편향된 이미지 데이터셋을 분석하고 확장하여 8B급 멀티모달 모델의 일반화 성능을 높이는 것</span>이었습니다.
-                    동시에 고성능 AI 서버가 아닌 <strong>Google Colab의 단일 GPU 환경</strong>에서도 반복 실험이 가능하도록 4-bit 양자화와 LoRA 기반 파인튜닝 파이프라인을 구축하는 것이 중요했습니다.
+                    목표는 다양한 VLM 후보 모델을 비교한 뒤, <span class="highlight">Qwen3-VL-8B를 제한된 GPU 환경에서 안정적으로 파인튜닝하여 VQA 성능을 개선하는 것</span>이었습니다.
+                    데이터 편향 분석과 증강은 파인튜닝 성능을 높이기 위한 전략으로 활용했고, <strong>Google Colab의 단일 GPU 환경</strong>에서도 반복 실험이 가능하도록 4-bit 양자화와 LoRA 기반 학습 파이프라인을 구축했습니다.
                 </p>
                 <div class="key-point">
-                    <p>목표 요약: <strong>데이터 편향 분석</strong> → <strong>이미지/QA 데이터 증강</strong> → <strong>Qwen3-VL-8B 경량 파인튜닝</strong> → 리더보드 성능 개선.</p>
+                    <p>목표 요약: <strong>VLM 후보 모델 비교</strong> → <strong>Qwen3-VL-8B LoRA/QLoRA 파인튜닝</strong> → <strong>데이터 편향 보정</strong> → 리더보드 성능 개선.</p>
                 </div>
             </section>
 
@@ -511,8 +511,8 @@
             <section class="card">
                 <h2>역할 및 기여도</h2>
                 <p class="mb-4">
-                    4명 팀으로 진행했으며, 역할을 완전히 분리하기보다 <strong>데이터 확장, 모델 비교, 파인튜닝 실험</strong>을 함께 검토하며 진행했습니다.
-                    아래는 팀 내에서 제가 특히 많이 참여한 영역입니다.
+                    4명 팀으로 진행했으며, 제 핵심 역할은 <strong>다양한 모델과 파인튜닝 조건을 실험하며 성능을 개선하는 것</strong>이었습니다.
+                    데이터 확장과 편향 분석도 단독 목적이 아니라, Qwen3-VL-8B 파인튜닝 성능을 끌어올리기 위한 실험 근거로 활용했습니다.
                 </p>
                 <div class="role-grid">
                     <div class="sub-card">
@@ -523,15 +523,15 @@
                     </div>
                     <div class="sub-card">
                         <div class="role-head">
-                            <h3>모델 성능 비교</h3>
+                            <h3>VLM 후보 모델 비교</h3>
                         </div>
-                        <p><strong>Qwen3-VL-8B</strong>를 포함한 후보 모델의 리더보드 점수와 실험 결과를 비교해 최종 모델 선정 근거를 정리했습니다.</p>
+                        <p>Qwen2.5-VL, <strong>Qwen3-VL-8B</strong>, Gemma, LLaVA 계열의 실험 결과를 비교해 최종 파인튜닝 대상 모델 선정 근거를 정리했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <div class="role-head">
-                            <h3>파인튜닝 실험</h3>
+                            <h3>파인튜닝 실험 및 성능 개선</h3>
                         </div>
-                        <p>데이터 수와 epoch 변화에 따른 <strong>Loss / Accuracy 흐름</strong>을 분석하고, 과적합 신호를 기준으로 학습 조건을 조정했습니다.</p>
+                        <p>LoRA/QLoRA 적용, 데이터 수, epoch, learning rate, weight decay, LoRA dropout을 바꿔가며 <strong>Loss / Accuracy 흐름</strong>과 리더보드 점수를 기준으로 학습 조건을 조정했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <div class="role-head">
@@ -545,7 +545,7 @@
                     <img src="./pjt1_pic/111.png" alt="Qwen3-VL-8B 모델 선정 비교 자료" class="project-figure">
                     <p class="figure-caption">
                         모델 선정 근거: Qwen2.5-VL, <strong>Qwen3-VL-8B</strong>, Gemma, LLaVA 계열을 비교했고,
-                        최종적으로 <strong>Qwen3-VL-8B-Instruct-unsloth-bnb-4bit</strong> 모델이 가장 높은 성능 흐름을 보여 주요 모델로 채택했습니다.
+                        최종적으로 <strong>Qwen3-VL-8B-Instruct-unsloth-bnb-4bit</strong> 모델이 가장 높은 성능 흐름을 보여 주요 파인튜닝 모델로 채택했습니다.
                     </p>
                 </div>
             </section>
@@ -555,7 +555,7 @@
                 <div class="tech-grid">
                     <div class="sub-card">
                         <h3>Qwen3-VL-8B</h3>
-                        <p>이미지와 텍스트를 함께 이해해야 하는 <strong>VQA 태스크</strong>에 적합한 Vision-Language Model이 필요해 사용했습니다. 최종 리더보드 성능을 낸 주요 모델입니다.</p>
+                        <p>이미지와 텍스트를 함께 이해해야 하는 <strong>VQA 태스크</strong>에 적합한 Vision-Language Model이 필요해 사용했습니다. 여러 후보 모델 비교 후 최종 파인튜닝 대상으로 선택한 주요 모델입니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>Pixabay API</h3>
@@ -576,7 +576,22 @@
                 <h2>주요 문제 해결 사례</h2>
                 <div class="space-y-4">
                     <div class="problem-card">
-                        <p class="problem-title">문제 1. 학습 데이터가 동물/음식 카테고리에 과도하게 집중됨</p>
+                        <p class="problem-title">문제 1. 기본 VLM만으로는 VQA 데이터셋에 최적화된 성능을 얻기 어려움</p>
+                        <p>
+                            <strong>상황:</strong> 사전학습 Vision-Language Model은 범용 성능은 높지만, 주어진 VQA 데이터셋의 이미지 분포와 질문 형식에 맞게 조정하지 않으면 리더보드 성능이 제한될 수 있었습니다.
+                            따라서 단순 추론이 아니라, 데이터와 학습 조건을 바꿔가며 모델을 실제 태스크에 맞게 파인튜닝하는 과정이 필요했습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> Qwen 계열, Gemma, LLaVA 계열 후보를 비교한 뒤 <strong>Qwen3-VL-8B</strong>를 중심으로 LoRA/QLoRA 파인튜닝을 반복했습니다.
+                            데이터 수, epoch, learning rate, weight decay, LoRA dropout을 조정하며 Loss / Accuracy 흐름과 리더보드 점수를 함께 확인했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>핵심 판단: 여러 모델을 단순 비교하는 데서 끝내지 않고, 최종 모델을 데이터 특성과 GPU 제약에 맞게 파인튜닝하는 것이 성능 개선의 중심이라고 판단.</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 2. 학습 데이터가 동물/음식 카테고리에 과도하게 집중됨</p>
                         <p>
                             <strong>상황:</strong> 주어진 <strong>3,887장</strong> 이미지 데이터를 EDA한 결과, 동물과 음식 이미지가 전체의 <strong>40.65%</strong>를 차지했습니다.
                             이 상태로 학습하면 특정 카테고리에 과적합되어 다양한 이미지에 대한 VQA 일반화 성능이 떨어질 수 있었습니다.
@@ -591,7 +606,7 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 2. 정답 분포 불균형으로 softmax bias 가능성 발생</p>
+                        <p class="problem-title">문제 3. 정답 분포 불균형으로 softmax bias 가능성 발생</p>
                         <p>
                             <strong>상황:</strong> 정답 분포를 분석한 결과 d 선택지가 상대적으로 많이 추출되는 경향을 확인했습니다.
                             특정 보기가 자주 정답으로 등장하면 모델이 실제 의미 판단보다 보기 분포에 영향을 받을 가능성이 있었습니다.
@@ -606,7 +621,7 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 3. 데이터 증강 후 학습량 증가에 따른 과적합 신호 발생</p>
+                        <p class="problem-title">문제 4. 데이터 증강 후 학습량 증가에 따른 과적합 신호 발생</p>
                         <p>
                             <strong>상황:</strong> 데이터 수를 <strong>200개</strong>에서 <strong>500개</strong>, <strong>1000개</strong>로 늘렸을 때는 Loss가 낮아지고 Accuracy가 소폭 상승하는 흐름을 확인했습니다.
                             하지만 <strong>1000개 데이터에서 epoch을 2</strong>로 늘리자 Loss가 약 <strong>0.84</strong> 수준까지 급증하고 Accuracy가 약 <strong>0.27</strong> 수준으로 하락했습니다.
@@ -673,7 +688,7 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 4. Google Colab 단일 GPU 환경으로 반복 실험이 어려움</p>
+                        <p class="problem-title">문제 5. Google Colab 단일 GPU 환경으로 반복 실험이 어려움</p>
                         <p>
                             <strong>상황:</strong> 고성능 AI 서버가 아닌 <strong>Google Colab의 단일 GPU 환경</strong>에서 실험을 진행해야 했습니다.
                             이 환경에서 <strong>7B~8B급 모델</strong>을 일반적인 방식으로 실험하면 메모리 부족(<strong>OOM</strong>) 문제가 발생할 수 있어 반복적인 튜닝이 어려웠습니다.
@@ -714,7 +729,7 @@
                     </div>
                 </div>
                 <div class="key-point">
-                    <p>핵심 성과: 데이터 편향을 직접 분석하고, 이미지 수집/QA 생성/균등 샘플링/양자화 학습까지 연결해 <strong>전체 245팀 중 지역 2위, 전국 11위</strong> 달성.</p>
+                    <p>핵심 성과: 다양한 VLM 후보 비교와 Qwen3-VL-8B LoRA/QLoRA 파인튜닝을 반복하고, 데이터 편향 보정과 학습 조건 최적화를 결합해 <strong>전체 245팀 중 지역 2위, 전국 11위</strong> 달성.</p>
                 </div>
                 <div class="figure-card">
                     <img src="./pjt1_pic/333.png" alt="최종 리더보드 11위 달성 화면" class="project-figure">
@@ -728,11 +743,11 @@
             <section class="card">
                 <h2>회고</h2>
                 <p>
-                    이 프로젝트에서 가장 크게 배운 점은 모델 성능이 모델 크기만으로 결정되지 않는다는 점입니다.
-                    실제 성능 개선은 데이터 분포를 확인하고, 편향 가능성을 줄이며, 학습 과정의 Loss 흐름을 해석하는 과정에서 만들어졌습니다.
+                    이 프로젝트에서 가장 크게 배운 점은 모델 성능이 모델 크기나 기본 성능만으로 결정되지 않는다는 점입니다.
+                    실제 성능 개선은 다양한 모델을 비교하고, 파인튜닝 조건을 바꿔가며 Loss 흐름과 리더보드 결과를 함께 해석하는 과정에서 만들어졌습니다.
                 </p>
                 <p class="mt-3">
-                    특히 Pixabay API 기반 이미지 수집과 Q&A 자동 생성 파이프라인을 만들며, 좋은 모델을 쓰기 전에 좋은 학습 데이터를 만드는 과정이 얼마나 중요한지 체감했습니다.
+                    특히 Pixabay API 기반 이미지 수집과 Q&A 자동 생성 파이프라인을 만들며, 좋은 파인튜닝 결과를 얻기 위해서는 모델 선택만큼 학습 데이터의 분포와 품질이 중요하다는 점을 체감했습니다.
                     이후 프로젝트에서도 먼저 데이터의 맥락을 확인하고, 모델이 어떤 근거로 판단하는지 추적하는 습관을 갖게 되었습니다.
                 </p>
             </section>
