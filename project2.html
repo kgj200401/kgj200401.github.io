@@ -236,6 +236,47 @@
             line-height: 1.6;
         }
 
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pipeline-step {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .pipeline-step.is-final {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .step-no {
+            display: inline-grid;
+            place-items: center;
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-bottom: 0.5rem;
+            border-radius: 999px;
+            background: var(--green);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .pipeline-step h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .pipeline-step p {
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
         footer { border-top: 1px solid var(--line); }
 
         @media (max-width: 768px) {
@@ -244,6 +285,10 @@
             .grid-3,
             .impact-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .pipeline {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
     </style>
@@ -267,8 +312,10 @@
 
             <div class="meta-grid">
                 <div class="meta-card">
-                    <p class="meta-label">프로젝트 기간</p>
-                    <p class="meta-value">2026.01 ~ 2026.02 (6주)</p>
+                    <p class="meta-label">프로젝트 기간 · 팀 구성</p>
+                    <p class="meta-value">2026.01 ~ 2026.02 (6주) · 5인 프로젝트</p>
+                    <p class="meta-label mt-4">담당 영역</p>
+                    <p class="meta-value">LLM · RAG · Vision AI</p>
                 </div>
                 <div class="meta-card">
                     <p class="meta-label">사용 기술</p>
@@ -279,7 +326,10 @@
                         <span class="tag">Jetson Orin Nano</span>
                         <span class="tag">MQTT</span>
                         <span class="tag">RAG</span>
-                        <span class="tag">GPT-4O-MINI</span>
+                        <span class="tag">GPT-4o-mini</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Docker Compose</span>
                     </div>
                 </div>
             </div>
@@ -316,6 +366,62 @@
             </section>
 
             <section class="card">
+                <h2>개발환경 및 AI Pipeline</h2>
+                <div class="grid-2 mb-5">
+                    <div class="sub-card">
+                        <h3>실행환경</h3>
+                        <p>Backend: Django 6 + DRF · Frontend: React 19 + Vite<br>Database: SQLite · Communication: MQTT<br>Deployment: Docker Compose</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>AI 환경</h3>
+                        <p>LLM: GPT-4o-mini (OpenAI Compatible API)<br>Vision AI: YOLO Detection + Segmentation<br>Data: MQTT Sensor + Vision 결과</p>
+                    </div>
+                </div>
+                <div class="pipeline">
+                    <div class="pipeline-step">
+                        <span class="step-no">1</span>
+                        <h3>MQTT 센서 수신</h3>
+                        <p>온도 · 습도 등 환경 데이터 수신</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">2</span>
+                        <h3>Django 백엔드 반영</h3>
+                        <p>센서 값을 SQLite DB에 반영</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">3</span>
+                        <h3>Vision AI 분석</h3>
+                        <p>YOLO 병해 탐지, Segmentation으로 severity 산출</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">4</span>
+                        <h3>센서 + Vision 통합</h3>
+                        <p>농장 단위 전 구역 평균 계산, JSON 컨텍스트 생성</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">5</span>
+                        <h3>키워드 필터링 RAG</h3>
+                        <p>논문 PDF 3편에서 키워드 포함 페이지를 발췌해 참고 문맥 구성</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">6</span>
+                        <h3>프롬프트 · LLM 호출</h3>
+                        <p>센서 + Vision 컨텍스트 + 논문 문맥을 GPT-4o-mini에 전달</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">7</span>
+                        <h3>AI 리포트 생성</h3>
+                        <p>요약 · 위험도 · 원인 분석, 권장 조치 및 관리 방안</p>
+                    </div>
+                    <div class="pipeline-step is-final">
+                        <span class="step-no">8</span>
+                        <h3>DB 저장 · 대시보드</h3>
+                        <p>Report 모델 저장, 히스토리 조회 · 시각화</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
                 <h2>핵심 기능</h2>
                 <div class="grid-2">
                     <div class="sub-card">
@@ -331,7 +437,7 @@
                         <p>센서 데이터와 PDF 논문에서 키워드 기반으로 추출한 문맥을 결합해 작물 상태를 분석하는 <strong>단순 RAG 분석 흐름</strong>을 구성했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>GPT-4O-MINI 리포트 생성</h3>
+                        <h3>GPT-4o-mini 리포트 생성</h3>
                         <p>분석 결과를 기반으로 사용자가 이해하기 쉬운 형태의 <strong>농작물 상태 리포트</strong>를 자동 생성하도록 설계했습니다.</p>
                     </div>
                 </div>
@@ -340,24 +446,28 @@
             <section class="card">
                 <h2>역할 및 기여도</h2>
                 <p class="mb-4">
-                    팀 내 공식 역할은 <strong>AI(LLM)</strong>이었고, 비전 탐지 결과와 센서 데이터를 사용자가 이해할 수 있는 의사결정 리포트로 연결하는 흐름에 집중했습니다.
+                    5인 팀에서 <strong>LLM · RAG · Vision AI</strong>를 담당했고, 비전 탐지 결과와 센서 데이터를 사용자가 이해할 수 있는 의사결정 리포트로 연결하는 흐름에 집중했습니다.
                 </p>
                 <div class="grid-2">
                     <div class="sub-card">
-                        <h3>RAG 분석 흐름 설계</h3>
-                        <p>농장 센서 평균값과 PDF 논문 문맥을 함께 프롬프트에 넣어 작물 상태를 설명할 수 있도록 <strong>키워드 기반 RAG 구조</strong>를 정리했습니다.</p>
+                        <h3>경량 RAG 컨텍스트 설계</h3>
+                        <p>농장 센서 평균값과 <strong>논문 PDF 3편</strong>의 키워드 필터링 발췌문을 함께 프롬프트에 넣어, LLM이 센서 데이터와 논문 정보를 함께 활용하도록 구현했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>LLM 리포트 생성</h3>
-                        <p><strong>GPT-4O-MINI</strong>를 활용해 위험도와 조치 방향을 요약하는 리포트 생성 흐름을 구현했습니다.</p>
+                        <h3>GPT-4o-mini 리포트 생성</h3>
+                        <p><strong>GPT-4o-mini</strong>를 활용해 병해 위험도와 대응 방안을 담은 리포트 생성 흐름을 구현했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>AI 결과 연결</h3>
-                        <p>비전 AI의 병해충 탐지 결과와 센서 값을 리포트 입력 정보로 연결해 사용자가 상황을 빠르게 파악하도록 구성했습니다.</p>
+                        <h3>Vision AI 실시간 병해 탐지</h3>
+                        <p>Jetson Orin Nano에서 <strong>YOLO26n + TensorRT(FP16)</strong>로 잿빛곰팡이병을 실시간 탐지하도록 구성했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>성과 발표</h3>
-                        <p>리포트 생성 흐름과 AI 판단 결과가 서비스 화면에서 어떻게 의사결정으로 이어지는지 발표 자료로 정리했습니다.</p>
+                        <h3>프롬프트 엔지니어링</h3>
+                        <p>Vision severity와 센서 데이터를 하나의 JSON 컨텍스트로 통합하고, 프롬프트를 최적화해 응답 품질과 일관성을 높였습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>AI 서비스 결과 발표</h3>
+                        <p>분석 결과와 서비스 흐름이 화면에서 어떻게 의사결정으로 이어지는지 정리해 발표했습니다.</p>
                     </div>
                 </div>
             </section>
@@ -378,7 +488,7 @@
                         <p>센서와 로봇, 서버가 분리된 구조에서 상태값과 탐지 결과를 안정적으로 전달하기 위해 MQTT 브로커와 EC2 중앙 서버를 사용했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>RAG + GPT-4O-MINI</h3>
+                        <h3>RAG + GPT-4o-mini</h3>
                         <p>센서 수치만 나열하지 않고 논문 기반 정보와 함께 해석해 <strong>사용자 친화적인 리포트</strong>를 생성하기 위해 사용했습니다. 임베딩·벡터DB 기반 검색은 아니며, PDF 페이지에서 관련 키워드를 찾는 방식으로 구현했습니다.</p>
                     </div>
                 </div>
@@ -459,7 +569,7 @@
                         </p>
                         <p>
                             <strong>해결:</strong> 센서 데이터와 PDF 논문에서 추출한 키워드 기반 문맥을 함께 프롬프트에 넣는 <strong>단순 RAG</strong>를 구성했습니다.
-                            이후 <strong>GPT-4O-MINI</strong>를 통해 현재 상황, 권장 조치, 요약, 위험도를 JSON 형식으로 생성하고 리포트로 저장했습니다.
+                            이후 <strong>GPT-4o-mini</strong>를 통해 현재 상황, 권장 조치, 요약, 위험도를 JSON 형식으로 생성하고 리포트로 저장했습니다.
                         </p>
                     </div>
 
@@ -471,8 +581,8 @@
                         </p>
                         <p>
                             <strong>해결:</strong> 처리량을 높일 수 있는 <strong>vLLM</strong> 도입을 자발적으로 조사하고 벤치마크 관점에서 검토했습니다.
-                            분석 결과 vLLM은 GPU 자원이 필수적이었고, 로봇의 핵심 목적은 비전 인식이었기 때문에 GPU는 비전 모델에 집중 할당했습니다.
-                            LLM은 CPU 기반 일반 호출 구조로 전환해 전체 파이프라인의 리스크를 통제했습니다.
+                            분석 결과 vLLM 자체 추론 서버는 GPU 자원이 필수적이었고, 로봇의 핵심 목적은 비전 인식이었기 때문에 GPU는 비전 모델에 우선 배정했습니다.
+                            리포트 생성은 응답 속도가 충분했기 때문에 <strong>OpenAI API(GPT-4o-mini) 호출 구조</strong>를 채택해 전체 파이프라인의 리스크를 통제했습니다.
                         </p>
                         <div class="key-point">
                             <p>핵심 판단: 최신 기술을 무리하게 넣기보다, 제한된 자원에서 비전 인식 안정성을 우선하고 LLM은 리포트 생성 중심으로 분리.</p>
@@ -508,9 +618,9 @@
                     </p>
                 </div>
                 <div class="figure-card">
-                    <img src="./pjt2_pic/page45_report.png" alt="GPT-4O-MINI 리포트 생성 화면" class="project-figure">
+                    <img src="./pjt2_pic/page45_report.png" alt="GPT-4o-mini 리포트 생성 화면" class="project-figure">
                     <p class="figure-caption">
-                        리포트 생성 근거: RAG 분석 결과를 바탕으로 GPT-4O-MINI가 날짜별 위험도와 관리 방향을 요약하는 리포트 화면입니다.
+                        리포트 생성 근거: RAG 분석 결과를 바탕으로 GPT-4o-mini가 날짜별 위험도와 관리 방향을 요약하는 리포트 화면입니다.
                     </p>
                 </div>
             </section>
@@ -526,6 +636,25 @@
                     또한 Edge 디바이스, 중앙 서버, 웹 대시보드, LLM 리포트가 함께 동작하는 구조를 보며
                     AI 기능은 모델 하나가 아니라 데이터 흐름 전체 위에서 안정적으로 설계되어야 한다는 점을 체감했습니다.
                 </p>
+                <div class="grid-2 mt-5">
+                    <div class="sub-card">
+                        <h3>아쉬웠던 부분</h3>
+                        <ul class="list-disc list-inside">
+                            <li>OpenAI API 기반 리포트 생성이라 추론 비용 · 응답 속도에 한계</li>
+                            <li>GPU 자원을 Vision AI에 우선 배정해 vLLM 자체 추론 서버는 구축하지 못함</li>
+                        </ul>
+                    </div>
+                    <div class="sub-card">
+                        <h3>개선 방안</h3>
+                        <ul class="list-disc list-inside">
+                            <li>vLLM으로 오픈소스 LLM을 직접 서빙</li>
+                            <li>임베딩 기반 검색으로 센서 · 병해 상황에 맞는 문맥을 찾도록 RAG 고도화</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <p>깨달은 점: 개별 모델 정확도뿐 아니라 <strong>Vision AI · 센서 · RAG를 하나의 컨텍스트로 연결하는 설계</strong>가 서비스 성능을 좌우하며, 생성형 AI는 입력 컨텍스트 설계가 품질을 결정합니다.</p>
+                </div>
             </section>
         </div>
     </main>

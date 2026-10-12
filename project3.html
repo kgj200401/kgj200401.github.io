@@ -236,6 +236,47 @@
             line-height: 1.6;
         }
 
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pipeline-step {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .pipeline-step.is-final {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .step-no {
+            display: inline-grid;
+            place-items: center;
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-bottom: 0.5rem;
+            border-radius: 999px;
+            background: var(--green);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .pipeline-step h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .pipeline-step p {
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
         footer { border-top: 1px solid var(--line); }
 
         @media (max-width: 768px) {
@@ -244,6 +285,10 @@
             .grid-3,
             .impact-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .pipeline {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
     </style>
@@ -261,14 +306,16 @@
             <p class="eyebrow">Project 03</p>
             <h1>NightWatch 야간 자율순찰 시스템</h1>
             <p class="mt-5 text-lg text-gray-500">
-                자율주행 로봇, 비전 AI 탐지, GPT-4o-mini 관제 리포트, Web 대시보드를 연결해
+                자율주행 로봇, 비전 AI 탐지, GPT-4o 관제 리포트, Web 대시보드를 연결해
                 <strong>야간 사각지대의 이상 상황을 자동 감지하고 기록하는 보안 관제 시스템</strong>을 구현한 프로젝트입니다.
             </p>
 
             <div class="meta-grid">
                 <div class="meta-card">
-                    <p class="meta-label">프로젝트 기간</p>
-                    <p class="meta-value">2026.03 ~ 2026.04</p>
+                    <p class="meta-label">프로젝트 기간 · 팀 구성</p>
+                    <p class="meta-value">2026.03 ~ 2026.04 (7주) · 6인 프로젝트</p>
+                    <p class="meta-label mt-4">담당 영역</p>
+                    <p class="meta-value">Vision AI · LLM</p>
                 </div>
                 <div class="meta-card">
                     <p class="meta-label">사용 기술</p>
@@ -279,10 +326,13 @@
                         <span class="tag">TF2</span>
                         <span class="tag">YOLO11n</span>
                         <span class="tag">EfficientNet-B0</span>
-                        <span class="tag">GPT-4o-mini</span>
+                        <span class="tag">GPT-4o</span>
                         <span class="tag">FastAPI</span>
                         <span class="tag">Flask</span>
                         <span class="tag">React</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">SQLite</span>
                     </div>
                 </div>
             </div>
@@ -321,7 +371,7 @@
                 <p>
                     NightWatch는 로봇이 순찰을 수행하면서 카메라 영상을 ROS2 토픽으로 수신하고,
                     비전 AI가 사람과 자물쇠 상태를 탐지한 뒤, 이벤트 로그를 FastAPI 서버로 집계합니다.
-                    이후 GPT-4o-mini가 Markdown 형식의 보안 리포트를 생성하고, React 대시보드에서 실시간 영상과 이벤트 로그를 확인하도록 구성했습니다.
+                    이후 GPT-4o가 Markdown 형식의 보안 리포트를 생성하고, React 대시보드에서 실시간 영상과 이벤트 로그를 확인하도록 구성했습니다.
                 </p>
                 <div class="figure-card">
                     <img src="./pjt3_pic/page06_solution.png" alt="NightWatch 솔루션 제안" class="project-figure">
@@ -343,8 +393,8 @@
                         <p>반경 <strong>3m</strong> 내 동일 좌표를 중복 감지로 판단해 동일 인물 재탐지로 인한 알림 도배를 제거했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>GPT-4o-mini 관제 리포트</h3>
-                        <p>사람 수, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 순찰 데이터로 구조화하고 GPT-4o-mini에 전달해 Markdown 보안 리포트를 생성했습니다.</p>
+                        <h3>GPT-4o 관제 리포트</h3>
+                        <p>사람 수, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 순찰 데이터로 구조화하고 GPT-4o에 전달해 Markdown 보안 리포트를 생성했습니다.</p>
                     </div>
                     <div class="sub-card">
                         <h3>React + Flask 대시보드</h3>
@@ -361,20 +411,80 @@
                 </p>
                 <div class="grid-2">
                     <div class="sub-card">
-                        <h3>비전 AI 파이프라인</h3>
-                        <p><strong>YOLO11n</strong>으로 사람/자물쇠 위치를 탐지하고, <strong>EfficientNet-B0</strong>로 locked/unlocked 상태를 분류하는 흐름을 구성했습니다.</p>
+                        <h3>탐지 · 분류</h3>
+                        <p>자물쇠는 <strong>YOLO11n 커스텀 학습</strong>, 사람은 COCO 사전학습 모델을 활용하고, <strong>EfficientNet-B0</strong>로 자물쇠 locked/unlocked 상태 분류를 구현했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>LLM 리포트 자동 생성</h3>
-                        <p>탐지 인원, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 LLM 입력 데이터로 구조화하고 Markdown 리포트 생성 흐름을 구현했습니다.</p>
+                        <h3>리포트 파이프라인</h3>
+                        <p>탐지 인원, 자물쇠 상태, 발생 시간, 추정 좌표, 캡처 이미지를 LLM 입력 데이터로 구조화하고 GPT 기반 관제 리포트 생성 파이프라인을 설계 · 구현했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>ROS-Web 통합</h3>
-                        <p>FastAPI/Flask 기반 REST API와 MJPEG 스트리밍 브릿지를 활용해 ROS 이벤트와 React 대시보드가 연동되는 구조를 구현했습니다.</p>
+                        <h3>프롬프트 설계</h3>
+                        <p>상황 요약 · 위험도 · 권장 조치가 포함되도록 <strong>Markdown 기반 리포트 출력 형식</strong>을 최적화했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>대시보드 리포트 표시</h3>
-                        <p>생성된 Markdown 리포트를 React-Markdown 팝업으로 표시해 관제자가 탐지 결과와 조치 제안을 바로 확인하도록 연결했습니다.</p>
+                        <h3>관제 기능 · 발표</h3>
+                        <p>Vision AI와 생성형 AI를 연계한 이상 상황 관제를 구현하고, 최종 프로젝트 성과를 발표했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>개발환경 및 AI Pipeline</h2>
+                <div class="grid-3 mb-5">
+                    <div class="sub-card">
+                        <h3>실행환경</h3>
+                        <p>Ubuntu 22.04 · ROS2 Humble<br>Gazebo · TurtleBot3 Waffle Pi<br>Python 3.10</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>AI 환경</h3>
+                        <p>Vision: YOLO11n, EfficientNet-B0<br>LLM: GPT-4o<br>PyTorch · OpenCV · CUDA 12.4</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>Backend &amp; Frontend</h3>
+                        <p>FastAPI + Flask<br>React 19 + Vite<br>SQLite</p>
+                    </div>
+                </div>
+                <div class="pipeline">
+                    <div class="pipeline-step">
+                        <span class="step-no">1</span>
+                        <h3>카메라 입력</h3>
+                        <p>로봇 카메라 실시간 영상으로 순찰 환경 모니터링</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">2</span>
+                        <h3>YOLO11n</h3>
+                        <p>자물쇠 탐지(커스텀 학습), 사람 감지(COCO 사전학습)</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">3</span>
+                        <h3>EfficientNet-B0</h3>
+                        <p>Crop한 자물쇠 상태 분류, 분류 확률(신뢰도) 출력</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">4</span>
+                        <h3>Vision 결과 구조화</h3>
+                        <p>탐지 · 분류 결과를 JSON 이벤트로 생성, FastAPI 수신 · 검증</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">5</span>
+                        <h3>GPT-4o 리포트 생성</h3>
+                        <p>이벤트 데이터 기반 프롬프트로 이상 상황 분석</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">6</span>
+                        <h3>Markdown 변환</h3>
+                        <p>GPT 출력을 Markdown 리포트 형식으로 변환</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">7</span>
+                        <h3>리포트 저장</h3>
+                        <p>SQLite에 이벤트 · 이미지 · 이력 저장</p>
+                    </div>
+                    <div class="pipeline-step is-final">
+                        <span class="step-no">8</span>
+                        <h3>React 대시보드</h3>
+                        <p>실시간 이상 상황 자동 감지 · 리포트 확인</p>
                     </div>
                 </div>
             </section>
@@ -436,7 +546,7 @@
                         <p>YOLO11n으로 사람과 자물쇠 영역을 빠르게 탐지하고, Crop된 자물쇠 이미지를 EfficientNet-B0로 분류했습니다.</p>
                     </div>
                     <div class="sub-card">
-                        <h3>GPT-4o-mini + React-Markdown</h3>
+                        <h3>GPT-4o + React-Markdown</h3>
                         <p>이벤트 로그와 이미지를 바탕으로 보안관제사 스타일의 Markdown 리포트를 생성하고 대시보드에서 바로 렌더링하기 위해 사용했습니다. 출력 포맷을 고정해 리포트 품질의 일관성을 확보했습니다.</p>
                     </div>
                 </div>
@@ -446,7 +556,24 @@
                 <h2>주요 문제 해결 사례</h2>
                 <div class="space-y-4">
                     <div class="problem-card">
-                        <p class="problem-title">문제 1. 2D 카메라 탐지를 맵 좌표로 변환해야 함</p>
+                        <p class="problem-title">문제 1. 객체 탐지만으로는 자물쇠 잠금/해제 상태 판별에 한계</p>
+                        <p>
+                            <strong>상황:</strong> YOLO11n만으로는 자물쇠의 <strong>잠금(locked) / 해제(unlocked)</strong> 상태를 정확하게 판별하기 어려웠습니다.
+                            Detection 모델은 객체 위치 탐지에는 적합하지만 세부 상태 구분에는 한계가 있었고, 가상환경 특성상 작은 객체와 다양한 시점 변화로 오분류가 발생했습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 자물쇠 탐지(YOLO11n, 1클래스 커스텀 학습) → Bounding Box 추출 → <strong>Crop 이미지를 EfficientNet-B0에 입력</strong>하는
+                            <strong>Detection + Classification 2단계 파이프라인</strong>을 설계하고, Transfer Learning 기반 상태 분류 모델을 적용했습니다.
+                            사람 감지는 COCO 사전학습 YOLO11n을 추가 학습 없이 활용했습니다.
+                            데이터는 분류 <strong>719장</strong>(locked 363 / unlocked 356, 균형 구성), 탐지 <strong>327장</strong>으로 구성했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>결과: Detection과 Classification의 역할 분리로 자물쇠 탐지 mAP50 <strong>0.995</strong>(검증 65장), 상태 분류 검증 정확도 <strong>100%</strong>(검증 144장)를 기록했습니다. (가상환경 기준)</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 2. 2D 카메라 탐지를 맵 좌표로 변환해야 함</p>
                         <p>
                             <strong>상황:</strong> 카메라에서 사람을 감지해도 단순 bounding box만으로는 순찰 맵의 어느 위치에서 이벤트가 발생했는지 알 수 없었습니다.
                             관제 리포트와 대시보드에 의미 있는 위치 정보를 남기려면 카메라 좌표를 map 좌표계의 추정 좌표로 변환해야 했습니다.
@@ -457,7 +584,7 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 2. 동일 인물 재탐지로 알림이 반복 발생함</p>
+                        <p class="problem-title">문제 3. 동일 인물 재탐지로 알림이 반복 발생함</p>
                         <p>
                             <strong>상황:</strong> 같은 사람이 카메라에 계속 잡히면 매 프레임마다 새로운 이벤트로 기록되어 알림이 반복될 수 있었습니다.
                         </p>
@@ -470,7 +597,7 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 3. ROS 카메라 토픽을 웹에서 실시간으로 확인해야 함</p>
+                        <p class="problem-title">문제 4. ROS 카메라 토픽을 웹에서 실시간으로 확인해야 함</p>
                         <p>
                             <strong>상황:</strong> ROS2 카메라 토픽은 로봇 내부 데이터 흐름에는 적합하지만, 웹 대시보드에서 바로 표시하기에는 변환 계층이 필요했습니다.
                         </p>
@@ -481,14 +608,14 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 4. 탐지 로그를 관제자가 바로 읽을 수 있는 보고서로 바꿔야 함</p>
+                        <p class="problem-title">문제 5. 탐지 로그를 관제자가 바로 읽을 수 있는 보고서로 바꿔야 함</p>
                         <p>
                             <strong>상황:</strong> 사람 감지, 자물쇠 상태, 추정 좌표, 캡처 이미지는 각각 의미 있는 데이터였지만,
                             단순 로그 형태로는 관제자가 후속 조치를 빠르게 판단하기 어려웠습니다.
                         </p>
                         <p>
                             <strong>해결:</strong> 이벤트 로그를 LLM 입력 데이터로 구조화하고,
-                            GPT-4o-mini 프롬프트에 <strong>경고 사항 / 관리자 조치 제안 / 결론</strong> 형식을 명시했습니다.
+                            GPT-4o 프롬프트에 <strong>경고 사항 / 관리자 조치 제안 / 결론</strong> 형식을 명시했습니다.
                             생성된 Markdown 리포트는 <strong>/api/report</strong>로 저장한 뒤 React-Markdown 팝업으로 렌더링했습니다.
                         </p>
                         <div class="key-point">
@@ -497,7 +624,7 @@
                     </div>
 
                     <div class="problem-card">
-                        <p class="problem-title">문제 5. 외부 서버 배포 환경에서 ROS2 실시간 제어/스트리밍 연동이 제한됨</p>
+                        <p class="problem-title">문제 6. 외부 서버 배포 환경에서 ROS2 실시간 제어/스트리밍 연동이 제한됨</p>
                         <p>
                             <strong>상황:</strong> 초기에는 React 대시보드와 FastAPI 서버를 외부 도메인에서 동작시키고,
                             사용자가 웹에서 순찰 시작/중지, 실시간 영상 확인, 리포트 조회까지 수행하는 구조를 고려했습니다.
@@ -527,15 +654,33 @@
                     </p>
                 </div>
                 <div class="figure-card">
-                    <img src="./pjt3_pic/page14_report.png" alt="GPT-4o-mini 관제 리포트 생성 흐름" class="project-figure">
+                    <img src="./pjt3_pic/page14_report.png" alt="GPT-4o 관제 리포트 생성 흐름" class="project-figure">
                     <p class="figure-caption">
-                        리포트 생성 근거: 이벤트 로그를 FastAPI에서 구조화 JSON으로 변환하고, GPT-4o-mini가 Markdown 보안 리포트를 생성했습니다.
+                        리포트 생성 근거: 이벤트 로그를 FastAPI에서 구조화 JSON으로 변환하고, GPT-4o가 Markdown 보안 리포트를 생성했습니다.
                     </p>
                 </div>
             </section>
 
             <section class="card">
                 <h2>성과</h2>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <span class="impact-value">0.995</span>
+                        <span class="impact-label">자물쇠 탐지 mAP50 (YOLO11n) · 검증 65장</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">0.834</span>
+                        <span class="impact-label">자물쇠 탐지 mAP50-95</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">100%</span>
+                        <span class="impact-label">상태 분류 Best Val Accuracy (EfficientNet-B0) · 검증 144장</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">719 / 327장</span>
+                        <span class="impact-label">분류 / 탐지 학습 데이터 (가상환경)</span>
+                    </div>
+                </div>
                 <div class="impact-grid">
                     <div class="impact-card">
                         <span class="impact-value">중복 알림 제거</span>
@@ -547,7 +692,7 @@
                     </div>
                     <div class="impact-card">
                         <span class="impact-value">리포트 자동 생성</span>
-                        <span class="impact-label">GPT-4o-mini 기반 Markdown 보안 리포트 생성</span>
+                        <span class="impact-label">GPT-4o 기반 Markdown 보안 리포트 생성</span>
                     </div>
                     <div class="impact-card">
                         <span class="impact-value">실시간 관제 연결</span>
@@ -583,6 +728,26 @@
                     추후에는 <strong>ROSBridge/WebSocket, WebRTC 스트리밍, Docker Compose 통합 실행, Nginx reverse proxy</strong>를 적용해
                     로봇 시스템도 외부 접속 가능한 구조로 개선해보고 싶습니다.
                 </p>
+                <div class="grid-2 mt-5">
+                    <div class="sub-card">
+                        <h3>모델 성능의 한계</h3>
+                        <ul class="list-disc list-inside">
+                            <li>가상환경(Gazebo) 데이터로 학습해 실제 환경 일반화 성능 검증에 한계</li>
+                            <li>별도 test set 없이 검증 데이터로 최적 epoch를 선택해 수치가 낙관적일 수 있음</li>
+                        </ul>
+                    </div>
+                    <div class="sub-card">
+                        <h3>개선 방안</h3>
+                        <ul class="list-disc list-inside">
+                            <li>실제 환경 데이터 추가 및 train/val/test 3분할 재평가</li>
+                            <li>다양한 LLM · Prompt 전략 비교로 리포트 품질 고도화</li>
+                            <li>RAG 기반 외부 지식 연계로 상황 분석 정확도 향상</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <p>깨달은 점: Vision AI와 생성형 AI를 잇는 <strong>데이터 구조 설계</strong>가 서비스 품질을 결정하며, 객체 탐지와 상태 분류를 <strong>분리한 모델 설계</strong>가 정확도 향상에 효과적이었습니다.</p>
+                </div>
             </section>
         </div>
     </main>

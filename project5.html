@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국립중앙박물관 AI 도슨트 - 프로젝트 상세</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --page-bg: #ffffff;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --line: #e5e7eb;
+            --line-strong: #d1d5db;
+            --text: #111827;
+            --muted: #4b5563;
+            --subtle: #6b7280;
+            --accent: #2563eb;
+            --green: #047857;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            min-height: 100vh;
+            background: var(--page-bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        nav {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        .back-link {
+            color: var(--subtle);
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .hero {
+            padding: 4rem 0 2.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        h2::before {
+            content: "";
+            width: 0.45rem;
+            height: 1.35rem;
+            border-radius: 999px;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        p, li {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        strong { color: var(--text); }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .meta-card,
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .meta-label {
+            color: var(--green);
+            font-size: 0.82rem;
+            font-weight: 900;
+            margin-bottom: 0.45rem;
+        }
+
+        .meta-value {
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .section-stack {
+            padding: 3rem 0;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .sub-card,
+        .problem-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .problem-title {
+            color: var(--accent);
+            font-weight: 900;
+            margin-bottom: 0.65rem;
+        }
+
+        .highlight {
+            color: var(--text);
+            font-weight: 900;
+            background: linear-gradient(transparent 60%, #dbeafe 60%);
+        }
+
+        .key-point {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            background: #ecfdf5;
+        }
+
+        .key-point p {
+            color: #065f46;
+            font-weight: 800;
+            line-height: 1.7;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.38rem 0.68rem;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: #f3f4f6;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .grid-2,
+        .grid-3 {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .impact-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+            background: var(--surface-soft);
+        }
+
+        .impact-value {
+            display: block;
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .impact-label {
+            display: block;
+            margin-top: 0.35rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            line-height: 1.5;
+        }
+
+        .figure-card {
+            margin-top: 1.25rem;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .project-figure {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            padding: 0.9rem 1rem;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pipeline-step {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .pipeline-step.is-final {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .step-no {
+            display: inline-grid;
+            place-items: center;
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-bottom: 0.5rem;
+            border-radius: 999px;
+            background: var(--green);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .pipeline-step h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .pipeline-step p {
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
+        .pipeline.steps-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+        footer { border-top: 1px solid var(--line); }
+
+        @media (max-width: 768px) {
+            .meta-grid,
+            .grid-2,
+            .grid-3,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline,
+            .pipeline.steps-5 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col">
+    <nav>
+        <div class="max-w-4xl mx-auto w-full px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-wide">GEONJAE</a>
+            <a href="index.html#mini-projects" class="back-link inline-flex items-center gap-2">&larr; 프로젝트 목록</a>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto w-full px-6 flex-grow">
+        <header class="hero">
+            <p class="eyebrow">Mini Project 02 · 팀장</p>
+            <h1>국립중앙박물관 AI 도슨트</h1>
+            <p class="mt-5 text-lg text-gray-500">
+                유물을 카메라로 비추면 자동으로 인식하고, 관람객 유형(어린이 / 일반 / 전문가)별
+                <strong>맞춤 해설과 공식 데이터 기반 실시간 Q&amp;A</strong>를 제공하는 AI 도슨트입니다.
+            </p>
+
+            <div class="meta-grid">
+                <div class="meta-card">
+                    <p class="meta-label">프로젝트 기간 · 팀 구성</p>
+                    <p class="meta-value">2026.09 ~ 2026.10 · 5인 프로젝트 (팀장)</p>
+                    <p class="meta-label mt-4">담당 영역</p>
+                    <p class="meta-value">PM · 데이터셋 구축 · 서비스 통합 · LLM 평가 설계</p>
+                </div>
+                <div class="meta-card">
+                    <p class="meta-label">사용 기술</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag">EfficientNet-B0</span>
+                        <span class="tag">Ollama (EXAONE-3.5)</span>
+                        <span class="tag">GGUF Q4_K_M</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">React + Vite</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="section-stack">
+            <section class="card">
+                <h2>프로젝트 목표</h2>
+                <p>
+                    박물관의 설명 카드만으로는 관람객의 눈높이에 맞춘 해설이 어렵고, 궁금한 점이 생겨도 바로 물어볼 곳이 없습니다.
+                    카메라 인식과 로컬 LLM을 결합해 <span class="highlight">관람객마다 다른 수준의 해설과 즉각적인 질의응답</span>을 제공하는 것을 목표로 했습니다.
+                </p>
+                <div class="key-point">
+                    <p>목표 요약: <strong>유물 인식(7종)</strong> → <strong>관람객 유형별 해설</strong> → <strong>공식 데이터 기반 챗봇</strong>.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>AI Pipeline</h2>
+                <div class="pipeline steps-5">
+                    <div class="pipeline-step">
+                        <span class="step-no">1</span>
+                        <h3>유형 선택</h3>
+                        <p>어린이 / 일반 / 전문가</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">2</span>
+                        <h3>유물 인식</h3>
+                        <p>카메라 촬영 → EfficientNet-B0 인식, artifact_id 반환</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">3</span>
+                        <h3>해설 생성</h3>
+                        <p>공식 데이터(GOLD) 조회 → 유형별 해설 (사전 생성본 캐시)</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">4</span>
+                        <h3>결과 화면</h3>
+                        <p>유물 정보 · AI 해설 표시</p>
+                    </div>
+                    <div class="pipeline-step is-final">
+                        <span class="step-no">5</span>
+                        <h3>챗봇 Q&amp;A</h3>
+                        <p>로컬 LLM이 공식 데이터에 근거해 답변</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>역할 및 기여도</h2>
+                <p class="mb-4">
+                    5인 팀의 <strong>팀장</strong>으로 일정과 협업 규칙을 정하고, 데이터셋 구축부터 서비스 통합, LLM 평가 설계까지 맡았습니다.
+                </p>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>일정 · 협업</h3>
+                        <p>Git 브랜치 전략과 PR 리뷰 규칙을 수립해 5인 협업 흐름을 정리했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>데이터셋 구축</h3>
+                        <p><strong>Blender synthetic 1,416장 + 실사 66장</strong>을 확보하고, 과적합 방지를 위해 실사 이미지는 val/test 위주로 배치했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>서비스 통합</h3>
+                        <p>Vision · RAG · LLM · API를 하나의 서비스 흐름으로 통합했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>LLM 평가 설계</h3>
+                        <p><strong>팩트체크 · 교차 평가 · 외부 심판 · 사람 블라인드</strong> 4가지 평가를 설계하고 실행했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>주요 문제 해결 사례</h2>
+                <div class="space-y-4">
+                    <div class="problem-card">
+                        <p class="problem-title">문제 1. 로컬 LLM이 한국어 질문에 중국어를 섞거나 엉뚱하게 답변</p>
+                        <p>
+                            <strong>상황:</strong> 직접 양자화(GGUF Q4_K_M)한 로컬 LLM이 한국어 질문에 중국어를 섞거나 질문과 무관한 답을 생성했습니다.
+                        </p>
+                        <p>
+                            <strong>원인:</strong> Ollama 등록 시 채팅 템플릿을 지정하지 않아, 모델이 기대하는 입력 형식(ChatML)과 실제 입력이 일치하지 않았습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 토크나이저 설정을 확인해 올바른 템플릿을 Modelfile에 명시한 뒤 재등록했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>결과: 한국어 응답이 정상화되었고, 신규 모델을 추가할 때 <strong>템플릿을 먼저 확인하는 절차</strong>를 팀 규칙으로 수립했습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 2. 로컬 모델끼리 서로 채점하면 평가 결과를 믿기 어려움</p>
+                        <p>
+                            <strong>상황:</strong> 여러 로컬 LLM의 답변 품질을 비교하기 위해 모델끼리 교차 채점을 시켰더니, 자기가 만든 오답에도 후한 점수를 주는 경향이 나타났습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 교차 평가에만 의존하지 않고 <strong>팩트체크, 외부 중립 심판, 사람 블라인드 평가</strong>를 함께 설계해 결과를 교차 검증했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>배운 점: LLM 평가에는 <strong>자기 선호 편향</strong>이 있어, 중립 심판과 사람 블라인드 평가를 함께 봐야 신뢰할 수 있는 결론이 나옵니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>성과</h2>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <span class="impact-value">99.61%</span>
+                        <span class="impact-label">Vision 인식 정확도 (테스트 257장 중 256장, macro F1 99.63%)</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">53 / 54</span>
+                        <span class="impact-label">실사 촬영 정답, 유일한 오답은 신뢰도 0.28로 임계값(0.60)에서 재촬영 요청</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">3.5~4.3초</span>
+                        <span class="impact-label">LLM 평균 응답속도 (로컬 모델 4종 비교 기준)</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">1,482장</span>
+                        <span class="impact-label">Synthetic 1,416장 + 실사 66장 데이터셋</span>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <p>핵심 성과: 신뢰도 임계값으로 불확실한 인식은 재촬영을 요청하도록 설계해, 잘못된 유물 해설이 노출되지 않도록 했습니다.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>회고</h2>
+                <p>
+                    팀장으로서 가장 크게 배운 점은 <strong>"측정 방법을 먼저 정해야 결론을 믿을 수 있다"</strong>는 것입니다.
+                    Vision 쪽은 synthetic 데이터로 학습하되 실사 데이터를 val/test에 배치해 실제 환경 성능을 따로 확인했고,
+                    LLM 쪽은 4가지 평가를 병행해 한 가지 평가 방식의 편향에 결론이 휘둘리지 않도록 했습니다.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full px-6 py-8 text-center">
+        <p class="text-xs text-gray-500">© 2026 강건재 Personal Portfolio</p>
+    </footer>
+</body>
+</html>

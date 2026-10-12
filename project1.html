@@ -409,6 +409,93 @@
             line-height: 1.7;
         }
 
+        .env-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pipeline-step {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .pipeline-step.is-final {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .step-no {
+            display: inline-grid;
+            place-items: center;
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-bottom: 0.5rem;
+            border-radius: 999px;
+            background: var(--green);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .pipeline-step h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .pipeline-step p {
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .data-table {
+            width: 100%;
+            min-width: 40rem;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+
+        .data-table th {
+            padding: 0.75rem;
+            background: var(--surface-soft);
+            color: var(--text);
+            font-weight: 900;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .data-table td {
+            padding: 0.75rem;
+            color: var(--muted);
+            line-height: 1.6;
+            vertical-align: top;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .data-table tr:last-child td { border-bottom: 0; }
+
+        .data-table .result-bad {
+            color: #b91c1c;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
         footer { border-top: 1px solid var(--line); }
 
         @media (max-width: 768px) {
@@ -416,8 +503,13 @@
             .role-grid,
             .tech-grid,
             .impact-grid,
-            .tuning-layout {
+            .tuning-layout,
+            .env-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .pipeline {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .plot-area {
@@ -445,8 +537,10 @@
 
             <div class="meta-grid">
                 <div class="meta-card">
-                    <p class="meta-label">프로젝트 기간</p>
-                    <p class="meta-value">2025.10</p>
+                    <p class="meta-label">프로젝트 기간 · 팀 구성</p>
+                    <p class="meta-value">2025.10 · 4인 프로젝트</p>
+                    <p class="meta-label mt-4">담당 영역</p>
+                    <p class="meta-value">AI Model Fine-tuning · Data Analysis</p>
                 </div>
                 <div class="meta-card">
                     <p class="meta-label">사용 기술</p>
@@ -455,8 +549,12 @@
                         <span class="tag">PyTorch</span>
                         <span class="tag">Unsloth</span>
                         <span class="tag">LoRA/QLoRA</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">PEFT</span>
+                        <span class="tag">Bitsandbytes</span>
                         <span class="tag">Pixabay API</span>
                         <span class="tag">4-bit Quantization</span>
+                        <span class="tag">Prompting</span>
                     </div>
                 </div>
             </div>
@@ -504,6 +602,66 @@
                     <div class="sub-card">
                         <h3>균등 샘플링 로더</h3>
                         <p>정답 보기 <strong>a~d가 동일한 비율</strong>로 추출되도록 샘플링 로더를 구성해 보기 분포 편향을 완화했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>개발환경 및 AI Pipeline</h2>
+                <div class="env-grid">
+                    <div class="sub-card">
+                        <h3>실행환경</h3>
+                        <p>Google Colab 단일 GPU<br>Python 3.11 · Jupyter Notebook</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>주요 라이브러리</h3>
+                        <p>PyTorch · Transformers · PEFT<br>Pandas · Bitsandbytes · Accelerate · Pillow</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>사용 모델</h3>
+                        <p>Qwen3-VL-8B<br>(Unsloth 4-bit + LoRA)</p>
+                    </div>
+                </div>
+                <div class="pipeline">
+                    <div class="pipeline-step">
+                        <span class="step-no">1</span>
+                        <h3>데이터 준비</h3>
+                        <p>train/test.csv 로드, 이미지 경로 · 질문 · 보기 · 정답 정리</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">2</span>
+                        <h3>프롬프트 구성</h3>
+                        <p>SYSTEM_INSTRUCT + 질문 · 보기 4개, VQAMCDataset → messages 변환</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">3</span>
+                        <h3>Processor 처리</h3>
+                        <p>apply_chat_template()로 input_ids · pixel_values · labels 생성</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">4</span>
+                        <h3>모델 파인튜닝</h3>
+                        <p>LoRA + 4-bit Quantization, batch=1 · Gradient Accumulation=4</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">5</span>
+                        <h3>검증</h3>
+                        <p>valid_loader 평가 · Loss 모니터링, LoRA Adapter · Processor 저장</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">6</span>
+                        <h3>추론</h3>
+                        <p>test.csv 순회하며 model.generate() 실행</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">7</span>
+                        <h3>후처리</h3>
+                        <p>extract_choice()로 a/b/c/d 선택지 추출</p>
+                    </div>
+                    <div class="pipeline-step is-final">
+                        <span class="step-no">8</span>
+                        <h3>최종 결과</h3>
+                        <p>submission.csv 생성, <strong>Accuracy 0.96296</strong></p>
                     </div>
                 </div>
             </section>
@@ -701,6 +859,53 @@
                             <p>핵심 판단: 구체적인 절감률을 과장하지 않고, OOM 없이 반복 실험 가능한 파이프라인 확보에 초점.</p>
                         </div>
                     </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 6. 프롬프트를 바꿔도 성능이 오르지 않거나 오히려 감소함</p>
+                        <p class="mb-3">
+                            <strong>상황:</strong> 추론 단계에서 다양한 프롬프트 전략을 실험했지만, 정확도가 개선되지 않거나 오히려 떨어지는 경우가 발생했습니다.
+                            각 실험의 원인을 분석해 프롬프트의 실제 효과 범위를 검증했습니다.
+                        </p>
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>실험</th>
+                                        <th>예시</th>
+                                        <th>결과</th>
+                                        <th>원인</th>
+                                        <th>대응</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>이미지 · 텍스트를 자세히 보도록 지시</strong></td>
+                                        <td>"이미지, 텍스트를 자세하게 보고 답변하세요"</td>
+                                        <td class="result-bad">성능 저하</td>
+                                        <td>질문과 무관한 객체까지 함께 고려해 핵심 특징을 놓침</td>
+                                        <td>질문과 보기 중심으로 추론하도록 프롬프트 간소화</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>가장 높은 확률의 보기 선택</strong></td>
+                                        <td>"확실치 않을 때는, 보기의 확률이 가장 높은 것을 선택"</td>
+                                        <td class="result-bad">향상 없음</td>
+                                        <td>질문과 무관한 객체의 확률이 높아 오답 발생</td>
+                                        <td>추론 방식을 강제하지 않고 기본 프롬프트 유지</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Few-shot 추가</strong></td>
+                                        <td>질문 · 보기 · 정답 예시 2건을 프롬프트에 포함</td>
+                                        <td class="result-bad">향상 없음</td>
+                                        <td>사전 학습된 프롬프트 패턴으로 예시 추가 효과가 제한적</td>
+                                        <td>출력 형식 일관성 유지 용도로 활용</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="key-point">
+                            <p>핵심 결론: 프롬프트는 <strong>출력 형식의 일관성 유지</strong>에만 효과가 있었고, 정확도 향상에는 <strong>데이터 품질 개선과 모델 파인튜닝</strong>이 더 큰 영향을 줌.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -724,17 +929,17 @@
                         <span class="impact-label">최종 활용 모델 규모</span>
                     </div>
                     <div class="impact-card">
-                        <span class="impact-value">245팀</span>
+                        <span class="impact-value">254팀</span>
                         <span class="impact-label">전체 참가 팀 규모</span>
                     </div>
                 </div>
                 <div class="key-point">
-                    <p>핵심 성과: 다양한 VLM 후보 비교와 Qwen3-VL-8B LoRA/QLoRA 파인튜닝을 반복하고, 데이터 편향 보정과 학습 조건 최적화를 결합해 <strong>전체 245팀 중 지역 2위, 전국 11위</strong> 달성.</p>
+                    <p>핵심 성과: 다양한 VLM 후보 비교와 Qwen3-VL-8B LoRA/QLoRA 파인튜닝을 반복하고, 데이터 편향 보정과 학습 조건 최적화를 결합해 <strong>전체 254팀 중 지역 2위, 전국 11위</strong> 달성.</p>
                 </div>
                 <div class="figure-card">
                     <img src="./pjt1_pic/333.png" alt="최종 리더보드 11위 달성 화면" class="project-figure">
                     <p class="figure-caption">
-                        최종 리더보드 결과: <strong>C026_OBYG</strong> 팀으로 <strong>전체 245팀 중 지역 2위, 전국 11위</strong>를 기록했고,
+                        최종 리더보드 결과: <strong>C026_OBYG</strong> 팀으로 <strong>전체 254팀 중 지역 2위, 전국 11위</strong>를 기록했고,
                         팀 최종 베스트 점수는 <strong>0.96296</strong>입니다.
                     </p>
                 </div>
@@ -750,6 +955,19 @@
                     특히 Pixabay API 기반 이미지 수집과 Q&A 자동 생성 파이프라인을 만들며, 좋은 파인튜닝 결과를 얻기 위해서는 모델 선택만큼 학습 데이터의 분포와 품질이 중요하다는 점을 체감했습니다.
                     이후 프로젝트에서도 먼저 데이터의 맥락을 확인하고, 모델이 어떤 근거로 판단하는지 추적하는 습관을 갖게 되었습니다.
                 </p>
+                <div class="role-grid mt-5">
+                    <div class="sub-card">
+                        <h3>아쉬웠던 부분</h3>
+                        <p>GPU 자원의 제약으로 더 큰 모델과 다양한 하이퍼파라미터 조합을 충분히 실험하지 못했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>개선 방안</h3>
+                        <p>더 다양한 Vision-Language Model과 데이터 증강 기법을 적용해 일반화 성능을 비교 · 검증하고 싶습니다.</p>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <p>깨달은 점: 많은 실험보다 <strong>원인을 분석하고 가설을 검증하는 과정</strong>이 성능 개선에 더 중요했습니다.</p>
+                </div>
             </section>
         </div>
     </main>

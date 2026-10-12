@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cart AI 비전 스마트 마트카트 - 프로젝트 상세</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --page-bg: #ffffff;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --line: #e5e7eb;
+            --line-strong: #d1d5db;
+            --text: #111827;
+            --muted: #4b5563;
+            --subtle: #6b7280;
+            --accent: #2563eb;
+            --green: #047857;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            min-height: 100vh;
+            background: var(--page-bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        nav {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        .back-link {
+            color: var(--subtle);
+            font-weight: 700;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .hero {
+            padding: 4rem 0 2.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        h2::before {
+            content: "";
+            width: 0.45rem;
+            height: 1.35rem;
+            border-radius: 999px;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        p, li {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        strong { color: var(--text); }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .meta-card,
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .meta-label {
+            color: var(--green);
+            font-size: 0.82rem;
+            font-weight: 900;
+            margin-bottom: 0.45rem;
+        }
+
+        .meta-value {
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .section-stack {
+            padding: 3rem 0;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .sub-card,
+        .problem-card {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .problem-title {
+            color: var(--accent);
+            font-weight: 900;
+            margin-bottom: 0.65rem;
+        }
+
+        .highlight {
+            color: var(--text);
+            font-weight: 900;
+            background: linear-gradient(transparent 60%, #dbeafe 60%);
+        }
+
+        .key-point {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            background: #ecfdf5;
+        }
+
+        .key-point p {
+            color: #065f46;
+            font-weight: 800;
+            line-height: 1.7;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.38rem 0.68rem;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: #f3f4f6;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .grid-2,
+        .grid-3 {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .impact-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+            background: var(--surface-soft);
+        }
+
+        .impact-value {
+            display: block;
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .impact-label {
+            display: block;
+            margin-top: 0.35rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+            line-height: 1.5;
+        }
+
+        .figure-card {
+            margin-top: 1.25rem;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .project-figure {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            padding: 0.9rem 1rem;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pipeline-step {
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .pipeline-step.is-final {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .step-no {
+            display: inline-grid;
+            place-items: center;
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-bottom: 0.5rem;
+            border-radius: 999px;
+            background: var(--green);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .pipeline-step h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .pipeline-step p {
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
+        .pipeline.steps-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+        footer { border-top: 1px solid var(--line); }
+
+        @media (max-width: 768px) {
+            .meta-grid,
+            .grid-2,
+            .grid-3,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline,
+            .pipeline.steps-5 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col">
+    <nav>
+        <div class="max-w-4xl mx-auto w-full px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-wide">GEONJAE</a>
+            <a href="index.html#mini-projects" class="back-link inline-flex items-center gap-2">&larr; 프로젝트 목록</a>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto w-full px-6 flex-grow">
+        <header class="hero">
+            <p class="eyebrow">Mini Project 01</p>
+            <h1>Smart Cart AI 비전 기반 스마트 마트카트</h1>
+            <p class="mt-5 text-lg text-gray-500">
+                카메라로 상품을 인식해 <strong>장바구니 금액을 실시간으로 계산</strong>하고,
+                보유 재료로 만들 수 있는 <strong>요리와 부족 재료를 추천</strong>하는 서비스입니다.
+            </p>
+
+            <div class="meta-grid">
+                <div class="meta-card">
+                    <p class="meta-label">프로젝트 기간 · 팀 구성</p>
+                    <p class="meta-value">2026.09 · 5인 (주제 · 데이터 수집 공동 진행 → 이후 개인 개발)</p>
+                    <p class="meta-label mt-4">담당 영역</p>
+                    <p class="meta-value">Backend · Vision AI 통합</p>
+                </div>
+                <div class="meta-card">
+                    <p class="meta-label">사용 기술</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag">YOLOv8n</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">React</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Roboflow</span>
+                        <span class="tag">Uvicorn</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="section-stack">
+            <section class="card">
+                <h2>프로젝트 목표</h2>
+                <p>
+                    1인 가구 증가와 물가 상승으로 장보기 예산 부담이 커지고, 구매한 재료를 다 활용하지 못하는 문제가 생깁니다.
+                    카메라로 담은 상품을 자동으로 인식해 금액을 바로 보여주고, 보유 재료 기반 요리를 추천해 <span class="highlight">예산 관리와 재료 활용을 함께 돕는 것</span>을 목표로 했습니다.
+                </p>
+                <div class="key-point">
+                    <p>목표 요약: <strong>상품 인식</strong> → <strong>자동 장바구니 등록</strong> → <strong>실시간 금액 계산</strong> → <strong>요리 · 부족 재료 추천</strong>.</p>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>핵심 기능</h2>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>상품 탐지 · 자동 장바구니 등록</h3>
+                        <p>YOLOv8n으로 <strong>상품 10종</strong>을 인식하고, 탐지가 확정되면 장바구니에 자동 등록합니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>수량 · 총 금액 실시간 계산</h3>
+                        <p>상품 · 가격 DB를 기반으로 수량과 총 금액을 즉시 갱신합니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>보유 식재료 기반 요리 추천</h3>
+                        <p>장바구니에 담긴 재료로 만들 수 있는 <strong>요리 5종</strong>을 추천합니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>부족 재료 자동 안내</h3>
+                        <p>요리별 필요 재료와 보유 재료를 비교해 부족한 재료를 자동으로 알려줍니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>AI Pipeline</h2>
+                <div class="pipeline steps-5">
+                    <div class="pipeline-step">
+                        <span class="step-no">1</span>
+                        <h3>웹 카메라</h3>
+                        <p>React에서 프레임 캡처</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">2</span>
+                        <h3>FastAPI /detect</h3>
+                        <p>JPEG 프레임을 순차 전송</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">3</span>
+                        <h3>YOLOv8n 탐지</h3>
+                        <p>상품별 신뢰도 임계값 + 1초 유지 확인</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <span class="step-no">4</span>
+                        <h3>장바구니 API</h3>
+                        <p>SQLite 저장 · 수량 · 금액 계산</p>
+                    </div>
+                    <div class="pipeline-step is-final">
+                        <span class="step-no">5</span>
+                        <h3>요리 추천</h3>
+                        <p>보유 재료 비교 · 부족 재료 안내</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>역할 및 기여도</h2>
+                <p class="mb-4">
+                    5인이 주제 선정과 데이터 수집을 함께 진행한 뒤 개인 개발로 이어졌고,
+                    저는 <strong>YOLO 탐지 결과를 실제 서비스로 연결하는 백엔드와 전체 흐름</strong>을 맡았습니다.
+                </p>
+                <div class="grid-2">
+                    <div class="sub-card">
+                        <h3>FastAPI Backend 설계</h3>
+                        <p>YOLO 탐지 결과를 받아 장바구니 · 추천 기능으로 연결하는 API를 설계했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>DB 구조 · 금액 계산</h3>
+                        <p>상품 · 가격 DB 구조를 설계하고 수량 · 총 금액 계산 로직을 구현했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>요리 추천 · 부족 재료 추출</h3>
+                        <p>보유 재료를 분석하는 요리 추천 로직과, 필요 · 보유 재료 비교로 부족 재료를 자동 추출하는 로직을 구현했습니다.</p>
+                    </div>
+                    <div class="sub-card">
+                        <h3>전체 흐름 설계</h3>
+                        <p><strong>Camera → YOLO → FastAPI → DB → UI</strong>로 이어지는 서비스 흐름 전체를 설계했습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>주요 문제 해결 사례</h2>
+                <div class="space-y-4">
+                    <div class="problem-card">
+                        <p class="problem-title">문제 1. 오탐이 곧 장바구니 금액 오류로 이어짐</p>
+                        <p>
+                            <strong>상황:</strong> 카메라에 상품이 잠깐 스치거나 비슷한 상품이 잘못 인식되면, 장바구니에 잘못된 상품이 담겨 금액이 틀어집니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> 상품별 <strong>신뢰도 임계값</strong>을 튜닝하고, 같은 상품이 <strong>1초 이상 유지</strong>될 때만 장바구니에 등록하도록 했습니다.
+                            Recall을 일부 포기하더라도 Precision을 우선하는 운영 기준을 택했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>결과: 운영 기준 <strong>Precision 94.70%</strong> (Recall 57.66%, mAP50 82.20%)로 장바구니 금액 오류를 최소화했습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="problem-card">
+                        <p class="problem-title">문제 2. FastAPI 실행 시 ASGI Application 로딩 오류</p>
+                        <p>
+                            <strong>상황:</strong> <code>uvicorn main:app</code> 실행 시 <code>Attribute "app" not found in module "main"</code> 오류가 발생했습니다.
+                        </p>
+                        <p>
+                            <strong>원인:</strong> main.py 내 FastAPI 인스턴스(app) 선언과 엔트리포인트 모듈 구조에 문제가 있었습니다.
+                        </p>
+                        <p>
+                            <strong>해결:</strong> FastAPI 인스턴스를 올바르게 선언하고 모듈 구조를 정리해 정상 실행되도록 했습니다.
+                        </p>
+                        <div class="key-point">
+                            <p>배운 점: Uvicorn이 Python 모듈과 FastAPI Application 객체를 어떻게 로딩하는지 구조를 이해했습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>성과</h2>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <span class="impact-value">94.70%</span>
+                        <span class="impact-label">Precision (임계값 튜닝 후 운영 기준)</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">57.66%</span>
+                        <span class="impact-label">Recall (정밀도 우선 전략)</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">82.20%</span>
+                        <span class="impact-label">mAP50</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">10 + 5</span>
+                        <span class="impact-label">상품 10종 인식 + 요리 5종 추천 로직 통합</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>회고</h2>
+                <p>
+                    증강과 하이퍼파라미터를 늘려도 성능이 비례해서 좋아지지는 않았습니다.
+                    오히려 <strong>서비스 목표(정밀도 우선)에 맞는 운영 지표를 고르는 것</strong>이 더 중요하다는 것을 확인했습니다.
+                    장바구니 서비스에서는 놓친 상품보다 잘못 담긴 상품이 사용자 신뢰를 더 크게 떨어뜨리기 때문에, 정밀도 우선 전략으로 오탐을 최소화했습니다.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="max-w-4xl mx-auto w-full px-6 py-8 text-center">
+        <p class="text-xs text-gray-500">© 2026 강건재 Personal Portfolio</p>
+    </footer>
+</body>
+</html>
